@@ -52,7 +52,7 @@
                     android:id="@+id/recommendationType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#FFDFDD"
+                    android:background="@color/themeColorExtralight"
                     android:paddingLeft="3dp"
                     android:paddingRight="3dp"
                     android:text="Nearby"

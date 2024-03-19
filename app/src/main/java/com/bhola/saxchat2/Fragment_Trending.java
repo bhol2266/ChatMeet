@@ -1167,7 +1167,7 @@ class CountryRecyclerViewAdapter extends RecyclerView.Adapter<CountryRecyclerVie
         }
 
         if (countryInfoModel.isSelected()) {
-            holder.counrtyCard.setCardBackgroundColor(ContextCompat.getColor(context, R.color.themeColorExtralight));
+            holder.counrtyCard.setCardBackgroundColor(ContextCompat.getColor(context, R.color.themeColorlight));
             holder.countryName.setTextColor(Color.WHITE);
         } else {
             holder.counrtyCard.setCardBackgroundColor(Color.parseColor("#F1FBFF"));

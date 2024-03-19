@@ -34,7 +34,7 @@
             app:tabIndicatorColor="@color/themeColor"
             app:tabIndicatorHeight="3dp"
             app:tabMode="fixed"
-            app:tabRippleColor="#FF9C95"
+            app:tabRippleColor="#ADC9FF"
             app:tabSelectedTextAppearance="@color/themeColor"
 
             app:tabSelectedTextColor="@color/themeColor"

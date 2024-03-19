@@ -11,6 +11,8 @@
     <color name="themeColor">#103783</color>
     <color name="themeColorlight">#5D86D5</color>
     <color name="themeColorExtralight">#D7E5FF</color>
+    <color name="themeColor2">#439cfb</color>
+
     <color name="grey">#BF707070</color>
     <color name="color_333333">#333333</color>
     <color name="cardView_bg">#F1F1F1</color>
