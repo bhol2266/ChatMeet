@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.bhola.livevideochat4.CropBottomImageView
+        <com.bhola.saxchat2.CropBottomImageView
             android:id="@+id/profile"
             android:layout_width="match_parent"
             android:layout_height="250dp"

@@ -1,58 +1,42 @@
 {
   "project_info": {
-    "project_number": "634922729472",
-    "firebase_url": "https://live-video-chat-4-default-rtdb.europe-west1.firebasedatabase.app",
-    "project_id": "live-video-chat-4",
-    "storage_bucket": "live-video-chat-4.appspot.com"
+    "project_number": "789062274076",
+    "firebase_url": "https://saxchat-2-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "saxchat-2",
+    "storage_bucket": "saxchat-2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:634922729472:android:128192910ac56327eb58e5",
+        "mobilesdk_app_id": "1:789062274076:android:af80e42f34df907f5123d9",
         "android_client_info": {
-          "package_name": "com.bhola.livevideochat4"
+          "package_name": "com.bhola.saxchat2"
         }
       },
       "oauth_client": [
         {
-          "client_id": "634922729472-ahpa6f7gifk44opvtcfh0ti9pmtc6dof.apps.googleusercontent.com",
+          "client_id": "789062274076-t02vgccieiulnsik6m8rdl66v1aaseru.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.bhola.livevideochat4",
-            "certificate_hash": "2178d6d27656547625ead1a13a393c7a0b1a54da"
-          }
-        },
-        {
-          "client_id": "634922729472-etn4j3e22i3cvno5ra14trnrsofk2rfe.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.bhola.livevideochat4",
+            "package_name": "com.bhola.saxchat2",
             "certificate_hash": "ea9ebb17d0b5b9dbe882c4492b6f40153960aabd"
           }
         },
         {
-          "client_id": "634922729472-t7s7vucihggpug6bsf7178s4d4tq8vgi.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.bhola.livevideochat4",
-            "certificate_hash": "4374a14dca01de7a53411e0f49949025c68f165c"
-          }
-        },
-        {
-          "client_id": "634922729472-92d1gpuc57nqb16aqlvs697d8sv1hjc9.apps.googleusercontent.com",
+          "client_id": "789062274076-5c3cfom7beh6r0cm44cn0hbvee4fkb2g.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDDohcRM7X0FZf59lE0OKJOrm1kIpnLtCk"
+          "current_key": "AIzaSyC-jW8AquYUZvgWh5lCVi3pVizLMpOeCzI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "634922729472-92d1gpuc57nqb16aqlvs697d8sv1hjc9.apps.googleusercontent.com",
+              "client_id": "789062274076-5c3cfom7beh6r0cm44cn0hbvee4fkb2g.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -162,7 +162,7 @@
                         </LinearLayout>
 
 
-                        <com.bhola.livevideochat4.CustomRecyclerView
+                        <com.bhola.saxchat2.CustomRecyclerView
                             android:id="@+id/recyclerView_slider"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

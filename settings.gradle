@@ -29,5 +29,5 @@ dependencyResolutionManagement {
     }
     
 }
-rootProject.name = "Live Video Chat 4"
+rootProject.name = "Sax Chat 2"
 include ':app'
