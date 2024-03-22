@@ -12,6 +12,9 @@
     <color name="themeColorlight">#5D86D5</color>
     <color name="themeColorExtralight">#D7E5FF</color>
     <color name="themeColor2">#439cfb</color>
+    <color name="yellow_dim">#dcc3a0</color>
+    <color name="yellow">#FFD185</color>
+    <color name="brown">#82766a</color>
 
     <color name="grey">#BF707070</color>
     <color name="color_333333">#333333</color>

@@ -1,8 +1,11 @@
 package com.bhola.saxchat2;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +13,6 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,11 +21,10 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.bhola.saxchat2.Models.FlipItem;
+import com.bhola.saxchat2.Models.SliderImageModel;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -32,117 +33,105 @@ import java.util.List;
 
 public class PremiumMembership extends AppCompatActivity {
 
-    private ViewFlipper viewFlipper;
-    private RecyclerView bottomRecyclerView;
-
+    private ViewPager2 viewPager;
+    private Handler handler;
+    private Runnable runnable;
+    private int currentPosition = 0;
+    private boolean isUserTouched = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_premium_membership);
-        viewFlipper = findViewById(R.id.viewFlipper);
-        bottomRecyclerView = findViewById(R.id.bottomRecyclerView);
-
-        List<FlipItem> flipItems = new ArrayList<>();
-
-        // Assume you have Drawable objects for your images
-        Drawable mm_chat = ContextCompat.getDrawable(this, R.drawable.mm_chat);
-        Drawable mm_hello = ContextCompat.getDrawable(this, R.drawable.mm_hello);
-        Drawable mm_crown = ContextCompat.getDrawable(this, R.drawable.mm_crown);
-        Drawable mm_hair = ContextCompat.getDrawable(this, R.drawable.mm_hair);
-        Drawable mm_diamond = ContextCompat.getDrawable(this, R.drawable.mm_diamond);
+        viewPager = findViewById(R.id.viewPager);
 
 
-        flipItems.add(new FlipItem("Unlimited messages", mm_chat));
-        flipItems.add(new FlipItem("VIP Greetings", mm_hello));
-        flipItems.add(new FlipItem("VIP Badge", mm_crown));
-        flipItems.add(new FlipItem("Fresh Girl", mm_hair));
-        flipItems.add(new FlipItem("Monthly Coins", mm_diamond));
+        List<SliderImageModel> slideImages = new ArrayList<>();
+
+        Drawable mm_slide_1 = ContextCompat.getDrawable(this, R.drawable.mm_slide_1);
+        Drawable mm_slide_2 = ContextCompat.getDrawable(this, R.drawable.mm_slide_2);
+        Drawable mm_slide_3 = ContextCompat.getDrawable(this, R.drawable.mm_slide_3);
+        Drawable mm_slide_4 = ContextCompat.getDrawable(this, R.drawable.mm_slide_4);
+        Drawable mm_slide_5 = ContextCompat.getDrawable(this, R.drawable.mm_slide_5);
+
+        SliderImageModel slide1 = new SliderImageModel(mm_slide_1, "Unlimited messages", "Send messages to anyone you want");
+        SliderImageModel slide2 = new SliderImageModel(mm_slide_2, "VIP Greetings", "All your greeting will be given preference in the chatlist");
+        SliderImageModel slide3 = new SliderImageModel(mm_slide_3, "VIP Badge", "Become a VIP will be more attractive to the girl you want");
+        SliderImageModel slide4 = new SliderImageModel(mm_slide_4, "Fresh Girl", "Becoming a VIP will give you priority to recommend  new girls");
+        SliderImageModel slide5 = new SliderImageModel(mm_slide_5, "Monthly Coins", "Becoming a VIP will get extra coins");
+
+        slideImages.add(slide1);
+        slideImages.add(slide2);
+        slideImages.add(slide3);
+        slideImages.add(slide4);
+        slideImages.add(slide5);
 
 
-        FlipItemAdapter adapter = new FlipItemAdapter(flipItems);
-        bottomRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        bottomRecyclerView.setAdapter(adapter);
+        SlideImageAdapter slideImageAdapter = new SlideImageAdapter(this, slideImages);
+        viewPager.setAdapter(slideImageAdapter);
 
-
-//        viewFlipper.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
-//
-//            @Override
-//            public void onPageSelected(int position) {
-//                adapter.setSelectedItem(position);
-//                LinearLayoutManager layoutManager = (LinearLayoutManager) bottomRecyclerView.getLayoutManager();
-//                layoutManager.scrollToPositionWithOffset(position, 0);
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {}
-//        });
-//        fullscreenMode();
 
         tabBtns();
+        fullscreenMode();
     }
 
     private void tabBtns() {
 
-        ViewPager2 viewPager2 = findViewById(R.id.viewpager);
-        viewPager2.setAdapter(new PagerAdapter(PremiumMembership.this));
-
         TabLayout tabLayout = findViewById(R.id.tabLayout);
 
-
-        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
+        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 switch (position) {
 
                     case 0:
-                        tab.setIcon(R.drawable.mm_chat);
                         View view5 = getLayoutInflater().inflate(R.layout.item_flip, null);
-                        TextView textView = view5.findViewById(R.id.text);
-                        textView.setText("Unlimited messages");
+                        ImageView image5 = view5.findViewById(R.id.image);
+                        image5.setImageResource(R.drawable.mm_chat_on);
+                        TextView text5 = view5.findViewById(R.id.text);
+                        text5.setText("Unlimited\nmessages");
                         tab.setCustomView(view5);
 
-                        //By default tab 0 will be selected to change the tint of that tab
-//                        View tabView = tab.getCustomView();
-//                        ImageView tabIcon = tabView.findViewById(R.id.icon);
-//                        tabIcon.setBackgroundTintList(ContextCompat.getColorStateList(PremiumMembership.this, R.color.themeColor));
-
+                        int color = ContextCompat.getColor(PremiumMembership.this, R.color.yellow_dim);
+                        text5.setTextColor(color);
                         break;
                     case 1:
-                        tab.setIcon(R.drawable.videocall2);
 
-                        View view1 = getLayoutInflater().inflate(R.layout.customtab, null);
-                        view1.findViewById(R.id.icon).setBackgroundResource(R.drawable.videocall2);
+                        View view1 = getLayoutInflater().inflate(R.layout.item_flip, null);
+                        ImageView image1 = view1.findViewById(R.id.image);
+                        image1.setImageResource(R.drawable.mm_hello_off);
+                        TextView text1 = view1.findViewById(R.id.text);
+                        text1.setText("VIP\nGreetings");
                         tab.setCustomView(view1);
 
                         break;
                     case 2:
-                        tab.setIcon(R.drawable.chat);
-
-
-                        View view2 = getLayoutInflater().inflate(R.layout.customtab, null);
-                        view2.findViewById(R.id.icon).setBackgroundResource(R.drawable.chat);
+                        View view2 = getLayoutInflater().inflate(R.layout.item_flip, null);
+                        ImageView image2 = view2.findViewById(R.id.image);
+                        image2.setImageResource(R.drawable.mm_crown_off);
+                        TextView text2 = view2.findViewById(R.id.text);
+                        text2.setText("VIP\nBadge");
                         tab.setCustomView(view2);
-
                         break;
 
 
                     case 3:
-                        tab.setIcon(R.drawable.info_2);
-
-
-                        View view3 = getLayoutInflater().inflate(R.layout.customtab, null);
-                        view3.findViewById(R.id.icon).setBackgroundResource(R.drawable.info_2);
+                        View view3 = getLayoutInflater().inflate(R.layout.item_flip, null);
+                        ImageView image3 = view3.findViewById(R.id.image);
+                        image3.setImageResource(R.drawable.mm_hair_off);
                         tab.setCustomView(view3);
+                        TextView text3 = view3.findViewById(R.id.text);
+                        text3.setText("Fresh\nGirl");
                         break;
 
 
                     default:
-                        tab.setIcon(R.drawable.user2);
-                        View view4 = getLayoutInflater().inflate(R.layout.customtab, null);
-                        view4.findViewById(R.id.icon).setBackgroundResource(R.drawable.user2);
+                        View view4 = getLayoutInflater().inflate(R.layout.item_flip, null);
+                        ImageView image4 = view4.findViewById(R.id.image);
+                        image4.setImageResource(R.drawable.mm_diamond_off);
+                        TextView text4 = view4.findViewById(R.id.text);
+                        text4.setText("Monthly\nCoins");
                         tab.setCustomView(view4);
+
                         break;
                 }
             }
@@ -155,11 +144,36 @@ public class PremiumMembership extends AppCompatActivity {
                 // Get the custom view of the selected tab
                 View tabView = tab.getCustomView();
                 if (tabView != null) {
-                    // Find the ImageView in the custom view
-                    ImageView tabIcon = tabView.findViewById(R.id.icon);
+                    int position = tab.getPosition();
 
-                    // Set the background tint color for the selected tab
-                    tabIcon.setBackgroundTintList(ContextCompat.getColorStateList(PremiumMembership.this, R.color.themeColor));
+                    TextView text = tabView.findViewById(R.id.text);
+
+                    ImageView image = tabView.findViewById(R.id.image);
+
+                    int color = ContextCompat.getColor(PremiumMembership.this, R.color.yellow);
+                    text.setTextColor(color);
+
+                    switch (position) {
+                        case 0:
+                            image.setImageResource(R.drawable.mm_chat_on);
+                            break;
+                        case 1:
+                            image.setImageResource(R.drawable.mm_hello_on);
+                            break;
+                        case 2:
+                            image.setImageResource(R.drawable.mm_crown_on);
+                            break;
+                        case 3:
+                            image.setImageResource(R.drawable.mm_hair_on);
+                            break;
+
+                        default:
+                            image.setImageResource(R.drawable.mm_diamond_on);
+                            break;
+                    }
+
+
+
                 }
             }
 
@@ -168,11 +182,33 @@ public class PremiumMembership extends AppCompatActivity {
                 // Get the custom view of the unselected tab
                 View tabView = tab.getCustomView();
                 if (tabView != null) {
-                    // Find the ImageView in the custom view
-                    ImageView tabIcon = tabView.findViewById(R.id.icon);
+                    TextView text = tabView.findViewById(R.id.text);
+                    ImageView image = tabView.findViewById(R.id.image);
 
-                    // Set the background tint color for the unselected tab
-                    tabIcon.setBackgroundTintList(ContextCompat.getColorStateList(PremiumMembership.this, com.google.android.ads.mediationtestsuite.R.color.gmts_light_gray));
+                    int color = ContextCompat.getColor(PremiumMembership.this, R.color.brown);
+                    text.setTextColor(color);
+
+                    int position = tab.getPosition();
+
+
+                    switch (position) {
+                        case 0:
+                            image.setImageResource(R.drawable.mm_chat_off);
+                            break;
+                        case 1:
+                            image.setImageResource(R.drawable.mm_hello_off);
+                            break;
+                        case 2:
+                            image.setImageResource(R.drawable.mm_crown_off);
+                            break;
+                        case 3:
+                            image.setImageResource(R.drawable.mm_hair_off);
+                            break;
+
+                        default:
+                            image.setImageResource(R.drawable.mm_diamond_off);
+                            break;
+                    }
                 }
             }
 
@@ -181,44 +217,119 @@ public class PremiumMembership extends AppCompatActivity {
                 // Tab reselected, no action needed
             }
         });
+        autoPlaySlides();
+    }
+
+    private void autoPlaySlides() {
+
+        handler = new Handler(Looper.getMainLooper());
+        handler = new Handler(Looper.getMainLooper());
+
+        // Runnable to auto-slide ViewPager
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (!isUserTouched) {
+                    if (currentPosition == 4) {
+                        currentPosition = 0;
+                    } else {
+                        currentPosition++;
+                    }
+                    viewPager.setCurrentItem(currentPosition, true);
+                }
+                handler.postDelayed(this, 2000); // 2 seconds delay
+            }
+        };
+
+        handler.postDelayed(runnable, 2000); // 2 seconds delay
+
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+                isUserTouched = state == ViewPager2.SCROLL_STATE_DRAGGING;
+                if (state == ViewPager2.SCROLL_STATE_IDLE) {
+                    handler.postDelayed(runnable, 2000); // Start auto-sliding after 2 seconds
+                } else {
+                    handler.removeCallbacks(runnable); // Stop auto-sliding
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                currentPosition = position;
+            }
+        });
+
+
+
+
     }
 
     private void fullscreenMode() {
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
-        WindowInsetsControllerCompat windowInsetsCompat = new WindowInsetsControllerCompat(getWindow(), getWindow().getDecorView());
-        windowInsetsCompat.hide(WindowInsetsCompat.Type.statusBars());
-        windowInsetsCompat.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            getWindow().getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+        // Make the status bar transparent
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+                            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            );
+            getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
         }
+
+        // Make the activity full-screen
+        getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        );
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            int statusBarHeight = getStatusBarHeight();
+            LinearLayout layout = findViewById(R.id.parentLayout); // Replace with your layout ID
+            layout.setPadding(0, statusBarHeight, 0, 0);
+        }
+
+    }
+
+    private int getStatusBarHeight() {
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            return getResources().getDimensionPixelSize(resourceId);
+        }
+        return 0;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        // Remove callbacks to prevent memory leaks
+        handler.removeCallbacksAndMessages(null);
     }
 
 }
 
-class FlipItemAdapter extends RecyclerView.Adapter<FlipItemAdapter.FlipItemViewHolder> {
+class SlideImageAdapter extends RecyclerView.Adapter<SlideImageAdapter.ViewHolder> {
 
-    private List<FlipItem> items;
-    private int selectedItem = -1;
+    private Context context;
+    private List<SliderImageModel> items;
 
-    public FlipItemAdapter(List<FlipItem> items) {
+    public SlideImageAdapter(Context context, List<SliderImageModel> items) {
+        this.context = context;
         this.items = items;
     }
 
     @NonNull
     @Override
-    public FlipItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_flip, parent, false);
-        return new FlipItemViewHolder(view);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_premuim_membership_slider_image, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FlipItemViewHolder holder, int position) {
-        FlipItem flipItem = items.get(position);
-
-        holder.text.setText(flipItem.getItemName());
-        holder.image.setImageDrawable(flipItem.getItemImage());
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        SliderImageModel sliderImageModel = items.get(position);
+        holder.imageView.setImageDrawable(sliderImageModel.getImageDrawable());
+        holder.title.setText(sliderImageModel.getTitle());
+        holder.subTitle.setText(sliderImageModel.getSubTitle());
     }
 
     @Override
@@ -226,24 +337,15 @@ class FlipItemAdapter extends RecyclerView.Adapter<FlipItemAdapter.FlipItemViewH
         return items.size();
     }
 
-    public void setSelectedItem(int position) {
-        selectedItem = position;
-        notifyDataSetChanged();
-    }
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView imageView;
+        TextView title, subTitle;
 
-    static class FlipItemViewHolder extends RecyclerView.ViewHolder {
-        TextView text;
-        LinearLayout parentLayout;
-        CardView imageCardView;
-        ImageView image;
-
-
-        public FlipItemViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            text = itemView.findViewById(R.id.text);
-            parentLayout = itemView.findViewById(R.id.parentLayout);
-            imageCardView = itemView.findViewById(R.id.imageCardView);
-            image = itemView.findViewById(R.id.image);
+            title = itemView.findViewById(R.id.title);
+            subTitle = itemView.findViewById(R.id.subTitle);
+            imageView = itemView.findViewById(R.id.imageView);
         }
     }
 }

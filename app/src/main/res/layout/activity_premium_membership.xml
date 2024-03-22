@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parentLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/mm_bg"
@@ -14,16 +15,18 @@
 
         <ImageView
             android:id="@+id/back_arrow"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="30dp"
+            android:layout_height="28dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="5dp"
+            android:alpha="0.8"
             android:clickable="true"
             android:focusable="true"
-            app:srcCompat="@drawable/cross"
+            android:rotation="180"
+            app:srcCompat="@drawable/right_arrow"
             app:tint="@color/white" />
 
 
@@ -32,7 +35,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/title_collection"
@@ -72,15 +77,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="3dp"
                 android:orientation="horizontal"
-                android:paddingLeft="8dp"
-                android:paddingTop="5dp"
-                android:paddingRight="5dp"
-                android:paddingBottom="2dp">
+                android:paddingLeft="7dp"
+                android:paddingTop="4dp"
+                android:paddingRight="5dp">
 
 
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
+                    android:paddingTop="2dp"
                     android:src="@drawable/gem" />
 
                 <TextView
@@ -88,10 +93,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:fontFamily="@font/inter"
-                    android:paddingBottom="1dp"
+
+                    android:paddingBottom="4dp"
                     android:text="100"
                     android:textColor="@color/white"
-                    android:textSize="16dp" />
+                    android:textSize="14dp" />
 
             </LinearLayout>
 
@@ -100,67 +106,278 @@
     </RelativeLayout>
 
 
-    <ViewFlipper
-        android:id="@+id/viewFlipper"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:flipInterval="2000"
-        android:autoStart="true"
+        android:layout_height="wrap_content" />
 
-        android:inAnimation="@anim/slide_in_right"
-        android:outAnimation="@anim/slide_out_left">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="30dp"
-            android:src="@drawable/mm_slide_1" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="30dp"
-            android:src="@drawable/mm_slide_2" />
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="30dp"
-            android:src="@drawable/mm_slide_3" />
-    </ViewFlipper>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingBottom="8dp"
+        android:layout_marginTop="15dp"
+        android:background="@android:color/transparent"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         app:tabIconTint="@color/gmts_light_gray"
-        app:tabIndicator="@drawable/custom_tab_indicator"
-        app:tabIndicatorColor="@color/themeColor"
+        app:tabIndicator="@drawable/custom_tab_indicator_premium_membership"
+        app:tabIndicatorColor="@color/yellow"
         app:tabIndicatorHeight="3dp"
+        app:tabMaxWidth="75dp"
         app:tabMode="fixed"
-        app:tabRippleColor="#ADC9FF"
-        app:tabSelectedTextAppearance="@color/themeColor"
+        app:tabPaddingBottom="10dp"
+        app:tabRippleColor="@android:color/transparent" />
 
-        app:tabSelectedTextColor="@color/themeColor"
-        app:tabTextColor="@color/themeColor" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewpager"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-
-        app:layout_constraintBottom_toTopOf="@id/tabLayout"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/bottomRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:scrollbars="horizontal" />
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/card1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:paddingBottom="8dp"
+                android:scaleType="fitEnd"
+                android:src="@drawable/mm_card_1" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:paddingTop="50dp">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/gem" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/rubrik_semibold"
+                    android:text="500" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/card1"
+                android:layout_gravity="top|left"
+                android:fontFamily="@font/rubrik_semibold"
+                android:gravity="center"
+
+                android:paddingLeft="10dp"
+                android:paddingTop="4dp"
+                android:text="1 Week"
+                android:textColor="@color/white"
+                android:textSize="14dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_below="@+id/card1"
+                android:layout_gravity="center|bottom"
+                android:background="@drawable/mm_pricebg"
+                android:fontFamily="@font/inter"
+                android:gravity="center"
+                android:text="Rs200.00"
+                android:textColor="@color/yellow_dim" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/card2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:paddingBottom="8dp"
+                android:scaleType="fitEnd"
+                android:src="@drawable/mm_card_2" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:paddingTop="50dp">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/gem" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/rubrik_semibold"
+                    android:text="2000"
+                    android:textColor="@color/semiblack" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/card1"
+                android:layout_gravity="top|left"
+                android:fontFamily="@font/rubrik_semibold"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingTop="4dp"
+
+                android:text="1 Month"
+                android:textColor="@color/white"
+                android:textSize="14dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center|bottom"
+                android:background="@drawable/mm_pricebg"
+                android:fontFamily="@font/inter"
+                android:gravity="center"
+                android:text="Rs500.00"
+                android:textColor="@color/yellow_dim" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/card3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:paddingBottom="8dp"
+                android:scaleType="fitEnd"
+                android:src="@drawable/mm_card_3" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:paddingTop="50dp">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/gem" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/rubrik_semibold"
+                    android:text="10000"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/card1"
+                android:layout_gravity="top|left"
+                android:fontFamily="@font/rubrik_semibold"
+                android:gravity="center"
+                android:paddingLeft="8dp"
+                android:paddingTop="4dp"
+                android:text="12 Month"
+                android:textColor="@color/white"
+                android:textSize="14dp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center|bottom"
+                android:background="@drawable/mm_pricebg"
+                android:fontFamily="@font/inter"
+                android:gravity="center"
+                android:text="1100.00"
+                android:textColor="@color/yellow_dim" />
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="130dp"
+        android:gravity="center|bottom"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter"
+            android:text="Any problems?"
+
+            android:textColor="@color/brown"
+            android:textSize="14dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:fontFamily="@font/inter"
+            android:text="Contact us"
+
+            android:textColor="@color/yellow"
+            android:textSize="16dp" />
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:backgroundTint="@color/brown"
+            app:cardCornerRadius="10dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:padding="5dp"
+                android:src="@drawable/right_arrow"
+                app:tint="@color/white" />
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
 
 </LinearLayout>
