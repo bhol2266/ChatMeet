@@ -128,6 +128,33 @@
             android:src="@drawable/mm_slide_3" />
     </ViewFlipper>
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="8dp"
+        app:tabIconTint="@color/gmts_light_gray"
+        app:tabIndicator="@drawable/custom_tab_indicator"
+        app:tabIndicatorColor="@color/themeColor"
+        app:tabIndicatorHeight="3dp"
+        app:tabMode="fixed"
+        app:tabRippleColor="#ADC9FF"
+        app:tabSelectedTextAppearance="@color/themeColor"
+
+        app:tabSelectedTextColor="@color/themeColor"
+        app:tabTextColor="@color/themeColor" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        app:layout_constraintBottom_toTopOf="@id/tabLayout"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bottomRecyclerView"
         android:layout_width="match_parent"
