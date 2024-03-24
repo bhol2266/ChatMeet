@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
         startIncomingCallService();
 
 
-        startActivity(new Intent(MainActivity.this,PremiumMembership.class));
 
     }
 

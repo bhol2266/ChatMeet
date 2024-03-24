@@ -110,9 +110,8 @@
             android:layout_width="match_parent"
             android:layout_height="148dp"
             android:gravity="left|center"
-            android:paddingStart="20dp"
             android:orientation="horizontal"
-           >
+            android:paddingStart="20dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profileUrl"
@@ -242,15 +241,6 @@
                 </LinearLayout>
 
 
-                <TextView
-                    android:id="@+id/coins"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:paddingLeft="5dp"
-                    android:text="Coins: 0"
-                    android:textColor="@color/white"
-                    android:textSize="15dp" />
             </LinearLayout>
 
 
@@ -265,46 +255,146 @@
             android:paddingRight="5dp">
 
 
-            <LinearLayout
-                android:id="@+id/memberShip"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginBottom="5dp"
+                app:cardCornerRadius="10dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/memberShip"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+
+
+                    <ImageView
+                        android:id="@+id/coinsImage"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/gem" />
+
+                    <TextView
+                        android:id="@+id/coins"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toRightOf="@id/coinsImage"
+
+                        android:fontFamily="@font/rubrik_semibold"
+                        android:text="My coins:"
+                        android:textColor="@color/semiblack"
+                        android:textSize="18dp" />
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="end"
+                        android:layout_marginRight="2dp"
+                        app:cardCornerRadius="10dp">
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+
+                            android:paddingLeft="10dp"
+                            android:paddingTop="2dp"
+                            android:paddingRight="7dp"
+                            android:paddingBottom="2dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:text="Buy"
+                                android:textColor="@color/semiblack"
+                                android:textSize="16dp" />
+
+
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="12dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="3dp"
+                                android:src="@drawable/right_arrow"
+                                app:tint="@color/semiblack" />
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <LinearLayout
+                android:id="@+id/becomeVIP"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:layout_margin="7dp"
+                android:background="@drawable/mm_bg_menu"
                 android:orientation="horizontal"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp">
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
 
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/crown" />
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/crown2" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="15dp"
-                    android:fontFamily="@font/inter"
-                    android:text="Membership Center"
-                    android:textColor="@color/gmts_light_gray"
-                    android:textSize="20dp" />
+                    android:fontFamily="@font/rubrik_semibold"
+                    android:text="Become VIP"
+                    android:textColor="@color/yellow_dim"
+                    android:textSize="16dp" />
 
 
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="22dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:paddingTop="2dp"
-                    android:src="@drawable/hot" />
-
-                <ImageView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_gravity="end|center_vertical"
-                    android:scaleType="fitEnd"
-                    android:src="@drawable/right_arrow"
-                    app:tint="@color/gmts_light_gray" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="right|center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="15dp"
+                        android:text="Not joined yet"
+                        android:textColor="@color/yellow_dim"
+                        android:textSize="12dp" />
+
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/right_arrow"
+                        app:tint="@color/yellow_dim" />
+                </LinearLayout>
 
 
             </LinearLayout>

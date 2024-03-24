@@ -1,6 +1,8 @@
 package com.bhola.saxchat2;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,26 +12,39 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.WindowCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.android.billingclient.api.BillingClient;
+import com.android.billingclient.api.BillingClientStateListener;
+import com.android.billingclient.api.BillingFlowParams;
+import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.ProductDetails;
+import com.android.billingclient.api.ProductDetailsResponseListener;
+import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.PurchasesUpdatedListener;
+import com.android.billingclient.api.QueryProductDetailsParams;
 import com.bhola.saxchat2.Models.SliderImageModel;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.common.collect.ImmutableList;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class PremiumMembership extends AppCompatActivity {
 
@@ -38,6 +53,25 @@ public class PremiumMembership extends AppCompatActivity {
     private Runnable runnable;
     private int currentPosition = 0;
     private boolean isUserTouched = false;
+    private BillingClient billingClient;
+    boolean isSuccess = false;
+
+    PurchasesUpdatedListener purchaseUpdatedListener = new PurchasesUpdatedListener() {
+        @Override
+        public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> purchases) {
+            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK
+                    && purchases != null) {
+                for (Purchase purchase : purchases) {
+                    handlePurchase(purchase);
+                }
+            } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
+                // Handle user cancellation
+            } else {
+                // Handle other errors
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,10 +103,198 @@ public class PremiumMembership extends AppCompatActivity {
         SlideImageAdapter slideImageAdapter = new SlideImageAdapter(this, slideImages);
         viewPager.setAdapter(slideImageAdapter);
 
+        ImageView back_arrow = findViewById(R.id.back_arrow);
+        back_arrow.setOnClickListener(view -> {
+            onBackPressed();
+        });
 
+        LinearLayout contactUs = findViewById(R.id.contactUs);
+        contactUs.setOnClickListener(view -> {
+            startActivity(new Intent(this, Feedback.class));
+        });
+        TextView coins=findViewById(R.id.coins);
+        coins.setText(String.valueOf(MyApplication.userModel.coins));
         tabBtns();
         fullscreenMode();
+
+        billingfunction();
     }
+
+    private void billingfunction() {
+
+        //Initialize
+        billingClient = BillingClient.newBuilder(PremiumMembership.this)
+                .setListener(purchaseUpdatedListener)
+                .enablePendingPurchases()
+                .build();
+
+
+        ExecutorService service = Executors.newSingleThreadExecutor();
+        service.execute(new Runnable() {
+            @Override
+            public void run() {
+                //start the connection after initializing the billing client
+                connectGooglePlayBilling();
+            }
+        });
+    }
+
+    void connectGooglePlayBilling() {
+        billingClient.startConnection(new BillingClientStateListener() {
+            @Override
+            public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
+                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                    getProductDetails();
+                }
+            }
+
+            @Override
+            public void onBillingServiceDisconnected() {
+                connectGooglePlayBilling();
+
+                // Try to restart the connection on the next request to
+                // Google Play by calling the startConnection() method.
+            }
+        });
+
+    }
+
+    private void handlePurchase(Purchase purchase) {
+        if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
+            // Grant the subscription to the user
+            // Save purchase token and other details for verification
+        }
+    }
+
+    private void getProductDetails() {
+
+        List<String> productIds = new ArrayList<>();
+        List<QueryProductDetailsParams.Product> list = new ArrayList<>();
+
+        productIds.add("1_week");
+        productIds.add("1_month");
+        productIds.add("3_months");
+// Add more product IDs as needed
+
+        QueryProductDetailsParams.Builder queryBuilder = QueryProductDetailsParams.newBuilder();
+
+        for (String productId : productIds) {
+            QueryProductDetailsParams.Product product = QueryProductDetailsParams.Product.newBuilder().setProductId(productId).setProductType(BillingClient.ProductType.SUBS).build();
+            list.add(product);
+        }
+        queryBuilder.setProductList(list);
+
+
+        QueryProductDetailsParams queryProductDetailsParams = queryBuilder.build();
+
+        billingClient.queryProductDetailsAsync(queryProductDetailsParams, new ProductDetailsResponseListener() {
+            public void onProductDetailsResponse(BillingResult billingResult, List<ProductDetails> productDetailsList) {
+                // Handle the product details response for multiple products
+
+                ((Activity) PremiumMembership.this).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ArrayList<Map<String, String>> productList = new ArrayList<>();
+
+                        // Iterate through the productDetailsList
+                        for (ProductDetails productDetails : productDetailsList) {
+                            String validity = productDetails.getSubscriptionOfferDetails().get(0).getPricingPhases().getPricingPhaseList().get(0).getBillingPeriod();
+
+                            if (validity.equals("P1W")) {
+                                setCard1(productDetails);
+                            } else if (validity.equals("P1M")) {
+                                setCard2(productDetails);
+
+                            } else {
+                                setCard3(productDetails);
+
+                            }
+
+                        }
+
+                    }
+                });
+            }
+        });
+
+
+    }
+
+    private void setCard1(ProductDetails productDetails) {
+
+        String price = productDetails.getSubscriptionOfferDetails().get(0).getPricingPhases().getPricingPhaseList().get(0).getFormattedPrice();
+        TextView card1_price_textview = findViewById(R.id.card1_price_textview);
+        card1_price_textview.setText(price.replace(".00", ""));
+
+        FrameLayout card1 = findViewById(R.id.card1);
+        card1.setOnClickListener(view -> {
+            ImmutableList productDetailsParamsList =
+                    ImmutableList.of(
+                            BillingFlowParams.ProductDetailsParams.newBuilder()
+                                    // retrieve a value for "productDetails" by calling queryProductDetailsAsync()
+                                    .setProductDetails(productDetails)
+                                    .setOfferToken(productDetails.getSubscriptionOfferDetails().get(0).getOfferToken())
+                                    // to get an offer token, call ProductDetails.getSubscriptionOfferDetails()
+                                    // for a list of offers that are available to the user
+                                    .build()
+                    );
+            BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+                    .setProductDetailsParamsList(productDetailsParamsList)
+                    .build();
+            billingClient.launchBillingFlow(PremiumMembership.this, billingFlowParams);
+        });
+
+
+    }
+
+    private void setCard2(ProductDetails productDetails) {
+        String price = productDetails.getSubscriptionOfferDetails().get(0).getPricingPhases().getPricingPhaseList().get(0).getFormattedPrice();
+        TextView card2_price_textview = findViewById(R.id.card2_price_textview);
+        card2_price_textview.setText(price.replace(".00", ""));
+
+        FrameLayout card2 = findViewById(R.id.card2);
+        card2.setOnClickListener(view -> {
+            ImmutableList productDetailsParamsList =
+                    ImmutableList.of(
+                            BillingFlowParams.ProductDetailsParams.newBuilder()
+                                    // retrieve a value for "productDetails" by calling queryProductDetailsAsync()
+                                    .setProductDetails(productDetails)
+                                    .setOfferToken(productDetails.getSubscriptionOfferDetails().get(0).getOfferToken())
+                                    // to get an offer token, call ProductDetails.getSubscriptionOfferDetails()
+                                    // for a list of offers that are available to the user
+                                    .build()
+                    );
+            BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+                    .setProductDetailsParamsList(productDetailsParamsList)
+                    .build();
+            billingClient.launchBillingFlow(PremiumMembership.this, billingFlowParams);
+        });
+    }
+
+    private void setCard3(ProductDetails productDetails) {
+        String price = productDetails.getSubscriptionOfferDetails().get(0).getPricingPhases().getPricingPhaseList().get(0).getFormattedPrice();
+        TextView card3_price_textview = findViewById(R.id.card3_price_textview);
+        card3_price_textview.setText(price.replace(".00", ""));
+
+        FrameLayout card3 = findViewById(R.id.card3);
+        card3.setOnClickListener(view -> {
+            ImmutableList productDetailsParamsList =
+                    ImmutableList.of(
+                            BillingFlowParams.ProductDetailsParams.newBuilder()
+                                    // retrieve a value for "productDetails" by calling queryProductDetailsAsync()
+                                    .setProductDetails(productDetails)
+                                    .setOfferToken(productDetails.getSubscriptionOfferDetails().get(0).getOfferToken())
+                                    // to get an offer token, call ProductDetails.getSubscriptionOfferDetails()
+                                    // for a list of offers that are available to the user
+                                    .build()
+                    );
+            BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+                    .setProductDetailsParamsList(productDetailsParamsList)
+                    .build();
+            billingClient.launchBillingFlow(PremiumMembership.this, billingFlowParams);
+        });
+    }
+
 
     private void tabBtns() {
 
@@ -173,7 +395,6 @@ public class PremiumMembership extends AppCompatActivity {
                     }
 
 
-
                 }
             }
 
@@ -263,8 +484,6 @@ public class PremiumMembership extends AppCompatActivity {
         });
 
 
-
-
     }
 
     private void fullscreenMode() {
@@ -297,6 +516,7 @@ public class PremiumMembership extends AppCompatActivity {
         }
         return 0;
     }
+
 
     @Override
     public void onDestroy() {

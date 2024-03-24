@@ -15,6 +15,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,7 +57,7 @@ public class Fragment_UserProfile extends Fragment {
         setProfileDetails();
 
 
-        LinearLayout memberShip = view.findViewById(R.id.memberShip);
+        RelativeLayout memberShip = view.findViewById(R.id.memberShip);
         memberShip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,6 +73,11 @@ public class Fragment_UserProfile extends Fragment {
             public void onClick(View view) {
                 context.startActivity(new Intent(context, About.class));
             }
+        });
+
+        LinearLayout becomeVIP = view.findViewById(R.id.becomeVIP);
+        becomeVIP.setOnClickListener(view -> {
+            view.getContext().startActivity(new Intent(view.getContext(), PremiumMembership.class));
         });
 
         profileEdit();

@@ -89,6 +89,7 @@
                     android:src="@drawable/gem" />
 
                 <TextView
+                    android:id="@+id/coins"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -138,17 +139,17 @@
 
 
         <FrameLayout
+            android:id="@+id/card1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="10dp">
 
             <ImageView
-                android:id="@+id/card1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:paddingBottom="8dp"
+                android:paddingBottom="12dp"
                 android:scaleType="fitEnd"
                 android:src="@drawable/mm_card_1" />
 
@@ -176,6 +177,7 @@
 
 
             <TextView
+                android:id="@+id/card1_period_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/card1"
@@ -190,6 +192,7 @@
                 android:textSize="14dp" />
 
             <TextView
+                android:id="@+id/card1_price_textview"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_below="@+id/card1"
@@ -197,11 +200,14 @@
                 android:background="@drawable/mm_pricebg"
                 android:fontFamily="@font/inter"
                 android:gravity="center"
+                android:textSize="18dp"
                 android:text="Rs200.00"
                 android:textColor="@color/yellow_dim" />
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/card2"
+
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -209,11 +215,10 @@
             android:padding="10dp">
 
             <ImageView
-                android:id="@+id/card2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:paddingBottom="8dp"
+                android:paddingBottom="12dp"
                 android:scaleType="fitEnd"
                 android:src="@drawable/mm_card_2" />
 
@@ -256,17 +261,20 @@
                 android:textSize="14dp" />
 
             <TextView
+                android:id="@+id/card2_price_textview"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_gravity="center|bottom"
                 android:background="@drawable/mm_pricebg"
-                android:fontFamily="@font/inter"
+                android:fontFamily="@font/inter"                android:textSize="18dp"
+
                 android:gravity="center"
                 android:text="Rs500.00"
                 android:textColor="@color/yellow_dim" />
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/card3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -274,11 +282,10 @@
             android:padding="10dp">
 
             <ImageView
-                android:id="@+id/card3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:paddingBottom="8dp"
+                android:paddingBottom="12dp"
                 android:scaleType="fitEnd"
                 android:src="@drawable/mm_card_3" />
 
@@ -315,17 +322,19 @@
                 android:gravity="center"
                 android:paddingLeft="8dp"
                 android:paddingTop="4dp"
-                android:text="12 Month"
+                android:text="3 Month"
                 android:textColor="@color/white"
                 android:textSize="14dp" />
 
 
             <TextView
+                android:id="@+id/card3_price_textview"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_gravity="center|bottom"
                 android:background="@drawable/mm_pricebg"
-                android:fontFamily="@font/inter"
+                android:fontFamily="@font/inter"                android:textSize="18dp"
+
                 android:gravity="center"
                 android:text="1100.00"
                 android:textColor="@color/yellow_dim" />
@@ -336,9 +345,10 @@
 
 
     <LinearLayout
+        android:id="@+id/contactUs"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
         android:gravity="center|bottom"
         android:orientation="horizontal">
 
