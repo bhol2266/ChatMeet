@@ -62,7 +62,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/rubrik_semibold"
                         android:longClickable="true"
-                        android:text="SAX Live"
+                        android:text="ChatHub Live"
 
                         android:textColor="@color/white"
                         android:textFontWeight="700"
@@ -102,7 +102,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter"
-                    android:text="SAX Chat Live Members"
+                    android:text="ChatHub Chat Live Members"
                     android:textColor="@color/white"
                     android:textSize="15dp" />
             </LinearLayout>

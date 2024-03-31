@@ -1,6 +1,6 @@
 {
   "id": -1,
-  "initialMsg": "Welcome to SAX Chat! if you have any problem on SAX Chat, please report to us through feedback. Have fun on SAX Chat!!",
+  "initialMsg": "Welcome to ChatHub Chat! if you have any problem on ChatHub Chat, please report to us through feedback. Have fun on ChatHub Chat!!",
   "questionsWithReply": [
     {
       "id": 0,
@@ -29,7 +29,7 @@
   ],
   "customerCareMsg": {
     "id": 0,
-    "msg": "Welcome to SAX Chat! if you have any problem on SAX Chat, please report to us through feedback. Have fun on SAX Chat!!",
+    "msg": "Welcome to ChatHub Chat! if you have any problem on ChatHub Chat, please report to us through feedback. Have fun on ChatHub Chat!!",
     "mimeType": "mimeType/text/customerCare",
     "dateTime": "",
     "nextMsgDelay": 20000

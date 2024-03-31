@@ -4,6 +4,9 @@ package com.bhola.saxchat2;
 import android.animation.Animator;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +16,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +37,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.io.IOException;
 import java.util.Date;
 
 public class SplashScreen extends AppCompatActivity {
@@ -93,9 +98,23 @@ public class SplashScreen extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         generateNotification();
         generateFCMToken();
-
+backgroundVideoPlayback();
 
 //        clearChats();
+    }
+
+    private void backgroundVideoPlayback() {
+      VideoView videoView = findViewById(R.id.videoView);
+
+        String path = "android.resource://" + getPackageName() + "/" + R.raw.splash_video;
+        videoView.setVideoURI(Uri.parse(path));
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.setLooping(true); // Set looping false if you don't want the video to repeat
+                videoView.start();
+            }
+        });
     }
 
 

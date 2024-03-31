@@ -62,7 +62,6 @@
                             android:id="@+id/clickForPayment"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="#FFECEC"
                             android:orientation="horizontal"
                             android:padding="15dp">
 

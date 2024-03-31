@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
         startIncomingCallService();
 
 
-
     }
 
     private void startIncomingCallService() {

@@ -87,7 +87,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/inter"
-        android:text="SAX Team"
+        android:text="ChatHub Team"
         android:textColor="@color/semiblack"
         android:textSize="17dp"
         android:textStyle="bold" />

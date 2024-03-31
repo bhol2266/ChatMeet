@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rubrik_semibold"
-                android:text="SAX Team"
+                android:text="ChatHub Team"
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 android:textStyle="bold" />

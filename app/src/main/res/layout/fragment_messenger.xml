@@ -68,7 +68,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter"
-                            android:text="SAX Team Chat"
+                            android:text="ChatHub Team Chat"
                             android:textColor="@color/semiblack"
                             android:textSize="18dp" />
 
@@ -105,7 +105,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:maxLines="1"
-                        android:text="Welcome to SAX Team"
+                        android:text="Welcome to ChatHub Team"
                         android:textColor="#7A7A7A"
                         android:textSize="12dp" />
 

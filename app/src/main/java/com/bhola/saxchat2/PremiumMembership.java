@@ -3,11 +3,13 @@ package com.bhola.saxchat2;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +27,8 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.android.billingclient.api.AcknowledgePurchaseParams;
+import com.android.billingclient.api.AcknowledgePurchaseResponseListener;
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingFlowParams;
@@ -38,10 +43,11 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.common.collect.ImmutableList;
 
-import org.w3c.dom.Text;
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -55,29 +61,115 @@ public class PremiumMembership extends AppCompatActivity {
     private boolean isUserTouched = false;
     private BillingClient billingClient;
     boolean isSuccess = false;
+    LinearLayout progressBar;
 
     PurchasesUpdatedListener purchaseUpdatedListener = new PurchasesUpdatedListener() {
         @Override
         public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> purchases) {
-            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK
-                    && purchases != null) {
+            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && purchases != null) {
+                boolean purchaseDone = false;
                 for (Purchase purchase : purchases) {
-                    handlePurchase(purchase);
+                    if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED && !purchase.isAcknowledged()) {
+                        //first this is triggerd than onResume is called
+                        AcknowledgePurchase(purchase);
+                        purchaseDone = true;
+
+                    }
                 }
-            } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
-                // Handle user cancellation
+                if (!purchaseDone) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(PremiumMembership.this, "Payment failed! try again", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }, 5000);
+                }
+
             } else {
-                // Handle other errors
+                // Handle any other error codes.
+                Toast.makeText(PremiumMembership.this, "Something went wrong try again!", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
             }
         }
     };
+
+
+    private void AcknowledgePurchase(Purchase purchase) {
+
+        //in This first consume is called than Achnowledged is called
+
+        AcknowledgePurchaseResponseListener acknowledgePurchaseResponseListener = new AcknowledgePurchaseResponseListener() {
+            @Override
+            public void onAcknowledgePurchaseResponse(@NonNull BillingResult billingResult) {
+                Log.d("handlePurchase", "Achnowledged Done: ");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+
+                        Log.d("handlePurchase", "run: " + purchase.getProducts().get(0));
+
+                        int coins = 0;
+                        String inputString = purchase.getProducts().get(0);
+                        if (inputString.equals("1_week")) coins = 500;
+                        if (inputString.equals("1_month")) coins = 2000;
+                        if (inputString.equals("3_months")) coins = 10000;
+
+                        savePurchaseDetails_inSharedPreference(purchase.getPurchaseToken(), coins, purchase.getPurchaseTime());
+
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressBar.setVisibility(View.GONE);
+                                startActivity(new Intent(PremiumMembership.this, SplashScreen.class));
+                            }
+                        }, 2000);
+
+
+                    }
+                });
+
+            }
+        };
+
+        if (!purchase.isAcknowledged()) {
+            AcknowledgePurchaseParams acknowledgePurchaseParams = AcknowledgePurchaseParams.newBuilder().setPurchaseToken(purchase.getPurchaseToken()).build();
+            billingClient.acknowledgePurchase(acknowledgePurchaseParams, acknowledgePurchaseResponseListener);
+        }
+
+    }
+
+
+    private void savePurchaseDetails_inSharedPreference(String purchaseToken, int coins, long purchaseTime) {
+        //Reading purchase Token
+        SharedPreferences sh = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        String a = sh.getString("purchaseToken", purchaseToken);
+
+        // Creating purchase Token into SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+        myEdit.putString("purchaseToken", purchaseToken);
+        myEdit.putInt("coins", coins);
+
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String dateString = dateFormat.format(currentDate);
+        myEdit.putString("purchase_date", dateString);
+        myEdit.commit();
+        FirebaseUtil.addUserCoins(coins);
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_premium_membership);
         viewPager = findViewById(R.id.viewPager);
-
+        progressBar = findViewById(R.id.progressBar);
 
         List<SliderImageModel> slideImages = new ArrayList<>();
 
@@ -112,8 +204,8 @@ public class PremiumMembership extends AppCompatActivity {
         contactUs.setOnClickListener(view -> {
             startActivity(new Intent(this, Feedback.class));
         });
-        TextView coins=findViewById(R.id.coins);
-        coins.setText(String.valueOf(MyApplication.userModel.coins));
+        TextView coins = findViewById(R.id.coins);
+        coins.setText(String.valueOf(MyApplication.coins));
         tabBtns();
         fullscreenMode();
 
@@ -159,12 +251,6 @@ public class PremiumMembership extends AppCompatActivity {
 
     }
 
-    private void handlePurchase(Purchase purchase) {
-        if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
-            // Grant the subscription to the user
-            // Save purchase token and other details for verification
-        }
-    }
 
     private void getProductDetails() {
 
@@ -228,6 +314,8 @@ public class PremiumMembership extends AppCompatActivity {
 
         FrameLayout card1 = findViewById(R.id.card1);
         card1.setOnClickListener(view -> {
+            progressBar.setVisibility(View.VISIBLE);
+
             ImmutableList productDetailsParamsList =
                     ImmutableList.of(
                             BillingFlowParams.ProductDetailsParams.newBuilder()
@@ -254,6 +342,8 @@ public class PremiumMembership extends AppCompatActivity {
 
         FrameLayout card2 = findViewById(R.id.card2);
         card2.setOnClickListener(view -> {
+            progressBar.setVisibility(View.VISIBLE);
+
             ImmutableList productDetailsParamsList =
                     ImmutableList.of(
                             BillingFlowParams.ProductDetailsParams.newBuilder()
@@ -278,6 +368,8 @@ public class PremiumMembership extends AppCompatActivity {
 
         FrameLayout card3 = findViewById(R.id.card3);
         card3.setOnClickListener(view -> {
+            progressBar.setVisibility(View.VISIBLE);
+
             ImmutableList productDetailsParamsList =
                     ImmutableList.of(
                             BillingFlowParams.ProductDetailsParams.newBuilder()
