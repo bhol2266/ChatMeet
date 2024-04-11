@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -61,7 +63,11 @@ public class PremiumMembership extends AppCompatActivity {
     private boolean isUserTouched = false;
     private BillingClient billingClient;
     boolean isSuccess = false;
+    ImageView card1_Check, card2_Check, card3_Check;
     LinearLayout progressBar;
+    Button btnSubs;
+    TextView subscriptionDetailText;
+    ProductDetails selectedCard_productDetails = null;
 
     PurchasesUpdatedListener purchaseUpdatedListener = new PurchasesUpdatedListener() {
         @Override
@@ -170,7 +176,13 @@ public class PremiumMembership extends AppCompatActivity {
         setContentView(R.layout.activity_premium_membership);
         viewPager = findViewById(R.id.viewPager);
         progressBar = findViewById(R.id.progressBar);
+        card1_Check = findViewById(R.id.card1_Check);
+        card2_Check = findViewById(R.id.card2_Check);
+        card3_Check = findViewById(R.id.card3_Check);
+        subscriptionDetailText = findViewById(R.id.subscriptionDetailText);
 
+        addUnderlineTerms_privacy();
+        subscribeBtn();
         List<SliderImageModel> slideImages = new ArrayList<>();
 
         Drawable mm_slide_1 = ContextCompat.getDrawable(this, R.drawable.mm_slide_1);
@@ -210,6 +222,35 @@ public class PremiumMembership extends AppCompatActivity {
         fullscreenMode();
 
         billingfunction();
+    }
+
+    private void subscribeBtn() {
+        btnSubs = findViewById(R.id.btnContinue);
+        btnSubs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (selectedCard_productDetails == null) {
+                    Toast.makeText(PremiumMembership.this, "Please select any card", Toast.LENGTH_SHORT).show();
+                } else {
+                    progressBar.setVisibility(View.VISIBLE);
+                    ImmutableList productDetailsParamsList =
+                            ImmutableList.of(
+                                    BillingFlowParams.ProductDetailsParams.newBuilder()
+                                            // retrieve a value for "productDetails" by calling queryProductDetailsAsync()
+                                            .setProductDetails(selectedCard_productDetails)
+                                            .setOfferToken(selectedCard_productDetails.getSubscriptionOfferDetails().get(0).getOfferToken())
+                                            // to get an offer token, call ProductDetails.getSubscriptionOfferDetails()
+                                            // for a list of offers that are available to the user
+                                            .build()
+                            );
+                    BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+                            .setProductDetailsParamsList(productDetailsParamsList)
+                            .build();
+                    billingClient.launchBillingFlow(PremiumMembership.this, billingFlowParams);
+                }
+            }
+        });
+
     }
 
     private void billingfunction() {
@@ -314,22 +355,14 @@ public class PremiumMembership extends AppCompatActivity {
 
         FrameLayout card1 = findViewById(R.id.card1);
         card1.setOnClickListener(view -> {
-            progressBar.setVisibility(View.VISIBLE);
+            selectedCard_productDetails = productDetails;
+//            btnSubs.setText("SUBSCRIBE (1 WEEK + Coins 500)");
+            card1_Check.setVisibility(View.VISIBLE);
+            card2_Check.setVisibility(View.INVISIBLE);
+            card3_Check.setVisibility(View.INVISIBLE);
+            subscriptionDetailText.setText("Your subscription will renew at " + card1_price_textview.getText() + " at the end of every billing cycle. By tapping Subscribe, your payment will be charged to your Google account, and your subscription will automatically renew for the same package length at the same price until you cancel on your Google account settings at least 24 hours prior to the end of the current period. By tapping Continue, you agree to our");
 
-            ImmutableList productDetailsParamsList =
-                    ImmutableList.of(
-                            BillingFlowParams.ProductDetailsParams.newBuilder()
-                                    // retrieve a value for "productDetails" by calling queryProductDetailsAsync()
-                                    .setProductDetails(productDetails)
-                                    .setOfferToken(productDetails.getSubscriptionOfferDetails().get(0).getOfferToken())
-                                    // to get an offer token, call ProductDetails.getSubscriptionOfferDetails()
-                                    // for a list of offers that are available to the user
-                                    .build()
-                    );
-            BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
-                    .setProductDetailsParamsList(productDetailsParamsList)
-                    .build();
-            billingClient.launchBillingFlow(PremiumMembership.this, billingFlowParams);
+
         });
 
 
@@ -342,22 +375,14 @@ public class PremiumMembership extends AppCompatActivity {
 
         FrameLayout card2 = findViewById(R.id.card2);
         card2.setOnClickListener(view -> {
-            progressBar.setVisibility(View.VISIBLE);
+            selectedCard_productDetails = productDetails;
+//            btnSubs.setText("SUBSCRIBE (1 MONTH + Coins 2000)");
+            card1_Check.setVisibility(View.INVISIBLE);
+            card2_Check.setVisibility(View.VISIBLE);
+            card3_Check.setVisibility(View.INVISIBLE);
+            subscriptionDetailText.setText("Your subscription will renew at " + card2_price_textview.getText() + " at the end of every billing cycle. By tapping Subscribe, your payment will be charged to your Google account, and your subscription will automatically renew for the same package length at the same price until you cancel on your Google account settings at least 24 hours prior to the end of the current period. By tapping Continue, you agree to our");
 
-            ImmutableList productDetailsParamsList =
-                    ImmutableList.of(
-                            BillingFlowParams.ProductDetailsParams.newBuilder()
-                                    // retrieve a value for "productDetails" by calling queryProductDetailsAsync()
-                                    .setProductDetails(productDetails)
-                                    .setOfferToken(productDetails.getSubscriptionOfferDetails().get(0).getOfferToken())
-                                    // to get an offer token, call ProductDetails.getSubscriptionOfferDetails()
-                                    // for a list of offers that are available to the user
-                                    .build()
-                    );
-            BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
-                    .setProductDetailsParamsList(productDetailsParamsList)
-                    .build();
-            billingClient.launchBillingFlow(PremiumMembership.this, billingFlowParams);
+
         });
     }
 
@@ -368,22 +393,15 @@ public class PremiumMembership extends AppCompatActivity {
 
         FrameLayout card3 = findViewById(R.id.card3);
         card3.setOnClickListener(view -> {
-            progressBar.setVisibility(View.VISIBLE);
+            selectedCard_productDetails = productDetails;
+//            btnSubs.setText("SUBSCRIBE (3 MONTH + Coins 10K)");
 
-            ImmutableList productDetailsParamsList =
-                    ImmutableList.of(
-                            BillingFlowParams.ProductDetailsParams.newBuilder()
-                                    // retrieve a value for "productDetails" by calling queryProductDetailsAsync()
-                                    .setProductDetails(productDetails)
-                                    .setOfferToken(productDetails.getSubscriptionOfferDetails().get(0).getOfferToken())
-                                    // to get an offer token, call ProductDetails.getSubscriptionOfferDetails()
-                                    // for a list of offers that are available to the user
-                                    .build()
-                    );
-            BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
-                    .setProductDetailsParamsList(productDetailsParamsList)
-                    .build();
-            billingClient.launchBillingFlow(PremiumMembership.this, billingFlowParams);
+            card1_Check.setVisibility(View.INVISIBLE);
+            card2_Check.setVisibility(View.INVISIBLE);
+            card3_Check.setVisibility(View.VISIBLE);
+
+            subscriptionDetailText.setText("Your subscription will renew at " + card3_price_textview.getText() + " at the end of every billing cycle. By tapping Subscribe, your payment will be charged to your Google account, and your subscription will automatically renew for the same package length at the same price until you cancel on your Google account settings at least 24 hours prior to the end of the current period. By tapping Continue, you agree to our");
+
         });
     }
 
@@ -607,6 +625,27 @@ public class PremiumMembership extends AppCompatActivity {
             return getResources().getDimensionPixelSize(resourceId);
         }
         return 0;
+    }
+
+    private void addUnderlineTerms_privacy() {
+        TextView terms = findViewById(R.id.terms);
+        TextView privaciy = findViewById(R.id.privacy);
+        terms.setPaintFlags(terms.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        privaciy.setPaintFlags(privaciy.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+        terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PremiumMembership.this, Terms_Conditions.class));
+            }
+        });
+        privaciy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PremiumMembership.this, PrivacyPolicy.class));
+
+            }
+        });
     }
 
 

@@ -1,5 +1,6 @@
 package com.bhola.saxchat2;
 
+import android.animation.ObjectAnimator;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.Cursor;
@@ -17,6 +18,10 @@ import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 import android.util.Log;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
+import android.widget.FrameLayout;
 
 import com.bhola.saxchat2.Models.CountryInfo_Model;
 import com.bhola.saxchat2.Models.Model_Profile;
@@ -425,6 +430,32 @@ public class Utils {
         cursor.close();
 
         return model_profile;
+    }
+
+
+    public static void scaleUp(FrameLayout frameLayout){
+        ObjectAnimator scaleAnimator = ObjectAnimator.ofFloat(frameLayout, "scaleX", 1.0f, 1.1f);
+        scaleAnimator.setDuration(300);
+        scaleAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        scaleAnimator.start();
+
+        ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(frameLayout, "scaleY", 1.0f, 1.1f);
+        scaleYAnimator.setDuration(300);
+        scaleYAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        scaleYAnimator.start();
+
+    }
+
+    public static void scaleDown(FrameLayout frameLayout){
+        ObjectAnimator scaleAnimator = ObjectAnimator.ofFloat(frameLayout, "scaleX", 1.05f, 1.0f);
+        scaleAnimator.setDuration(300);
+        scaleAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        scaleAnimator.start();
+
+        ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(frameLayout, "scaleY", 1.05f, 1.0f);
+        scaleYAnimator.setDuration(300);
+        scaleYAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        scaleYAnimator.start();
     }
 
 
