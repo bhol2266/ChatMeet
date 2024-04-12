@@ -2,11 +2,11 @@
 
     <string name="app_name">ChatHub - Random Video Call</string>
 
-    <string name="app_ID">ca-app-pub-8226562131234590~2838964179</string>
+    <string name="app_ID">ca-app-pub-8226562131234590~6332697722</string>
 
 
     ADMOB Real Ads ID :
-    <string name="Interstitial">ca-app-pub-8226562131234590/8278158964</string>
+    <string name="Interstitial">ca-app-pub-8226562131234590/9916719515</string>
 
 
     ADMOB Test Ads ID:
@@ -17,7 +17,7 @@
     <!--        <string name="Interstitial">ca-app-pub-3940256099942544/1033173712</string>-->
 
     Facebook Ads ID:
-    <string name="Facebook_InterstitialAdUnit">652739116782582_652744556782038</string>
+    <string name="Facebook_InterstitialAdUnit">788707286191157_788708279524391</string>
 
 
     <!-- Strings used for fragments for navigation -->

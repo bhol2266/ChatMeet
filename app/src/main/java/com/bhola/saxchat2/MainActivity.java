@@ -313,6 +313,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+//        super.onBackPressed();
         exit_dialog();
         if (MyApplication.Ads_State.equals("active")) {
             showAds();
