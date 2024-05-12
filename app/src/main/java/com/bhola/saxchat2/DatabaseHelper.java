@@ -120,6 +120,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public Cursor readFavoriteGirls() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + Database_tableNo + " WHERE like = 1 ORDER BY RANDOM() LIMIT 30";
+        Cursor cursor = db.rawQuery(query, null);
+        return cursor;
+    }
+
 
     public Cursor readRandomGirls() {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -215,6 +222,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("like", likeValue);
 
         float res = sQLiteDatabase.update(Database_tableNo, contentValues, "Username = ?", new String[]{Utils.encryption(username)});
+        Log.d("updateLike", "updateLike: "+res);
+
         if (res == -1)
             return "Failed";
         else

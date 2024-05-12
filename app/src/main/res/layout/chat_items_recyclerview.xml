@@ -21,54 +21,23 @@
         android:layout_weight="6"
         android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/userName"
             android:layout_width="wrap_content"
+            android:maxWidth="150dp"
+            android:maxLines="1"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/userName"
-                android:layout_width="wrap_content"
-                android:maxWidth="150dp"
-                android:maxLines="1"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/inter"
-                android:text="Sunaina Delhi  dafasdf asdf:)"
-                android:textColor="@color/semiblack"
-                android:textSize="18dp" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/recommendationTypeCardview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:elevation="0dp"
-                app:cardCornerRadius="5dp"
-                app:cardElevation="0dp">
-
-
-                <TextView
-                    android:id="@+id/recommendationType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/themeColorExtralight"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp"
-                    android:text="Nearby"
-                    android:textColor="@color/themeColor"
-                    android:textSize="12dp"
-                    android:textStyle="bold" />
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Sunaina Delhi  dafasdf asdf:)"
+            android:textColor="@color/semiblack"
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/lastMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
             android:maxLines="1"
+            android:fontFamily="@font/poppins_regular"
             android:text="Welcome to ChatHub Team"
             android:textColor="#7A7A7A"
             android:textSize="12dp" />
@@ -84,15 +53,14 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/messageTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/favouriteImage"
+            android:layout_width="30dp"
+            android:paddingLeft="10dp"
+            android:layout_height="20dp"
             android:layout_gravity="right|top"
-            android:fontFamily="@font/inter"
-            android:text="06:05"
-            android:textColor="@color/gmts_light_gray"
-            android:textSize="12dp" />
+            android:src="@drawable/favorite_start"
+          />
 
 
         <TextView

@@ -8,6 +8,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,16 +17,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bhola.saxchat2.Models.ChatItem_ModelClass;
+import com.bhola.saxchat2.Models.Model_Profile;
 import com.bhola.saxchat2.Models.UserBotMsg;
 import com.bhola.saxchat2.Models.UserQuestionWithAns;
 import com.google.common.reflect.TypeToken;
@@ -57,6 +59,8 @@ public class Fragment_Messenger extends Fragment {
     RecyclerView recyclerview;
     public static ArrayList<ChatItem_ModelClass> userList;
     public static ArrayList<ChatItem_ModelClass> userListTemp;
+    ArrayList<Model_Profile> favourite_slider;
+    FavouriteSliderAdapter sliderAdapter;
     LinearLayoutManager layoutManager;
     public static MessengeItemsAdapter adapter;
     public static String currentActiveUser = "";
@@ -84,6 +88,7 @@ public class Fragment_Messenger extends Fragment {
 
         setRecyclerView();
         setup_CustomerCare_Chat();
+        setUpSlider();
 
         return view;
 
@@ -470,6 +475,48 @@ public class Fragment_Messenger extends Fragment {
         }
     }
 
+    private void setUpSlider() {
+
+
+        favourite_slider = new ArrayList<>();
+        loadDatabase_slider();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        CustomRecyclerView recyclerView_slider = view.findViewById(R.id.recyclerView_slider);
+
+        recyclerView_slider.setLayoutManager(layoutManager);
+        sliderAdapter = new FavouriteSliderAdapter(context, favourite_slider);
+        recyclerView_slider.setAdapter(sliderAdapter);
+        sliderAdapter.notifyDataSetChanged();
+    }
+
+    private void loadDatabase_slider() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Cursor cursor = new DatabaseHelper(context, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile").readFavoriteGirls();
+                if (cursor.moveToFirst()) {
+                    do {
+                        favourite_slider.add(Utils.readCursor(cursor));
+                    } while (cursor.moveToNext());
+
+                }
+                cursor.close();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (favourite_slider.size() != 0) {
+                            sliderAdapter.notifyDataSetChanged();
+                        } else {
+                            LinearLayout favouriteSlideLayout = view.findViewById(R.id.favouriteSlideLayout);
+                            favouriteSlideLayout.setVisibility(View.GONE);
+                        }
+                    }
+                });
+            }
+        }).start();
+
+    }
+
 
     @Override
     public void onResume() {
@@ -486,9 +533,10 @@ class MessengeItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     Context context;
 
-    ArrayList<ChatItem_ModelClass> userList;
+   public static ArrayList<ChatItem_ModelClass> userList;
     MessengeItemsAdapter adapter;
     RecyclerView recyclerview;
+    boolean favourite = false;
 
     private HashMap<String, Handler> itemHandlers = new HashMap<>();
 
@@ -516,14 +564,11 @@ class MessengeItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         MessengeItemsAdapter.UserItem_Viewholder userItem_viewholder = (MessengeItemsAdapter.UserItem_Viewholder) holder;
         ChatItem_ModelClass modelClass = userList.get(position);
 
-
         userItem_viewholder.userName.setText(modelClass.getName());
-        userItem_viewholder.recommendationType.setText(modelClass.getRecommendationType());
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
 
         Date currentTime = new Date();
         String formattedTime = dateFormat.format(currentTime);
-        userItem_viewholder.messageTime.setText(formattedTime);
 
         Picasso.get().load(MyApplication.databaseURL_images + modelClass.getProfileImage()).into(userItem_viewholder.profileUrl);
 
@@ -640,6 +685,25 @@ class MessengeItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
             }
         }
+
+        userItem_viewholder.messageCount.setOnClickListener(v -> {
+            // this is because the size of the favourite btn is so small
+            userItem_viewholder.favouriteImage.performClick();
+        });
+        userItem_viewholder.favouriteImage.setOnClickListener(v -> {
+            if (!favourite) {
+                String res = new DatabaseHelper(context, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile").updateLike(modelClass.getUsername(), 1);
+                userItem_viewholder.favouriteImage.setImageDrawable(context.getResources().getDrawable(R.drawable.star));
+                favourite = true;
+            } else {
+                String res = new DatabaseHelper(context, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile").updateLike(modelClass.getUsername(), 0);
+                userItem_viewholder.favouriteImage.setImageDrawable(context.getResources().getDrawable(R.drawable.favorite_start));
+                favourite = false;
+
+            }
+
+        });
+        checkFavouriteStatus(modelClass.getUsername(), userItem_viewholder.favouriteImage);
     }
 
     private void isContainQuestion(ChatItem_ModelClass modelClass, UserItem_Viewholder userItem_viewholder, RecyclerView.ViewHolder holder, Date currentTime) {
@@ -785,6 +849,25 @@ class MessengeItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
 
+    private void checkFavouriteStatus(String username, ImageView favouriteImage) {
+
+        Cursor cursor = new DatabaseHelper(context, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile").readSingleGirl(username);
+        if (cursor.moveToFirst()) {
+            Model_Profile model_profile = Utils.readCursor(cursor);
+            if (model_profile.getLike() == 1) {
+                favourite = true;
+                favouriteImage.setImageDrawable(context.getResources().getDrawable(R.drawable.star)); // Set image drawable properly
+                //set imageview favourite
+            } else {
+                favourite = false;
+                favouriteImage.setImageDrawable(context.getResources().getDrawable(R.drawable.favorite_start)); // Set image drawable properly
+
+            }
+        }
+
+    }
+
+
     public static String getCurrentlyRunningActivity(Context context) {
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         String packageName = context.getPackageName();
@@ -812,10 +895,10 @@ class MessengeItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public static class UserItem_Viewholder extends RecyclerView.ViewHolder {
 
-        TextView userName, recommendationType, lastMessage, messageTime, messageCount;
+        TextView userName, lastMessage, messageCount;
         CircleImageView profileUrl;
+        ImageView favouriteImage;
         LinearLayout chatItemClick;
-        CardView recommendationTypeCardview;
         private Handler handler;
 
 
@@ -823,13 +906,83 @@ class MessengeItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             super(itemView);
 
             userName = itemView.findViewById(R.id.userName);
-            recommendationType = itemView.findViewById(R.id.recommendationType);
             lastMessage = itemView.findViewById(R.id.lastMessage);
-            messageTime = itemView.findViewById(R.id.messageTime);
+            favouriteImage = itemView.findViewById(R.id.favouriteImage);
             messageCount = itemView.findViewById(R.id.messageCount);
             profileUrl = itemView.findViewById(R.id.profileUrl);
             chatItemClick = itemView.findViewById(R.id.chatItemClick);
-            recommendationTypeCardview = itemView.findViewById(R.id.recommendationTypeCardview);
+
+
+        }
+    }
+}
+
+class FavouriteSliderAdapter extends RecyclerView.Adapter<FavouriteSliderAdapter.viewholder> {
+
+    Context context;
+    ArrayList<Model_Profile> girllist;
+
+
+    public FavouriteSliderAdapter(Context context, ArrayList<Model_Profile> girllist) {
+        this.context = context;
+        this.girllist = girllist;
+    }
+
+    @androidx.annotation.NonNull
+    @Override
+    public viewholder onCreateViewHolder(@androidx.annotation.NonNull ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+
+        View view = layoutInflater.inflate(R.layout.slider_item, parent, false);
+        return new viewholder(view);
+    }
+
+    @Override
+    public void onViewRecycled(viewholder holder) {
+        super.onViewRecycled(holder);
+    }
+
+    @Override
+    public void onBindViewHolder(@androidx.annotation.NonNull viewholder holder, int position) {
+        Model_Profile item = girllist.get(position);
+        holder.title.setText(item.getName());
+        Picasso.get().load(item.getProfilePhoto()).into(holder.thumbnail);
+
+        holder.sliderlayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, Profile.class);
+                intent.putExtra("userName", item.getUsername());
+                intent.putExtra("online", true);
+                context.startActivity(intent);
+            }
+        });
+
+        holder.messageCount.setText("3");
+
+    }
+
+
+    @Override
+    public int getItemCount() {
+        return girllist.size();
+    }
+
+
+    public class viewholder extends RecyclerView.ViewHolder {
+        ImageView thumbnail,online_imageView;
+        TextView title,messageCount;
+        LinearLayout sliderlayout;
+
+        public viewholder(@androidx.annotation.NonNull View itemView) {
+            super(itemView);
+            thumbnail = itemView.findViewById(R.id.imageview);
+            title = itemView.findViewById(R.id.categorytextview);
+            sliderlayout = itemView.findViewById(R.id.sliderlayout);
+            online_imageView = itemView.findViewById(R.id.online_imageView);
+            online_imageView.setVisibility(View.GONE);
+            messageCount = itemView.findViewById(R.id.messageCount);
+            messageCount.setVisibility(View.VISIBLE);
 
         }
     }

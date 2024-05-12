@@ -121,21 +121,13 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/themeColorlight"
-            app:cardCornerRadius="25dp">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="2dp"
-                android:padding="10dp"
-                android:src="@drawable/hi2"
-                app:tint="@color/white" />
-        </androidx.cardview.widget.CardView>
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/hi2"
+          />
 
 
         <ImageView
@@ -144,7 +136,7 @@
             android:layout_height="40dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="10dp"
-            android:src="@drawable/videocall" />
+            android:src="@drawable/gift" />
 
 
     </LinearLayout>
