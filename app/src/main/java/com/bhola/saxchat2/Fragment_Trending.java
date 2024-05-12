@@ -14,6 +14,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
@@ -116,10 +117,8 @@ public class Fragment_Trending extends Fragment {
         context = getContext();
 
         TextView HotTextview = view.findViewById(R.id.HotTextview);
-        ImageView HotTextview_line = view.findViewById(R.id.HotTextview_line);
 
         TextView NearbyTextview = view.findViewById(R.id.NearbyTextview);
-        ImageView NearbyTextview_line = view.findViewById(R.id.NearbyTextview_line);
 
 
         HotTextview.setOnClickListener(new View.OnClickListener() {
@@ -133,23 +132,29 @@ public class Fragment_Trending extends Fragment {
                 swipeRefreshLayout.setVisibility(View.VISIBLE);
                 swipeRefreshLayout.setEnabled(true);
 
-                float textSizeInDp = 25; // Replace with your desired text size in dp
+                float textSizeInDp = 20; // Replace with your desired text size in dp
                 float scale = getResources().getDisplayMetrics().density;
                 int textSizeInPixels = (int) (textSizeInDp * scale + 0.5f);
                 int textSizeInPixels2 = (int) (16 * scale + 0.5f);
 
 // Set the text size in pixels
                 NearbyTextview.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInPixels2);
-                NearbyTextview_line.setVisibility(View.INVISIBLE);
-
                 HotTextview.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInPixels);
-                HotTextview_line.setVisibility(View.VISIBLE);
 
                 int lightgray = getResources().getColor(com.google.android.ads.mediationtestsuite.R.color.gmts_light_gray); // Replace with your color resource or a specific color value
                 int semiblack = getResources().getColor(R.color.semiblack); // Replace with your color resource or a specific color value
 
                 NearbyTextview.setTextColor(lightgray);
                 HotTextview.setTextColor(semiblack);
+
+                Typeface poppins_regular = getResources().getFont(R.font.poppins_regular);
+                Typeface poppins_bold = getResources().getFont(R.font.poppins_bold);
+
+                HotTextview.setTypeface(poppins_bold);
+                NearbyTextview.setTypeface(poppins_regular);
+
+                HotTextview.setBackgroundResource(R.drawable.themecolor_outline);
+                NearbyTextview.setBackground(null);
 
             }
         });
@@ -177,23 +182,31 @@ public class Fragment_Trending extends Fragment {
                 swipeRefreshLayout.setVisibility(View.GONE);
                 swipeRefreshLayout.setEnabled(false);
 
-                float textSizeInDp = 25; // Replace with your desired text size in dp
+                float textSizeInDp = 18; // Replace with your desired text size in dp
                 float scale = getResources().getDisplayMetrics().density;
                 int textSizeInPixels = (int) (textSizeInDp * scale + 0.5f);
                 int textSizeInPixels2 = (int) (16 * scale + 0.5f);
 
 // Set the text size in pixels
                 NearbyTextview.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInPixels);
-                NearbyTextview_line.setVisibility(View.VISIBLE);
 
                 HotTextview.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInPixels2);
-                HotTextview_line.setVisibility(View.INVISIBLE);
 
                 int lightgray = getResources().getColor(com.google.android.ads.mediationtestsuite.R.color.gmts_light_gray); // Replace with your color resource or a specific color value
                 int semiblack = getResources().getColor(R.color.semiblack); // Replace with your color resource or a specific color value
 
                 NearbyTextview.setTextColor(semiblack);
                 HotTextview.setTextColor(lightgray);
+
+                Typeface poppins_regular = getResources().getFont(R.font.poppins_regular);
+                Typeface poppins_bold = getResources().getFont(R.font.poppins_bold);
+
+                HotTextview.setTypeface(poppins_regular);
+                NearbyTextview.setTypeface(poppins_bold);
+
+                HotTextview.setBackground(null);
+                NearbyTextview.setBackgroundResource(R.drawable.themecolor_outline);
+
             }
         });
 
@@ -231,10 +244,9 @@ public class Fragment_Trending extends Fragment {
 
     private void sideLayout_Countries() {
 
-        LinearLayout openDrawer = view.findViewById(R.id.openDrawer);
         drawerLayout = view.findViewById(R.id.drawerLayout);
 
-        openDrawer.setOnClickListener(new View.OnClickListener() {
+        flagIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (MyApplication.App_updating.equals("active")) {
@@ -812,16 +824,10 @@ class GirlsCardAdapter extends RecyclerView.Adapter<GirlsCardAdapter.GridViewHol
 
         for (CountryInfo_Model countryMap : MyApplication.countryList) {
             if (item.getFrom().equals(countryMap.getCountry())) {
-                loadImageview(holder.flag, countryMap.getCountry());
+                holder.country.setText(countryMap.getCountry());
             }
         }
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Animation breathingAnimation = AnimationUtils.loadAnimation(context, R.anim.breathing_animation);
-                holder.hello.startAnimation(breathingAnimation);
-            }
-        }, getRandomNumber());
+
 
         holder.cardView1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -834,43 +840,13 @@ class GirlsCardAdapter extends RecyclerView.Adapter<GirlsCardAdapter.GridViewHol
             }
         });
 
-        holder.hello.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("UserInfo", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("userName", item.getUsername());
-                editor.apply(); // Apply the changes to SharedPreferences
-
-                Intent intent = new Intent(context, ChatScreen_User.class);
-                context.startActivity(intent);
-
-            }
-        });
 
         censoredBtn(item.getCensored(), item.getUsername(), holder.censoredBtn, holder.getAbsoluteAdapterPosition(), item);
 
 
     }
 
-    private void loadImageview(ImageView imageView, String country) {
-        try {
-            // Replace "image.jpg" with the actual filename and path within the assets folder
-            InputStream inputStream = context.getAssets().open("countryFlag/" + country.replaceAll(" ", "-") + ".png");
-
-            // Decode the input stream into a Bitmap
-            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-
-            // Set the Bitmap to the ImageView
-            imageView.setImageBitmap(bitmap);
-
-            // Close the input stream when done
-            inputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     private void censoredBtn(int censored, String username, Button censoredBtn, int absoluteAdapterPosition, Model_Profile item) {
         if (censored == 0) {
@@ -924,22 +900,6 @@ class GirlsCardAdapter extends RecyclerView.Adapter<GirlsCardAdapter.GridViewHol
     }
 
 
-    private long getRandomNumber() {
-
-        Random random = new Random();
-        int minValue = 100;
-        int maxValue = 700;
-        int increment = 100;
-
-        // Calculate the range of possible values
-        int range = (maxValue - minValue) / increment + 1;
-
-        // Generate a random index within the range
-        int randomIndex = random.nextInt(range);
-
-        int randomNumber = minValue + randomIndex * increment;
-        return randomNumber;
-    }
 
 
     @Override
@@ -949,8 +909,8 @@ class GirlsCardAdapter extends RecyclerView.Adapter<GirlsCardAdapter.GridViewHol
 
 
     public static class GridViewHolder extends RecyclerView.ViewHolder {
-        TextView name;
-        ImageView profile, hello, flag;
+        TextView name,country;
+        ImageView profile, hello;
         CardView cardView1;
         Button censoredBtn;
 
@@ -958,8 +918,7 @@ class GirlsCardAdapter extends RecyclerView.Adapter<GirlsCardAdapter.GridViewHol
             super(itemView);
             profile = itemView.findViewById(R.id.profile);
             name = itemView.findViewById(R.id.name);
-            hello = itemView.findViewById(R.id.hello);
-            flag = itemView.findViewById(R.id.flag);
+            country = itemView.findViewById(R.id.country);
             cardView1 = itemView.findViewById(R.id.cardView1);
             censoredBtn = itemView.findViewById(R.id.censoredBtn);
 

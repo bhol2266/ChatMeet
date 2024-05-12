@@ -15,101 +15,58 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingStart="20dp"
-            android:paddingTop="10dp"
+            android:layout_marginTop="10dp"
             android:paddingEnd="10dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:layout_centerInParent="true"
                 android:orientation="horizontal">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/HotTextview"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:layout_gravity="center"
-                    android:orientation="vertical">
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Hots"
+                    android:gravity="center"
+                    android:background="@drawable/themecolor_outline"
+                    android:textColor="@color/semiblack"
+                    android:textSize="23dp"
+                   />
 
-                    <TextView
-                        android:id="@+id/HotTextview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/inter"
-                        android:text="Hot"
-                        android:textColor="@color/semiblack"
-                        android:textSize="25dp"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:id="@+id/HotTextview_line"
-                        android:layout_width="25dp"
-                        android:layout_height="5dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/line" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="vertical"
-                    android:paddingLeft="20dp">
-
-
-                    <TextView
-                        android:id="@+id/NearbyTextview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/inter"
-                        android:text="Nearby"
-                        android:textColor="@color/gmts_light_gray"
-                        android:textSize="16dp" />
-
-                    <ImageView
-                        android:id="@+id/NearbyTextview_line"
-                        android:layout_width="25dp"
-                        android:layout_height="5dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/line"
-                        android:visibility="invisible" />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/openDrawer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/flagIcon"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/earth" />
 
                 <TextView
-                    android:id="@+id/countryName"
+                    android:id="@+id/NearbyTextview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/inter"
-                    android:text="Region"
-                    android:textColor="#05587E"
-                    android:textSize="12dp" />
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"                    android:fontFamily="@font/poppins_regular"
+                    android:text="Nearby"
+                    android:textColor="@color/gmts_light_gray"
+                    android:textSize="16dp" />
 
 
             </LinearLayout>
+
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+
+                android:id="@+id/flagIcon"
+                android:layout_width="30dp"
+                android:layout_margin="5dp"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                android:layout_height="30dp"
+                android:src="@drawable/earth" />
+
 
 
         </RelativeLayout>
@@ -140,26 +97,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="12dp"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:src="@drawable/heart_atack" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/rubrik_bold"
-                                android:paddingLeft="5dp"
-                                android:text="Today is fate"
-                                android:textColor="@color/themeColor"
-                                android:textSize="20dp" />
-                        </LinearLayout>
 
 
                         <com.bhola.saxchat2.CustomRecyclerView

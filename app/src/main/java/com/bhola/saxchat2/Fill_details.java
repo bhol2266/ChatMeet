@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -13,9 +14,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,6 +29,8 @@ import com.bhola.saxchat2.Models.GalleryModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -49,9 +50,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Fill_details extends AppCompatActivity {
 
     String selectedGender = "";
-    EditText nickName;
+    TextInputEditText firstname, lastName;
     String Birthday = "";
-    Button nextBtn;
+    TextView nextBtn;
     String photoUrl;
     int userId;
     private final int PROFILE_IMAGE_CODE = 222;
@@ -72,7 +73,7 @@ public class Fill_details extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (nickName.getText().toString().length() > 0 && selectedGender.length() > 0 && Birthday.length() > 0) {
+                if (firstname.getText().toString().length() > 0 && selectedGender.length() > 0 && Birthday.length() > 0) {
                     int age = new Utils().calculateAge(Birthday);
                     if (age < 18) {
                         Toast.makeText(Fill_details.this, "Under 18 not allowed", Toast.LENGTH_SHORT).show();
@@ -88,10 +89,15 @@ public class Fill_details extends AppCompatActivity {
                         startActivity(new Intent(Fill_details.this, MainActivity.class));
                     }
                 }
+                else{
+                    Toast.makeText(Fill_details.this, "Fill details", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-        nickName = findViewById(R.id.nickName);
-        nickName.addTextChangedListener(new TextWatcher() {
+        firstname = findViewById(R.id.firstname);
+        lastName = findViewById(R.id.lastName);
+
+        firstname.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -109,7 +115,7 @@ public class Fill_details extends AppCompatActivity {
         });
 
         TextView dateOfBirth = findViewById(R.id.dateOfBirth);
-        CardView selectDate = findViewById(R.id.selectDate);
+        MaterialCardView selectDate = findViewById(R.id.selectDate);
         selectDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -145,6 +151,7 @@ public class Fill_details extends AppCompatActivity {
 
 
     private void saveProfileDetails() {
+
         Intent receivedIntent = getIntent();
         String email = receivedIntent.getStringExtra("email");
 
@@ -155,7 +162,7 @@ public class Fill_details extends AppCompatActivity {
         editor.putString("photoUrl", photoUrl);
         editor.putString("loginAs", loggedAs);
 
-        editor.putString("nickName", nickName.getText().toString());
+        editor.putString("nickName", firstname.getText().toString()+" "+lastName.getText().toString().trim());
         editor.putString("Gender", selectedGender);
         editor.putString("Birthday", Birthday);
         editor.putInt("userId", userId);
@@ -163,8 +170,10 @@ public class Fill_details extends AppCompatActivity {
         editor.apply();
 
 
-        UserModel userModel = new UserModel(nickName.getText().toString(), email, photoUrl, loggedAs, selectedGender, Birthday, "", "English", "", "", false, 0, userId, new java.util.Date(), "", new ArrayList<GalleryModel>(), "", false);
+        UserModel userModel = new UserModel(firstname.getText().toString()+" "+lastName.getText().toString().trim(), email, photoUrl, loggedAs, selectedGender, Birthday, "", "English", "", "", false, 0, userId, new java.util.Date(), "", new ArrayList<GalleryModel>(), "", false);
         MyApplication.userModel = userModel;
+
+        Log.d("saveProfileDetails", "saveProfileDetails: "+userModel.toString());
 
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -237,20 +246,20 @@ public class Fill_details extends AppCompatActivity {
         String displayName = receivedIntent.getStringExtra("nickName");
 
         if (loggedAs.equals("Google")) {
-            nickName.setText(displayName);
+            firstname.setText(displayName);
         }
 
     }
 
     private void genderSelector() {
-        CardView maleCard = findViewById(R.id.maleCard);
-        CardView femaleCard = findViewById(R.id.femaleCard);
+        MaterialCardView maleCard = findViewById(R.id.maleCard);
+        MaterialCardView femaleCard = findViewById(R.id.femaleCard);
+        ImageView maleCheckBox = findViewById(R.id.maleCheckBox);
+        ImageView femaleCheckBox = findViewById(R.id.femaleCheckBox);
 
-        ImageView maleicon = findViewById(R.id.maleicon);
-        ImageView femaleIcon = findViewById(R.id.femaleIcon);
+        Drawable checked = ContextCompat.getDrawable(Fill_details.this, R.drawable.checked);
+        Drawable unchecked = ContextCompat.getDrawable(Fill_details.this, R.drawable.unchecked);
 
-        TextView maleText = findViewById(R.id.maleText);
-        TextView femaleText = findViewById(R.id.femaleText);
 
         maleCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -258,16 +267,11 @@ public class Fill_details extends AppCompatActivity {
                 if (selectedGender.equals("male")) {
                     return;
                 }
+// Set the drawable to the ImageView
+                maleCheckBox.setImageDrawable(checked);
+                femaleCheckBox.setImageDrawable(unchecked);
 
                 selectedGender = "male";
-                maleCard.setCardBackgroundColor(ContextCompat.getColor(Fill_details.this, R.color.themeColor));
-                femaleCard.setCardBackgroundColor(ContextCompat.getColor(Fill_details.this, R.color.cardView_bg));
-
-                maleText.setTextColor(ContextCompat.getColor(Fill_details.this, R.color.white));
-                femaleText.setTextColor(ContextCompat.getColor(Fill_details.this, R.color.semiblack));
-
-                maleicon.setColorFilter(ContextCompat.getColor(Fill_details.this, R.color.white));
-                femaleIcon.setColorFilter(ContextCompat.getColor(Fill_details.this, R.color.female_icon));
 
                 btnStatus();
             }
@@ -279,17 +283,10 @@ public class Fill_details extends AppCompatActivity {
                 if (selectedGender.equals("female")) {
                     return;
                 }
+                maleCheckBox.setImageDrawable(unchecked);
+                femaleCheckBox.setImageDrawable(checked);
 
                 selectedGender = "female";
-                femaleCard.setCardBackgroundColor(ContextCompat.getColor(Fill_details.this, R.color.themeColor));
-                maleCard.setCardBackgroundColor(ContextCompat.getColor(Fill_details.this, R.color.cardView_bg));
-
-                femaleText.setTextColor(ContextCompat.getColor(Fill_details.this, R.color.white));
-                maleText.setTextColor(ContextCompat.getColor(Fill_details.this, R.color.semiblack));
-
-                femaleIcon.setColorFilter(ContextCompat.getColor(Fill_details.this, R.color.white));
-                maleicon.setColorFilter(ContextCompat.getColor(Fill_details.this, R.color.male_icon));
-
                 btnStatus();
 
             }
@@ -299,7 +296,7 @@ public class Fill_details extends AppCompatActivity {
     }
 
     private void btnStatus() {
-        if (nickName.getText().toString().length() > 0 && selectedGender.length() > 0 && Birthday.length() > 0) {
+        if (firstname.getText().toString().length() > 0 && selectedGender.length() > 0 && Birthday.length() > 0) {
             nextBtn.setAlpha(1);
         } else {
             nextBtn.setAlpha(0.5F);

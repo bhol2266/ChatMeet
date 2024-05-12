@@ -60,5 +60,12 @@
     </style>
 
 
+    <style name="CustomOutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <!-- Border color in the default state -->
+
+    </style>
+
+
+
 
 </resources>

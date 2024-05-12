@@ -20,8 +20,6 @@ public class PagerAdapter extends FragmentStateAdapter {
                 return new Fragment_HomePage();
             case 2:
                 return new Fragment_Messenger();
-            case 3:
-                return new Fragment_CustomerCare();
             default:
                 return new Fragment_UserProfile();
         }
@@ -29,6 +27,6 @@ public class PagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 5;
+        return 4;
     }
 }

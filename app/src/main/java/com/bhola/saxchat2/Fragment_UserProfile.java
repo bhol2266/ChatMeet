@@ -11,8 +11,6 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -20,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -80,9 +77,14 @@ public class Fragment_UserProfile extends Fragment {
             view.getContext().startActivity(new Intent(view.getContext(), PremiumMembership.class));
         });
 
+        LinearLayout customerSupport = view.findViewById(R.id.customerSupport);
+        customerSupport.setOnClickListener(v -> {
+            startActivity(new Intent(context, CustomerCare.class));
+        });
+
         profileEdit();
 
-        notificationBar();
+//        notificationBar();
 
 
         return view;
@@ -130,22 +132,13 @@ public class Fragment_UserProfile extends Fragment {
         String urll = sh.getString("photoUrl", "");
         String Gender = sh.getString("Gender", "");
         String Birthday = sh.getString("Birthday", "");
-
+        int age = 0;
         try {
-            int age = new Utils().calculateAge(Birthday);
-            TextView ageText = view.findViewById(R.id.ageText);
-            ageText.setText(String.valueOf(age));
+            age = new Utils().calculateAge(Birthday);
         } catch (Exception e) {
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-
-        if (Gender.equals("male")) {
-            ImageView genderIcon = view.findViewById(R.id.genderIcon);
-            genderIcon.setImageResource(R.drawable.male);
-            CardView genderCard = view.findViewById(R.id.genderCard);
-            genderCard.setCardBackgroundColor(getResources().getColor(R.color.male_icon)); // Replace with your color resource ID
-        }
 
         TextView location = view.findViewById(R.id.location);
 
@@ -161,7 +154,7 @@ public class Fragment_UserProfile extends Fragment {
         if (MyApplication.userLoggedIn) {
 
             String fullname = sh.getString("nickName", "not set");
-            name.setText(fullname);
+            name.setText(fullname + ", " + String.valueOf(age));
 
             if (urll.startsWith("http")) {
 
@@ -181,39 +174,39 @@ public class Fragment_UserProfile extends Fragment {
 
 
     private void notificationBar() {
-        CardView notificationCard = view.findViewById(R.id.notificationCard);
-        if (Fragment_Messenger.count == 0) {
-            notificationCard.setVisibility(View.INVISIBLE);
-        } else {
-            notificationCard.setVisibility(View.VISIBLE);
-
-        }
-        ImageView bellIcon = view.findViewById(R.id.bellIcon);
-        ImageView crossIcon = view.findViewById(R.id.crossIcon);
-        TextView notification_message = view.findViewById(R.id.notification_message);
-
-        Animation scaleAnimation = AnimationUtils.loadAnimation(context, R.anim.scale_up_down);
-        bellIcon.startAnimation(scaleAnimation);
-
-        crossIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                notificationCard.setVisibility(View.INVISIBLE);
-            }
-        });
-
-        notification_message.setText(String.valueOf(Fragment_Messenger.count) + " new messages,click to read!");
-        notification_message.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MainActivity.viewPager2.setCurrentItem(2); // Switch to Fragment B
-
-            }
-        });
+//        CardView notificationCard = view.findViewById(R.id.notificationCard);
+//        if (Fragment_Messenger.count == 0) {
+//            notificationCard.setVisibility(View.INVISIBLE);
+//        } else {
+//            notificationCard.setVisibility(View.VISIBLE);
+//
+//        }
+//        ImageView bellIcon = view.findViewById(R.id.bellIcon);
+//        ImageView crossIcon = view.findViewById(R.id.crossIcon);
+//        TextView notification_message = view.findViewById(R.id.notification_message);
+//
+//        Animation scaleAnimation = AnimationUtils.loadAnimation(context, R.anim.scale_up_down);
+//        bellIcon.startAnimation(scaleAnimation);
+//
+//        crossIcon.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                notificationCard.setVisibility(View.INVISIBLE);
+//            }
+//        });
+//
+//        notification_message.setText(String.valueOf(Fragment_Messenger.count) + " new messages,click to read!");
+//        notification_message.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                MainActivity.viewPager2.setCurrentItem(2); // Switch to Fragment B
+//
+//            }
+//        });
     }
 
     private void profileEdit() {
-        TextView edit = view.findViewById(R.id.edit);
+        ImageView edit = view.findViewById(R.id.edit);
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

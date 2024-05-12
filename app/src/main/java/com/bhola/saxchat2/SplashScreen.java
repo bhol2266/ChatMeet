@@ -65,7 +65,6 @@ public class SplashScreen extends AppCompatActivity {
 
         topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation);
         bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
-        textView = findViewById(R.id.textView_splashscreen);
         lottie_progressbar = findViewById(R.id.lottie_progressbar);
 
 
@@ -98,7 +97,7 @@ public class SplashScreen extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         generateNotification();
         generateFCMToken();
-backgroundVideoPlayback();
+//backgroundVideoPlayback();
 
 //        clearChats();
     }

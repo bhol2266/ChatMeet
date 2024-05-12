@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager2 = findViewById(R.id.viewpager);
         viewPager2.setAdapter(new PagerAdapter(MainActivity.this));
 
-        viewPager2.setOffscreenPageLimit(5);
+        viewPager2.setOffscreenPageLimit(4);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
 
 
@@ -148,9 +148,12 @@ public class MainActivity extends AppCompatActivity {
                 switch (position) {
 
                     case 0:
-                        tab.setIcon(R.drawable.trending);
                         View view5 = getLayoutInflater().inflate(R.layout.customtab, null);
                         view5.findViewById(R.id.icon).setBackgroundResource(R.drawable.trending);
+                        ImageView icon1 = view5.findViewById(R.id.icon);
+
+                        icon1.setScaleX(1.1f);
+                        icon1.setScaleY(1.1f);
                         tab.setCustomView(view5);
 
                         //By default tab 0 will be selected to change the tint of that tab
@@ -160,19 +163,23 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
                     case 1:
-                        tab.setIcon(R.drawable.videocall2);
 
                         View view1 = getLayoutInflater().inflate(R.layout.customtab, null);
                         view1.findViewById(R.id.icon).setBackgroundResource(R.drawable.videocall2);
+                        ImageView icon2 = view1.findViewById(R.id.icon);
+                        icon2.setScaleX(1.5f);
+                        icon2.setScaleY(1.5f);
+
                         tab.setCustomView(view1);
 
                         break;
                     case 2:
-                        tab.setIcon(R.drawable.chat);
 
 
                         View view2 = getLayoutInflater().inflate(R.layout.customtab, null);
                         view2.findViewById(R.id.icon).setBackgroundResource(R.drawable.chat);
+                        ImageView icon3 = view2.findViewById(R.id.icon);
+
                         tab.setCustomView(view2);
                         unreadMessage_count = getUndreadMessage_Count();
 
@@ -207,19 +214,7 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
 
-
-                    case 3:
-                        tab.setIcon(R.drawable.info_2);
-
-
-                        View view3 = getLayoutInflater().inflate(R.layout.customtab, null);
-                        view3.findViewById(R.id.icon).setBackgroundResource(R.drawable.info_2);
-                        tab.setCustomView(view3);
-                        break;
-
-
                     default:
-                        tab.setIcon(R.drawable.user2);
                         View view4 = getLayoutInflater().inflate(R.layout.customtab, null);
                         view4.findViewById(R.id.icon).setBackgroundResource(R.drawable.user2);
                         tab.setCustomView(view4);

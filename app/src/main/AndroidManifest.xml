@@ -48,6 +48,9 @@
         android:theme="@style/Theme.LiveVideoChat"
         tools:targetApi="31">
         <activity
+            android:name=".CustomerCare"
+            android:exported="false" />
+        <activity
             android:name=".PremiumMembership"
             android:exported="false" />
         <activity
