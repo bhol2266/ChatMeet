@@ -67,5 +67,13 @@
 
 
 
+    <style name="ImageView.Corner" parent="">
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeBottomLeft">40dp</item>
+        <item name="cornerSizeBottomRight">40dp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
 
 </resources>

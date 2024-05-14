@@ -18,10 +18,15 @@ import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.FrameLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bhola.saxchat2.Models.CountryInfo_Model;
 import com.bhola.saxchat2.Models.Model_Profile;
@@ -457,6 +462,8 @@ public class Utils {
         scaleYAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         scaleYAnimator.start();
     }
+
+
 
 
 }

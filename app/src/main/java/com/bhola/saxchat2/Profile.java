@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ import com.bhola.saxchat2.Models.ChatItem_ModelClass;
 import com.bhola.saxchat2.Models.GiftItemModel;
 import com.bhola.saxchat2.Models.Model_Profile;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -57,6 +59,8 @@ public class Profile extends AppCompatActivity {
     Model_Profile model_profile;
     public static TextView send;
     boolean isOnline;
+    boolean favourite;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,107 +75,48 @@ public class Profile extends AppCompatActivity {
 
         getGirlProfile_DB();
         actionbar();
-        lottieGift();
-
 
     }
 
-    private void selectBot() {
+    private void favourite() {
+        CardView favouriteCardview = findViewById(R.id.favouriteCardview);
+        ImageView favoriteImage = findViewById(R.id.favoriteImage);
+        favouriteCardview.setOnClickListener(view -> {
+            if (!favourite) {
+                String res = new DatabaseHelper(Profile.this, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile").updateLike(model_profile.getUsername(), 1);
+                favoriteImage.setImageDrawable(getResources().getDrawable(R.drawable.star));
+                favourite = true;
+                showCustomToast();
 
-        TextView selectBotBtn = findViewById(R.id.selectBotBtn);
-        TextView likeBtn = findViewById(R.id.likeBtn);
-
-        if (model_profile.getCensored() == 1) {
-            selectBotBtn.setVisibility(View.GONE);
-        } else {
-            likeBtn.setVisibility(View.GONE);
-
-        }
-        selectedbotBtn(selectBotBtn);
-        likeButton(likeBtn);
-
-    }
-
-    private void selectedbotBtn(TextView selectBotBtn) {
-        if (model_profile.getSelectedBot() == 0) {
-            selectBotBtn.setBackgroundColor(getResources().getColor(R.color.themeColor));
-            selectBotBtn.setText("Not Selected");
-        } else {
-            selectBotBtn.setBackgroundColor(getResources().getColor(R.color.green)); // Assumes you have a green color defined in your resources
-            selectBotBtn.setText("Selected Bot");
-
-        }
-
-        selectBotBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (model_profile.getSelectedBot() == 0) {
-                    String res = new DatabaseHelper(Profile.this, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile").selectedBot(model_profile.getUsername(), 1);
-
-                    selectBotBtn.setBackgroundColor(getResources().getColor(R.color.green));
-                    selectBotBtn.setText("Selected Bot");
-                    model_profile.setSelectedBot(1);
-
-                } else {
-                    String res = new DatabaseHelper(Profile.this, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile").selectedBot(model_profile.getUsername(), 0);
-
-                    selectBotBtn.setBackgroundColor(getResources().getColor(R.color.themeColor)); // Assumes you have a green color defined in your resources
-                    selectBotBtn.setText("Not Selected");
-
-                    model_profile.setSelectedBot(0);
-
-                }
+            } else {
+                String res = new DatabaseHelper(Profile.this, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile").updateLike(model_profile.getUsername(), 0);
+                favoriteImage.setImageDrawable(getResources().getDrawable(R.drawable.favorite_start));
+                favourite = false;
 
             }
         });
+
+        checkFavouriteStatus(model_profile.getUsername(), favoriteImage);
     }
 
-    private void likeButton(TextView likeBtn) {
-        if (model_profile.getLike() == 0) {
-            likeBtn.setBackgroundColor(getResources().getColor(R.color.themeColor));
-            likeBtn.setText("Not liked");
-        } else {
-            likeBtn.setBackgroundColor(getResources().getColor(R.color.green)); // Assumes you have a green color defined in your resources
-            likeBtn.setText("liked Bot");
+    private void checkFavouriteStatus(String username, ImageView favouriteImage) {
 
+        Cursor cursor = new DatabaseHelper(Profile.this, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile").readSingleGirl(username);
+        if (cursor.moveToFirst()) {
+            Model_Profile model_profile = Utils.readCursor(cursor);
+            if (model_profile.getLike() == 1) {
+                favourite = true;
+                favouriteImage.setImageDrawable(getResources().getDrawable(R.drawable.star)); // Set image drawable properly
+                //set imageview favourite
+            } else {
+                favourite = false;
+                favouriteImage.setImageDrawable(getResources().getDrawable(R.drawable.favorite_start)); // Set image drawable properly
+
+            }
         }
 
-        likeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (model_profile.getLike() == 0) {
-                    String res = new DatabaseHelper(Profile.this, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile").updateLike(model_profile.getUsername(), 1);
-
-                    likeBtn.setBackgroundColor(getResources().getColor(R.color.green));
-                    likeBtn.setText("liked Bot");
-                    model_profile.setLike(1);
-
-                } else {
-                    String res = new DatabaseHelper(Profile.this, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile").updateLike(model_profile.getUsername(), 0);
-
-                    likeBtn.setBackgroundColor(getResources().getColor(R.color.themeColor)); // Assumes you have a green color defined in your resources
-                    likeBtn.setText("Not liked");
-
-                    model_profile.setLike(0);
-
-                }
-
-            }
-        });
     }
 
-
-    private void lottieGift() {
-        LottieAnimationView lottiegift = findViewById(R.id.lottiegift);
-        lottiegift.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openBottomSheetDialog();
-            }
-        });
-    }
 
     private void openBottomSheetDialog() {
         BottomSheetDialog bottomSheetDialog;
@@ -225,53 +170,42 @@ public class Profile extends AppCompatActivity {
     }
 
     private void bindDetails() {
-        ImageView profileImage = findViewById(R.id.profileImage);
+        favourite();
+
+        ShapeableImageView profileImage = findViewById(R.id.profileImage);
         Picasso.get().load(model_profile.getProfilePhoto()).into(profileImage);
 
         TextView id = findViewById(R.id.id);
         id.setText(convertUsernameto_number(model_profile.getUsername()));
         TextView profileName = findViewById(R.id.profileName);
-        profileName.setText(model_profile.getName());
+        try {
+            profileName.setText(model_profile.getName().trim() + ",  " + model_profile.getAge().trim().substring(0, 2));
+        } catch (Exception e) {
+            profileName.setText(model_profile.getName().trim());
+        }
 
-        TextView age = findViewById(R.id.age);
-        age.setText(model_profile.getAge());
 
         TextView country = findViewById(R.id.country);
         country.setText(model_profile.getFrom());
 
-
-        CardView voiceCall = findViewById(R.id.voiceCall);
-        voiceCall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                rechargeDialog(view.getContext());
-            }
-        });
-
-        LottieAnimationView videoCall = findViewById(R.id.videoCall);
-        videoCall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                rechargeDialog(view.getContext());
-
-            }
-        });
-
         CardView chat = findViewById(R.id.chat);
-        chat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("UserInfo", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("userName", model_profile.getUsername());
+        chat.setOnClickListener(view -> {
+            SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("UserInfo", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("userName", model_profile.getUsername());
 
-                editor.apply(); // Apply the changes to SharedPreferences
+            editor.apply(); // Apply the changes to SharedPreferences
 
-                Intent intent = new Intent(Profile.this, ChatScreen_User.class);
-                intent.putExtra("online", isOnline);
-                startActivity(intent);
-            }
+            Intent intent = new Intent(Profile.this, ChatScreen_User.class);
+            intent.putExtra("online", isOnline);
+            startActivity(intent);
         });
+
+        CardView gift = findViewById(R.id.gift);
+        gift.setOnClickListener(view -> {
+            openBottomSheetDialog();
+        });
+
 
         TextView Languages = findViewById(R.id.Languages);
         Languages.setText(model_profile.getLanguages());
@@ -330,11 +264,6 @@ public class Profile extends AppCompatActivity {
             Subculturelayout.setVisibility(View.GONE);
         }
 
-        LinearLayout onlineLayout = findViewById(R.id.onlineLayout);
-         isOnline = getIntent().getBooleanExtra("online", false);
-        if (isOnline) {
-            onlineLayout.setVisibility(View.VISIBLE);
-        }
 
     }
 
@@ -372,7 +301,6 @@ public class Profile extends AppCompatActivity {
 
     private void actionbar() {
         ImageView backArrow = findViewById(R.id.backArrow);
-        ImageView warningSign = findViewById(R.id.warningSign);
         ImageView menuDots = findViewById(R.id.menuDots);
 
 
@@ -383,12 +311,6 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        warningSign.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                blockUserDialog();
-            }
-        });
 
         menuDots.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -528,7 +450,6 @@ public class Profile extends AppCompatActivity {
                                     // this is because when sdk is lower the blur effect on ImageView not working
                                     setImageinGridLayout();
                                 }
-                                selectBot();
 
                             }
                         }, 200);
@@ -638,6 +559,23 @@ public class Profile extends AppCompatActivity {
         recharge_dialog.getWindow().setBackgroundDrawable(inset);
 
     }
+
+    private void showCustomToast() {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.custom_toast_layout, null);
+
+        TextView profileName = layout.findViewById(R.id.profileName);
+        profileName.setText(model_profile.getName());
+        // You can customize the text and other properties of the view elements here
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 130); // Adjust the margin (bottom) here
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
+
+    }
+
 
 }
 

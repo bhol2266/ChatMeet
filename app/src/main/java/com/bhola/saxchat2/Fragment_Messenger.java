@@ -13,16 +13,22 @@ import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -64,10 +70,12 @@ public class Fragment_Messenger extends Fragment {
     LinearLayoutManager layoutManager;
     public static MessengeItemsAdapter adapter;
     public static String currentActiveUser = "";
+    EditText searchEdittext;
 
     private Dialog alertNotificationDialog;
     private static final long AUTO_DISMISS_DELAY = 4000; // 4 seconds
     public static int count = 0;
+
 
     public Fragment_Messenger() {
         // Required empty public constructor
@@ -89,8 +97,31 @@ public class Fragment_Messenger extends Fragment {
         setRecyclerView();
         setup_CustomerCare_Chat();
         setUpSlider();
-
+        searchFunction();
         return view;
+
+
+    }
+
+    private void searchFunction() {
+        searchEdittext = view.findViewById(R.id.searchEdittext);
+        searchEdittext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.getFilter().filter(s.toString().toLowerCase());
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
 
     }
@@ -475,7 +506,7 @@ public class Fragment_Messenger extends Fragment {
         }
     }
 
-    private void setUpSlider() {
+    public void setUpSlider() {
 
 
         favourite_slider = new ArrayList<>();
@@ -529,11 +560,12 @@ public class Fragment_Messenger extends Fragment {
 }
 
 
-class MessengeItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+class MessengeItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Filterable {
 
     Context context;
 
-   public static ArrayList<ChatItem_ModelClass> userList;
+    public static ArrayList<ChatItem_ModelClass> userList;
+    ArrayList<ChatItem_ModelClass> backup_userList; //for filtering
     MessengeItemsAdapter adapter;
     RecyclerView recyclerview;
     boolean favourite = false;
@@ -546,6 +578,7 @@ class MessengeItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.context = context;
         this.adapter = adapter;
         this.recyclerview = recyclerview;
+        backup_userList=new ArrayList<>(userList);
 
     }
 
@@ -887,6 +920,41 @@ class MessengeItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return null;
     }
 
+
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    Filter filter = new Filter() {
+        @Override
+        // background thread
+        protected FilterResults performFiltering(CharSequence keyword) {
+            ArrayList<ChatItem_ModelClass> filtereddata = new ArrayList<>();
+
+            if (keyword.toString().isEmpty())
+                filtereddata.addAll(backup_userList);
+            else {
+                for (ChatItem_ModelClass obj : backup_userList) {
+                    if (obj.getUsername().toString().toLowerCase().trim().contains(keyword.toString().toLowerCase()))
+                        filtereddata.add(obj);
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filtereddata;
+            return results;
+        }
+
+        @Override  // main UI thread
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            userList.clear();
+            userList.addAll((ArrayList<ChatItem_ModelClass>) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+
     @Override
     public int getItemCount() {
         return userList.size();
@@ -958,7 +1026,37 @@ class FavouriteSliderAdapter extends RecyclerView.Adapter<FavouriteSliderAdapter
             }
         });
 
-        holder.messageCount.setText("3");
+
+        getUnreadMessageCount(holder.messageCount, item.getUsername(), position, item);
+
+    }
+
+    private void getUnreadMessageCount(TextView messageCount, String username, int position, Model_Profile item) {
+
+        int count = 0;
+        for (int i = 0; i < Fragment_Messenger.userListTemp.size(); i++) {
+
+            ChatItem_ModelClass modelclass = Fragment_Messenger.userListTemp.get(i);
+            if (modelclass.getUsername().equals(username)) {
+                for (int j = 0; j < modelclass.getUserBotMsg().size(); j++) {
+                    UserBotMsg userBotMsg = modelclass.getUserBotMsg().get(j);
+                    if (userBotMsg.getSent() == 1 && userBotMsg.getRead() == 0) {
+                        count = count + 1;
+                    }
+                }
+                if (modelclass.isContainsQuestion()) {
+                    if (modelclass.getQuestionWithAns().getSent() == 1 && modelclass.getQuestionWithAns().getRead() == 0) {
+                        count = count + 1;
+                    }
+                }
+            }
+        }
+
+        messageCount.setText(String.valueOf(count));
+        if (count == 0) {
+            messageCount.setVisibility(View.GONE);
+        }
+
 
     }
 
@@ -968,10 +1066,9 @@ class FavouriteSliderAdapter extends RecyclerView.Adapter<FavouriteSliderAdapter
         return girllist.size();
     }
 
-
     public class viewholder extends RecyclerView.ViewHolder {
-        ImageView thumbnail,online_imageView;
-        TextView title,messageCount;
+        ImageView thumbnail, online_imageView;
+        TextView title, messageCount;
         LinearLayout sliderlayout;
 
         public viewholder(@androidx.annotation.NonNull View itemView) {
