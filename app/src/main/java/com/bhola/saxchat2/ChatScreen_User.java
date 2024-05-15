@@ -357,14 +357,7 @@ public class ChatScreen_User extends Activity {
         });
 
         ImageView sendImage = findViewById(R.id.sendImage); // this is option for sending extra images
-        ImageView lottiegift = findViewById(R.id.lottiegift);
 
-        lottiegift.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openBottomSheetDialog();
-            }
-        });
         ImageView videoCall = findViewById(R.id.videoCall);
         ImageView voiceCall = findViewById(R.id.voiceCall);
 
@@ -1086,8 +1079,7 @@ public class ChatScreen_User extends Activity {
 
     private void actionbar() {
         ImageView backArrow = findViewById(R.id.backArrow);
-        ImageView warningSign = findViewById(R.id.warningSign);
-        ImageView menuDots = findViewById(R.id.menuDots);
+
         RelativeLayout alertBar = findViewById(R.id.alertBar);
         TextView viewProfile = findViewById(R.id.viewProfile);
         TextView profileName = findViewById(R.id.profileName);
@@ -1136,19 +1128,7 @@ public class ChatScreen_User extends Activity {
             }
         });
 
-        warningSign.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                blockUserDialog();
-            }
-        });
 
-        menuDots.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                reportUserDialog();
-            }
-        });
 
         alertBar.setOnClickListener(new View.OnClickListener() {
             @Override

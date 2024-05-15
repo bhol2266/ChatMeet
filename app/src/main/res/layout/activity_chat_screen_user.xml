@@ -29,7 +29,8 @@
                 android:layout_height="35dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/back_arrow" />
+                android:src="@drawable/back_arrow"
+                app:tint="@color/semiblack" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -38,19 +39,52 @@
                 android:layout_centerVertical="true"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/profileName"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/rubrik_semibold"
-                    android:maxWidth="200dp"
-                    android:maxLines="1"
-                    android:text="Sunanda"
-                    android:textColor="@color/gmts_light_gray"
-                    android:textSize="22dp" />
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/profileName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:maxWidth="200dp"
+                        android:maxLines="1"
+                        android:text="Sunanda"
+                        android:textColor="@color/semiblack"
+                        android:textSize="22dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_gravity="center">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Online"
+                            android:textSize="10dp"
+                            android:textColor="@color/grey" />
+
+                        <ImageView
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_marginBottom="1dp"
+                            android:layout_marginLeft="3dp"
+                            android:src="@drawable/dot" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
 
                 <ImageView
                     android:id="@+id/onlineDot"
@@ -58,8 +92,8 @@
                     android:layout_height="12dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="5dp"
-                    android:visibility="gone"
-                    android:src="@drawable/dot" />
+                    android:src="@drawable/dot"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -71,20 +105,19 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/warningSign"
-                    android:layout_width="25dp"
-                    android:layout_height="30dp"
+                    android:id="@+id/voiceCall"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center"
-                    android:layout_marginRight="30dp"
-                    android:src="@drawable/warning"
-                    app:tint="@color/themeColor" />
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/phone" />
 
                 <ImageView
-                    android:id="@+id/menuDots"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:id="@+id/videoCall"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/dots" />
+                    android:src="@drawable/video" />
 
             </LinearLayout>
 
@@ -117,7 +150,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:fontFamily="@font/rubrik_semibold"
+                android:fontFamily="@font/poppins_regular"
                 android:text="Don't disclose sensitive info while chatting"
                 android:textColor="#929497"
                 android:textSize="10dp" />
@@ -167,7 +200,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginBottom="15dp"
-                        android:fontFamily="@font/inter"
+                        android:fontFamily="@font/poppins_regular"
                         android:padding="5dp"
                         android:text="View Profile"
                         android:textColor="@color/themeColor"
@@ -236,12 +269,21 @@
             android:id="@+id/ll2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/bottomNav"
+            android:layout_alignParentBottom="true"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
+            android:layout_marginBottom="20dp"
             android:orientation="horizontal"
             android:paddingTop="5dp"
             android:weightSum="2">
+
+
+            <ImageView
+                android:id="@+id/sendImage"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/plus" />
 
 
             <androidx.cardview.widget.CardView
@@ -255,17 +297,33 @@
                 app:cardCornerRadius="15dp"
                 app:cardElevation="0dp">
 
-                <EditText
-                    android:id="@+id/newMessage"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@null"
-                    android:fontFamily="@font/inter"
-                    android:hint="Type The Messages..."
-                    android:paddingStart="15dp"
-                    android:scrollbars="vertical"
-                    android:textSize="16dp" />
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/newMessage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:fontFamily="@font/inter"
+                        android:hint="Type The Messages..."
+                        android:paddingStart="15dp"
+                        android:scrollbars="vertical"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="15dp"
+                        android:src="@drawable/smiley" />
+
+
+                </RelativeLayout>
+
 
             </androidx.cardview.widget.CardView>
 
@@ -313,64 +371,6 @@
                 android:padding="12dp"
                 android:scaleType="centerInside"
                 app:mic_icon="@drawable/mic" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/bottomNav"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal"
-            android:paddingTop="5dp">
-
-            <ImageView
-                android:id="@+id/sendImage"
-                android:layout_width="30dp"
-                android:layout_height="27dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:src="@drawable/picture" />
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/lottiegift"
-                android:layout_width="30dp"
-                android:layout_height="45dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="3dp"
-
-                android:layout_weight="1"
-                app:lottie_autoPlay="true"
-
-                app:lottie_rawRes="@raw/lottie_gift"
-                app:lottie_repeatCount="10000"
-                app:lottie_speed="1" />
-
-            <ImageView
-                android:id="@+id/videoCall"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-
-                android:layout_centerInParent="true"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-
-                android:alpha="0.7"
-                android:src="@drawable/videocall" />
-
-            <ImageView
-                android:id="@+id/voiceCall"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:alpha="0.7"
-                android:src="@drawable/telephone" />
 
 
         </LinearLayout>

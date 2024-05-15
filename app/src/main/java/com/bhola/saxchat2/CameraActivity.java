@@ -64,9 +64,13 @@ import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.bhola.saxchat2.Models.GiftItemModel;
 import com.bhola.saxchat2.Models.Model_Profile;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.common.reflect.TypeToken;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -81,7 +85,10 @@ import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -109,8 +116,7 @@ public class CameraActivity extends AppCompatActivity {
     public static int currentVideoIndex = 0;
     RelativeLayout progressBarLayout;
     LinearLayout controlsLayout;
-    ImageView taptoReply;
-    View tapToReplyView;
+
     CameraCaptureSession cameraCaptureSession;
     CameraDevice cameraDevice;
     CameraDevice.StateCallback stateCallback = new CameraDevice.StateCallback() {
@@ -181,11 +187,6 @@ public class CameraActivity extends AppCompatActivity {
 
     private void likeBtn() {
         ImageView heart = findViewById(R.id.heart);
-        taptoReply = findViewById(R.id.taptoReply);
-        tapToReplyView = findViewById(R.id.tapToReplyView);
-
-        Animation taptoReply_anim = AnimationUtils.loadAnimation(this, R.anim.taptoreply_anim);
-        taptoReply.startAnimation(taptoReply_anim);
 
 
         Animation pulse = AnimationUtils.loadAnimation(this, R.anim.breathing_anim);
@@ -200,7 +201,6 @@ public class CameraActivity extends AppCompatActivity {
 
 
                 ImageViewCompat.setImageTintList(heart, null);
-                taptoReply.setVisibility(View.GONE);
                 heart.setImageResource(R.drawable.heart_liked);
                 heart.clearAnimation();
                 LottieAnimationView heart_lottie = findViewById(R.id.heart_lottie);
@@ -335,7 +335,6 @@ public class CameraActivity extends AppCompatActivity {
         ImageViewCompat.setImageTintList(heart, ColorStateList.valueOf(tintColor));
         ImageViewCompat.setImageTintMode(heart, PorterDuff.Mode.SRC_IN);
 
-        taptoReply.setVisibility(View.VISIBLE);
         ImageView speaker = findViewById(R.id.speaker);
         speaker.setImageResource(R.drawable.speaker_off);
 
@@ -452,7 +451,6 @@ public class CameraActivity extends AppCompatActivity {
 
                         progressBarLayout.setVisibility(View.GONE);
                         controlsLayout.setVisibility(View.VISIBLE);
-                        tapToReplyView.setVisibility(View.GONE);
                         resetButtons();
 
 
@@ -484,6 +482,9 @@ public class CameraActivity extends AppCompatActivity {
 
                                 TextView profileName = findViewById(R.id.profileName);
                                 profileName.setText(model_profile.getName());
+
+                                TextView countryName = findViewById(R.id.countryName);
+                                countryName.setText(model_profile.getFrom());
                                 CircleImageView profileImage = findViewById(R.id.profileImage);
 
                                 profileName.setOnClickListener(new View.OnClickListener() {
@@ -531,7 +532,6 @@ public class CameraActivity extends AppCompatActivity {
                     videoView.stopPlayback();
                     progressBarLayout.setVisibility(View.VISIBLE);
                     controlsLayout.setVisibility(View.GONE);
-                    tapToReplyView.setVisibility(View.VISIBLE);
                     String videoPath = MyApplication.databaseURL_video + "InternationalChatVideos/" + girlsList.get(currentVideoIndex).getUsername() + ".mp4";
 
 
@@ -576,7 +576,6 @@ public class CameraActivity extends AppCompatActivity {
                     videoView.stopPlayback();
                     progressBarLayout.setVisibility(View.VISIBLE);
                     controlsLayout.setVisibility(View.GONE);
-                    tapToReplyView.setVisibility(View.VISIBLE);
                     String videoPath = MyApplication.databaseURL_video + "InternationalChatVideos/" + girlsList.get(currentVideoIndex).getUsername() + ".mp4";
 
 
@@ -1112,16 +1111,7 @@ public class CameraActivity extends AppCompatActivity {
     private void actionbar() {
         controlsLayout = findViewById(R.id.controlsLayout);
 
-        ImageView warningSign = findViewById(R.id.warningSign);
         ImageView menuDots = findViewById(R.id.menuDots);
-
-
-        warningSign.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                blockUserDialog();
-            }
-        });
 
         menuDots.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1238,6 +1228,8 @@ public class CameraActivity extends AppCompatActivity {
         report_userSucessfully_dialog.getWindow().setBackgroundDrawable(inset);
 
     }
+
+
 
 
 }

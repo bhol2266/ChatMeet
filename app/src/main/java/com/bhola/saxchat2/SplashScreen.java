@@ -287,12 +287,12 @@ public class SplashScreen extends AppCompatActivity {
             return;
         }
         if (MyApplication.userLoggedIn && MyApplication.firebaseUser != null) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), CameraActivity.class);
             startActivity(intent);
         } else {
 
             if (MyApplication.userLoggedIn && MyApplication.userLoggedIAs.equals("Guest")) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CameraActivity.class);
                 startActivity(intent);
             } else {
                 Intent intent = new Intent(getApplicationContext(), LoginScreen.class);
