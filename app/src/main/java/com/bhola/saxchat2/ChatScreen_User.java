@@ -1084,10 +1084,10 @@ public class ChatScreen_User extends Activity {
         TextView viewProfile = findViewById(R.id.viewProfile);
         TextView profileName = findViewById(R.id.profileName);
 
-        ImageView onlineDot = findViewById(R.id.onlineDot);
+        LinearLayout onlineLayout = findViewById(R.id.onlineLayout);
         isOnline = getIntent().getBooleanExtra("online", false);
         if (isOnline) {
-            onlineDot.setVisibility(View.VISIBLE);
+            onlineLayout.setVisibility(View.VISIBLE);
         }
         profileName.setText(modelClass.getName());
         profileName.setOnClickListener(new View.OnClickListener() {

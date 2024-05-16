@@ -80,6 +80,8 @@ public class GiftItemAdapter extends RecyclerView.Adapter<GiftItemAdapter.ViewHo
                 String activityName = activity.getClass().getSimpleName();
                 if (activityName.equals("Profile")) {
                     Profile.send.setAlpha(1);
+                } else if (activityName.equals("CameraActivity")) {
+                    CameraActivity.send.setAlpha(1);
                 } else {
                     ChatScreen_User.send.setAlpha(1);
 

@@ -87,7 +87,6 @@ public class Fragment_Trending extends Fragment {
     public static DrawerLayout drawerLayout;
     public static String selectedCountry = "All";
     public static CircleImageView flagIcon;
-    public static TextView countryName;
 
 
     public static GirlsCardAdapter adapter;
@@ -238,8 +237,6 @@ public class Fragment_Trending extends Fragment {
 
     private void updateFlagIconButton() {
         flagIcon = view.findViewById(R.id.flagIcon);
-        countryName = view.findViewById(R.id.countryName);
-
     }
 
     private void sideLayout_Countries() {
@@ -306,10 +303,8 @@ public class Fragment_Trending extends Fragment {
         if (Fragment_Trending.selectedCountry.equals("All")) {
             Drawable drawable = context.getResources().getDrawable(R.drawable.earth);
             Fragment_Trending.flagIcon.setImageDrawable(drawable);
-            Fragment_Trending.countryName.setText("Region");
         } else {
             loadImageview(Fragment_Trending.flagIcon, Fragment_Trending.selectedCountry, context);
-            Fragment_Trending.countryName.setText(Fragment_Trending.selectedCountry);
 
         }
     }
@@ -1126,7 +1121,7 @@ class CountryRecyclerViewAdapter extends RecyclerView.Adapter<CountryRecyclerVie
         }
 
         if (countryInfoModel.isSelected()) {
-            holder.counrtyCard.setCardBackgroundColor(ContextCompat.getColor(context, R.color.themeColorlight));
+            holder.counrtyCard.setCardBackgroundColor(ContextCompat.getColor(context, R.color.themeColor));
             holder.countryName.setTextColor(Color.WHITE);
         } else {
             holder.counrtyCard.setCardBackgroundColor(Color.parseColor("#F1FBFF"));
@@ -1154,10 +1149,8 @@ class CountryRecyclerViewAdapter extends RecyclerView.Adapter<CountryRecyclerVie
                 if (Fragment_Trending.selectedCountry.equals("All")) {
                     Drawable drawable = context.getResources().getDrawable(R.drawable.earth);
                     Fragment_Trending.flagIcon.setImageDrawable(drawable);
-                    Fragment_Trending.countryName.setText("Region");
                 } else {
                     loadImageview(Fragment_Trending.flagIcon, Fragment_Trending.selectedCountry, context);
-                    Fragment_Trending.countryName.setText(countryInfoModel.getCountry());
 
                 }
             }

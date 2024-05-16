@@ -9,8 +9,8 @@
     <color name="semiblack">#2E2E2E</color>
     <color name="white">#FFFFFFFF</color>
     <color name="themeColor">#F82971</color>
-    <color name="themeColorlight">#5D86D5</color>
-    <color name="themeColorExtralight">#D7E5FF</color>
+    <color name="themeColorlight">#FFD0E1</color>
+    <color name="themeColorExtralight">#FDE1EB</color>
     <color name="themeColor2">#FC741C</color>
     <color name="yellow_dim">#dcc3a0</color>
     <color name="yellow">#FFD185</color>

@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
                         //By default tab 0 will be selected to change the tint of that tab
                         View tabView = tab.getCustomView();
                         ImageView tabIcon = tabView.findViewById(R.id.icon);
-                        tabIcon.setBackgroundTintList(ContextCompat.getColorStateList(MainActivity.this, R.color.themeColor));
+                        tabIcon.setBackgroundResource(R.drawable.trending_selected);
 
                         break;
                     case 1:
@@ -234,7 +234,15 @@ public class MainActivity extends AppCompatActivity {
                     ImageView tabIcon = tabView.findViewById(R.id.icon);
 
                     // Set the background tint color for the selected tab
-                    tabIcon.setBackgroundTintList(ContextCompat.getColorStateList(MainActivity.this, R.color.themeColor));
+                    if (tab.getPosition() == 0) {
+                        tabIcon.setBackgroundResource(R.drawable.trending_selected);
+                    } else if (tab.getPosition() == 1) {
+                        tabIcon.setBackgroundResource(R.drawable.videocall2_selected);
+                    } else if (tab.getPosition() == 2) {
+                        tabIcon.setBackgroundResource(R.drawable.chat_selected);
+                    } else {
+                        tabIcon.setBackgroundResource(R.drawable.user2_selected);
+                    }
                 }
             }
 
@@ -246,8 +254,15 @@ public class MainActivity extends AppCompatActivity {
                     // Find the ImageView in the custom view
                     ImageView tabIcon = tabView.findViewById(R.id.icon);
 
-                    // Set the background tint color for the unselected tab
-                    tabIcon.setBackgroundTintList(ContextCompat.getColorStateList(MainActivity.this, com.google.android.ads.mediationtestsuite.R.color.gmts_light_gray));
+                    if (tab.getPosition() == 0) {
+                        tabIcon.setBackgroundResource(R.drawable.trending);
+                    } else if (tab.getPosition() == 1) {
+                        tabIcon.setBackgroundResource(R.drawable.videocall2);
+                    } else if (tab.getPosition() == 2) {
+                        tabIcon.setBackgroundResource(R.drawable.chat);
+                    } else {
+                        tabIcon.setBackgroundResource(R.drawable.user2);
+                    }
                 }
             }
 

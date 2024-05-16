@@ -475,6 +475,10 @@ public class Profile extends AppCompatActivity {
             stringMap1.put("type", "premium");  //premium
             imageList.add(stringMap1);
         }
+        if(imageList.isEmpty()){
+            TextView imageTitle=findViewById(R.id.imageTitle);
+            imageTitle.setVisibility(View.GONE);
+        }
 
 //        for (int i = 0; i < model_profile.getVideos().size(); i++) {
 //            Map<String, String> stringMap1 = new HashMap<>();
