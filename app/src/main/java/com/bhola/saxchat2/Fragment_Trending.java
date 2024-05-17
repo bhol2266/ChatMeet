@@ -345,29 +345,42 @@ public class Fragment_Trending extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Cursor cursor = new DatabaseHelper(context, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile").readRandomGirls();
-                if (cursor.moveToFirst()) {
-                    do {
-                        girlsList_slider.add(Utils.readCursor(cursor));
-                    } while (cursor.moveToNext());
+                Cursor cursor = null;
+                try {
+                    DatabaseHelper dbHelper = new DatabaseHelper(context, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile");
+                    cursor = dbHelper.readRandomGirls();
 
-                }
-                cursor.close();
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        if (MyApplication.App_updating.equals("active")) {
-                            if (girlsList_slider.size() > 4) {
-                                girlsList_slider.subList(4, girlsList_slider.size()).clear();
-                            }
-                        }
-                        sliderAdapter.notifyDataSetChanged();
+                    if (cursor.moveToFirst()) {
+                        do {
+                            girlsList_slider.add(Utils.readCursor(cursor));
+                        } while (cursor.moveToNext());
                     }
-                });
+
+                } catch (Exception e) {
+                    // Log error or handle it as needed
+                    e.printStackTrace();
+                } finally {
+                    if (cursor != null) {
+                        cursor.close();
+                    }
+                }
+
+                // Make sure we are on a valid activity before interacting with UI
+                if (getActivity() != null) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (MyApplication.App_updating.equals("active")) {
+                                if (girlsList_slider.size() > 4) {
+                                    girlsList_slider.subList(4, girlsList_slider.size()).clear();
+                                }
+                            }
+                            sliderAdapter.notifyDataSetChanged();
+                        }
+                    });
+                }
             }
         }).start();
-
     }
 
     private void setupRecycerView() {

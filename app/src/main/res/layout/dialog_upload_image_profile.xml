@@ -25,12 +25,12 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginBottom="10dp"
-                android:fontFamily="@font/inter"
+
                 android:gravity="center"
                 android:text="Upload new photo"
                 android:textColor="@color/semiblack"
                 android:textSize="21dp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/poppins_bold" />
 
 
         </RelativeLayout>
@@ -76,7 +76,7 @@
                     android:text="Front View"
                     android:textAlignment="center"
                     android:textColor="@color/gmts_light_gray"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/poppins_bold" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -101,7 +101,7 @@
                     android:text="Blurred"
                     android:textAlignment="center"
                     android:textColor="@color/gmts_light_gray"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/poppins_bold" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -126,7 +126,7 @@
                     android:text="Back View"
                     android:textAlignment="center"
                     android:textColor="@color/gmts_light_gray"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/poppins_bold" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -151,7 +151,7 @@
                     android:text="Nudity"
                     android:textAlignment="center"
                     android:textColor="@color/gmts_light_gray"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/poppins_bold" />
             </LinearLayout>
 
 
@@ -165,7 +165,7 @@
             android:layout_gravity="center"
             android:layout_margin="15dp"
             android:background="@drawable/btn_bg"
-            android:fontFamily="@font/rubrik_semibold"
+
             android:gravity="center"
             android:text="upload"
             android:textColor="#ffffff"

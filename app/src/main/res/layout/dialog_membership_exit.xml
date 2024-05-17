@@ -32,7 +32,7 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/inter"
+
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingTop="120dp"
@@ -71,7 +71,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:fontFamily="@font/inter"
+
                                 android:maxLines="1"
                                 android:text="VIP 1 Month"
                                 android:textColor="@color/black"
@@ -88,7 +88,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/inter"
+
                                     android:text="Only"
                                     android:textColor="@color/black"
                                     android:textSize="18dp" />
@@ -99,11 +99,11 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="10dp"
-                                    android:fontFamily="@font/inter"
+
                                     android:text="₹"
                                     android:textColor="@color/black"
                                     android:textSize="20dp"
-                                    android:textStyle="bold"
+                                    android:fontFamily="@font/poppins_bold"
 
                                     />
                             </LinearLayout>
@@ -134,7 +134,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="15dp"
                     android:background="@drawable/btn_bg"
-                    android:fontFamily="@font/inter"
+
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="BUY NOW 59:12"

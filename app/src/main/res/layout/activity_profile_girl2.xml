@@ -143,11 +143,11 @@
                                 android:maxWidth="200dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="3"
-                                android:fontFamily="@font/inter"
+
                                 android:text="Sunanda Delhi :)"
                                 android:textColor="@color/semiblack"
                                 android:textSize="18dp"
-                                android:textStyle="bold" />
+                                android:fontFamily="@font/poppins_bold" />
 
                             <LinearLayout
                                 android:id="@+id/onlineLayout"
@@ -230,7 +230,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:fontFamily="@font/inter"
+
                                     android:text="19"
                                     android:textColor="@color/semiblack"
                                     android:textSize="15dp" />
@@ -259,7 +259,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:fontFamily="@font/inter"
+
                                     android:text="6010"
                                     android:textColor="@color/semiblack"
                                     android:textSize="14dp" />
@@ -288,7 +288,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:maxLines="1"
-                                    android:fontFamily="@font/inter"
+
                                     android:text="India"
                                     android:textColor="@color/semiblack"
                                     android:textSize="15dp" />
@@ -312,7 +312,7 @@
                                 android:id="@+id/Languages"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/inter"
+
                                 android:paddingLeft="5dp"
                                 android:text=""
                                 android:textColor="@color/gmts_light_gray"
@@ -325,7 +325,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
-                            android:fontFamily="@font/inter"
+
                             android:text="Hi! My name is sanjay"
                             android:textColor="@color/themeColor"
                             android:textSize="16dp" />

@@ -24,11 +24,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textAlignment="center"
-        android:fontFamily="@font/rubrik_bold"
         android:text="Extra Coins"
         android:textColor="@color/yellow"
         android:textSize="20dp"
-        android:textStyle="bold" />
+        android:fontFamily="@font/poppins_bold" />
 
     <TextView
         android:id="@+id/subTitle"
@@ -38,7 +37,7 @@
         android:layout_marginTop="5dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:fontFamily="@font/inter"
+
         android:text="Extra Coins"
         android:textColor="@color/yellow_dim"
         android:textAlignment="center"

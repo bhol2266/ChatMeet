@@ -30,8 +30,8 @@
             android:text="VIP"
             android:layout_gravity="center"
             android:textSize="18dp"
-            android:textStyle="bold"
-            android:fontFamily="@font/inter"
+            android:fontFamily="@font/poppins_bold"
+
             android:textColor="@color/white"/>
     </FrameLayout>
 

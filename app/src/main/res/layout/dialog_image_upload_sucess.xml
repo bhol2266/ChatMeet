@@ -34,12 +34,12 @@
                 android:layout_centerVertical="true"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
-                android:fontFamily="@font/inter"
+
                 android:gravity="center"
                 android:text="Upload Successfull !"
                 android:textColor="@color/gmts_light_gray"
                 android:textSize="21dp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/poppins_bold" />
 
 
 
@@ -55,7 +55,7 @@
             android:layout_gravity="center"
             android:layout_margin="15dp"
             android:background="@drawable/btn_bg"
-            android:fontFamily="@font/rubrik_semibold"
+
             android:gravity="center"
             android:text="ok"
             android:textColor="#ffffff"

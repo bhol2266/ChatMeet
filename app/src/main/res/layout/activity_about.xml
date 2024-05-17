@@ -30,8 +30,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:fontFamily="@font/inter"
             android:text="About us"
+            android:fontFamily="@font/poppins_semibold"
             android:textColor="@color/semiblack"
             android:textSize="24dp" />
 
@@ -62,7 +62,6 @@
         android:layout_below="@id/appicon"
         android:layout_centerInParent="true"
         android:layout_marginTop="20dp"
-        android:fontFamily="@font/inter"
         android:text="@string/app_name"
         android:textColor="@color/themeColor"
         android:textSize="18dp" />
@@ -74,7 +73,6 @@
         android:layout_below="@id/appname"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
-        android:fontFamily="@font/inter"
         android:text="v1.0"
         android:textColor="@color/gmts_light_gray"
         android:textSize="16dp" />
@@ -86,11 +84,10 @@
         android:layout_above="@id/bttomTextview"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:fontFamily="@font/inter"
         android:text="ChatHub Team"
         android:textColor="@color/semiblack"
         android:textSize="17dp"
-        android:textStyle="bold" />
+        android:fontFamily="@font/poppins_bold" />
 
     <TextView
         android:id="@+id/bttomTextview"
@@ -100,7 +97,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="3dp"
         android:layout_marginBottom="100dp"
-        android:fontFamily="@font/inter"
         android:text="Copyright @2023"
         android:textColor="@color/gmts_light_gray"
         android:textSize="14dp" />

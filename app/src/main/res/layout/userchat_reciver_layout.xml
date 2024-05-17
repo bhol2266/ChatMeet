@@ -43,7 +43,7 @@
                     android:id="@+id/textMsg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
+
                     android:text="asdfsda"
                     android:textColor="@color/gmts_light_gray"
                     android:textColorLink="@color/themeColor"
@@ -63,7 +63,7 @@
                     android:id="@+id/translatedMessage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
+
                     android:text=""
 
                     android:textColor="@color/gmts_light_gray"
@@ -150,7 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginEnd="1dp"
-            android:fontFamily="@font/inter"
+
             android:padding="7dp"
             android:paddingRight="10dp"
             android:text="07-12-2023"

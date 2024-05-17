@@ -37,17 +37,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/inter"
+
                 android:text="200"
                 android:textColor="@color/black"
                 android:textSize="30dp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/poppins_bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/inter"
+
                 android:text="Coins"
                 android:textColor="@color/gmts_light_gray"
                 android:textSize="15dp" />
@@ -65,12 +65,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/inter"
+
                 android:text="20% off"
                 android:visibility="gone"
                 android:textColor="@color/themeColor"
                 android:textSize="12dp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/poppins_bold" />
 
 
         </LinearLayout>
@@ -91,7 +91,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="3dp"
                 android:layout_marginRight="2dp"
-                android:fontFamily="@font/inter"
+
                 android:text="$99"
                 android:visibility="gone"
                 android:textColor="@color/black"
@@ -105,7 +105,7 @@
                 android:layout_margin="3dp"
 
                 android:layout_marginLeft="2dp"
-                android:fontFamily="@font/inter"
+
                 android:text="$99"
                 android:textColor="@color/black"
                 android:textSize="16dp" />

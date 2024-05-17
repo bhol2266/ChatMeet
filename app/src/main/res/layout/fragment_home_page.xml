@@ -80,7 +80,7 @@
                 app:backgroundTint="@null"
                 android:layout_height="match_parent"
                 android:background="@drawable/btn_bg"
-                android:fontFamily="@font/rubrik_semibold"
+
                 android:textColor="@color/white"
                 android:textAlignment="center"
                 android:gravity="center"

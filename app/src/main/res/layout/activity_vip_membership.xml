@@ -60,7 +60,7 @@
                         android:id="@+id/title_collection"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/rubrik_semibold"
+
                         android:longClickable="true"
                         android:text="ChatHub Live"
 
@@ -93,7 +93,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
+
                     android:text="12,318 people have joined"
                     android:textColor="@color/white"
                     android:textSize="16dp" />
@@ -101,7 +101,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
+
                     android:text="ChatHub Chat Live Members"
                     android:textColor="@color/white"
                     android:textSize="15dp" />
@@ -137,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
-                    android:fontFamily="@font/inter"
+
                     android:text="Chat with 1000+ streamers"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -161,7 +161,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
-                    android:fontFamily="@font/inter"
+
                     android:text="Have 24 hours video call at any time"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -185,7 +185,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
-                    android:fontFamily="@font/inter"
+
                     android:text="Enjoy high quality video stream"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -251,11 +251,11 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginRight="15dp"
-                            android:fontFamily="@font/inter"
+
                             android:text="20% Off"
                             android:textColor="@color/themeColor"
                             android:textSize="17dp"
-                            android:textStyle="bold"
+                            android:fontFamily="@font/poppins_bold"
                             android:visibility="gone" />
 
                         <TextView
@@ -263,25 +263,32 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:fontFamily="@font/inter"
+
                             android:text="Offer ends in 59:00"
                             android:textColor="@color/gmts_light_gray"
                             android:textSize="16dp"
                             android:visibility="gone" />
                     </LinearLayout>
 
-                    <Button
+                    <TextView
                         android:id="@+id/btnContinue"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/inter"
+                        android:background="@drawable/theme_bg"
+
+                        android:gravity="center"
+
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
                         android:text="CONTINUE"
-                        app:backgroundTint="@color/themeColor" />
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+
                         android:padding="10dp"
                         android:text="One time payment. By tapping Continue, your payment will be charged to your Google account, and your purchase is refundable within 24 hrs if something goes wrong. By tapping Continue, you agree to our"
                         android:textAlignment="center"
@@ -298,6 +305,8 @@
                             android:id="@+id/terms"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+
+
                             android:text="User Agreement"
                             android:textAlignment="center"
                             android:textColor="@color/gmts_light_gray"
@@ -317,6 +326,8 @@
                             android:id="@+id/privacy"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+
+
                             android:text="Privacy Policy"
                             android:textAlignment="center"
                             android:textColor="@color/gmts_light_gray"
@@ -361,7 +372,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
-            android:fontFamily="@font/inter"
+
             android:gravity="center"
             android:text="processing.."
             android:textColor="@color/white"

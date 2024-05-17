@@ -50,7 +50,7 @@
                     android:id="@+id/title_collection"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/rubrik_semibold"
+
                     android:longClickable="true"
                     android:text="ChatHub Live"
 
@@ -100,7 +100,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:fontFamily="@font/inter"
 
                         android:paddingBottom="4dp"
                         android:text="100"
@@ -174,7 +173,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:fontFamily="@font/rubrik_semibold"
+
                         android:text="500" />
 
                 </LinearLayout>
@@ -186,7 +185,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/card1"
                     android:layout_gravity="top|left"
-                    android:fontFamily="@font/rubrik_semibold"
+
                     android:gravity="center"
 
                     android:paddingLeft="10dp"
@@ -207,7 +206,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
                         android:background="@drawable/mm_pricebg"
-                        android:fontFamily="@font/inter"
                         android:gravity="center"
                         android:text="Rs200.00"
                         android:textColor="@color/yellow_dim"
@@ -261,7 +259,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:fontFamily="@font/rubrik_semibold"
+
                         android:text="2000"
                         android:textColor="@color/semiblack" />
 
@@ -273,7 +271,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/card1"
                     android:layout_gravity="top|left"
-                    android:fontFamily="@font/rubrik_semibold"
+
                     android:gravity="center"
                     android:paddingLeft="10dp"
                     android:paddingTop="4dp"
@@ -293,7 +291,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
                         android:background="@drawable/mm_pricebg"
-                        android:fontFamily="@font/inter"
+
                         android:gravity="center"
                         android:text="Rs500.00"
                         android:textColor="@color/yellow_dim"
@@ -346,7 +344,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:fontFamily="@font/rubrik_semibold"
+
                         android:text="10000"
                         android:textColor="@color/white" />
 
@@ -358,7 +356,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/card1"
                     android:layout_gravity="top|left"
-                    android:fontFamily="@font/rubrik_semibold"
+
                     android:gravity="center"
                     android:paddingLeft="8dp"
                     android:paddingTop="4dp"
@@ -377,7 +375,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
                         android:background="@drawable/mm_pricebg"
-                        android:fontFamily="@font/inter"
+
                         android:gravity="center"
                         android:text="Rs2150.00"
                         android:textColor="@color/yellow_dim"
@@ -406,7 +404,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="@font/inter"
+
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:paddingLeft="20dp"
@@ -414,7 +412,7 @@
             android:text="          SUBSCRIBE          "
             android:textColor="@color/btn_brown"
             android:textSize="13dp"
-            android:textStyle="bold"
+            android:fontFamily="@font/poppins_bold"
             app:backgroundTint="@color/yellow" />
 
         <LinearLayout
@@ -428,7 +426,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/inter"
+
                 android:text="Any problems?"
 
                 android:textColor="@color/brown"
@@ -438,7 +436,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
-                android:fontFamily="@font/inter"
+
                 android:text="Contact us"
 
                 android:textColor="@color/yellow"
@@ -541,7 +539,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
-            android:fontFamily="@font/inter"
+
             android:gravity="center"
             android:text="processing.."
             android:textColor="@color/white"

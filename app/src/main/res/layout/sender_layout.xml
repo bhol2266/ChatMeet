@@ -79,7 +79,7 @@
                     android:layout_gravity="right"
                     android:layout_marginEnd="1dp"
                     android:background="@drawable/sender_shape"
-                    android:fontFamily="@font/inter"
+
                     android:padding="7dp"
                     android:text="Why am i banned?"
                     android:textColor="@color/white"
@@ -169,7 +169,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginEnd="1dp"
-            android:fontFamily="@font/inter"
+
             android:padding="5dp"
             android:paddingRight="10dp"
             android:text="07-12-2023"

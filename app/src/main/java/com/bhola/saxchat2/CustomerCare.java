@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,13 +52,15 @@ public class CustomerCare extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_customer_care);
 
         init(CustomerCare.this);
 
         gotoAdminPanel(CustomerCare.this);
-
+        ImageView backArrow=findViewById(R.id.backArrow);
+        backArrow.setOnClickListener(v->{
+            onBackPressed();
+        });
     }
 
     private void gotoAdminPanel(Context context) {

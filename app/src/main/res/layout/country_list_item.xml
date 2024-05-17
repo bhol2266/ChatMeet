@@ -43,7 +43,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:fontFamily="@font/inter"
+                android:fontFamily="@font/poppins_bold"
+
                 android:text="India"
                 android:textColor="@color/semiblack"
                 android:textSize="11dp" />

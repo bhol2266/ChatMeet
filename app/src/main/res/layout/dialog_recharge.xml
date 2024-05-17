@@ -72,7 +72,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
                 android:elevation="10dp"
-                android:fontFamily="@font/rubrik_semibold"
+
                 android:gravity="center"
                 android:text="later"
                 android:textColor="@color/themeColor"
@@ -88,7 +88,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_bg"
-                android:fontFamily="@font/rubrik_semibold"
+
                 android:gravity="center"
                 android:text="recharge"
                 android:textColor="#ffffff"

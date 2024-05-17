@@ -47,7 +47,7 @@
                 android:id="@+id/country"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
+
                 android:maxLines="1"
                 android:text="Sunny Leone"
                 android:textColor="@color/white"

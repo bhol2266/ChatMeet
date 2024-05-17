@@ -24,7 +24,7 @@
         <TextView
             android:id="@+id/exitMSG"
             android:layout_width="match_parent"
-            android:fontFamily="@font/rubrik_semibold"
+
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Allow Permissions"
@@ -75,7 +75,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:paddingLeft="10dp"
-                        android:fontFamily="@font/rubrik_semibold"
+
                         android:text="Notification"
                         android:textColor="@color/black"
                         android:textSize="15dp" />
@@ -100,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:paddingLeft="10dp"
-                        android:fontFamily="@font/rubrik_semibold"
+
                         android:text="Camera"
                         android:textColor="@color/black"
                         android:textSize="15dp" />
@@ -125,7 +125,7 @@
                         android:layout_gravity="center"
                         android:paddingLeft="10dp"
                         android:text="Microphone"
-                        android:fontFamily="@font/rubrik_semibold"
+
                         android:textColor="@color/black"
                         android:textSize="15dp" />
                 </LinearLayout>
@@ -148,7 +148,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:paddingLeft="10dp"
-                        android:fontFamily="@font/rubrik_semibold"
+
                         android:text="Location"
                         android:textColor="@color/black"
                         android:textSize="15dp" />
@@ -172,7 +172,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:paddingLeft="10dp"
-                        android:fontFamily="@font/rubrik_semibold"
+
                         android:text="Storage"
                         android:textColor="@color/black"
                         android:textSize="15dp" />
@@ -189,7 +189,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:fontFamily="@font/rubrik_semibold"
+
             android:background="@drawable/btn_bg"
             android:gravity="center"
             android:text="Allow"

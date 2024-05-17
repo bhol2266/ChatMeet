@@ -23,7 +23,7 @@
             android:clickable="true"
             android:focusable="true"
             app:srcCompat="@drawable/back_arrow"
-            app:tint="@color/themeColor" />
+            app:tint="@color/semiblack" />
 
         <TextView
             android:id="@+id/title_collection"
@@ -33,7 +33,6 @@
             android:layout_centerInParent="true"
             android:layout_marginLeft="120dp"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/inter"
             android:gravity="center"
             android:longClickable="true"
             android:text="Feedback"
@@ -58,14 +57,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/inter"
                 android:text="Problem Type"
                 android:textSize="18dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/inter"
                 android:layout_marginLeft="5dp"
                 android:textColor="@color/themeColor"
                 android:text="*"
@@ -91,7 +88,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:fontFamily="@font/inter"
                 android:text="The Problem is related with"
                 android:textColor="@color/gmts_light_gray"
                 android:textSize="14dp" />
@@ -123,7 +119,6 @@
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/inter"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/gmts_light_gray" />
 
@@ -150,7 +145,6 @@
                 android:inputType="textMultiLine"
                 android:minLines="3"
                 android:maxLines="10"
-                android:fontFamily="@font/inter"
                 android:maxLength="1000"
                 android:textColor="@color/gmts_light_gray" />
 
@@ -167,7 +161,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/inter"
                 android:text="Screenshots"
                 android:textSize="18dp" />
 
@@ -212,7 +205,6 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="@drawable/btn_bg"
-            android:fontFamily="@font/inter"
             android:gravity="center"
             android:padding="10dp"
             android:text="Submit"

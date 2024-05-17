@@ -79,7 +79,7 @@ public class VipMembership extends AppCompatActivity {
     int backpressCount = 0;
     ArrayList<ProductDetails> productlist_offer;
     public static int[] selectedCard = {-1};
-    Button btnContinue;
+    TextView btnContinue;
     private static final String CHANNEL_ID = "notification_channel_id";
     private static final int REQUEST_CODE = 123;
     public static GridAdapter adapter;
@@ -722,7 +722,9 @@ public class VipMembership extends AppCompatActivity {
     public void onBackPressed() {
         Log.d(MyApplication.TAG, "backpressCount: " + backpressCount);
         if (backpressCount == 0) {
-            exit_dialog();
+//            exit_dialog();
+            super.onBackPressed();
+
             backpressCount++;
         } else {
             showNotification();

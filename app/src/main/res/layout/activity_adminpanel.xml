@@ -149,7 +149,7 @@
             android:textOff="Off"
             android:textOn="On"
             android:textSize="25sp"
-            android:textStyle="bold" />
+            android:fontFamily="@font/poppins_bold" />
 
         <Switch
             android:id="@+id/Activate_Ads"
@@ -165,7 +165,7 @@
             android:textOff="Off"
             android:textOn="On"
             android:textSize="25sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/poppins_bold"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <Switch
@@ -182,7 +182,7 @@
             android:textOff="Off"
             android:textOn="On"
             android:textSize="25sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/poppins_bold"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 

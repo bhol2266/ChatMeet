@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
-            android:fontFamily="@font/inter"
+
             android:gravity="center"
             android:text="Are you sure want to exit?"
             android:textColor="@color/semiblack"
@@ -45,7 +45,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
                 android:elevation="10dp"
-                android:fontFamily="@font/rubrik_semibold"
+
                 android:gravity="center"
                 android:text="cancel"
                 android:textColor="@color/themeColor"
@@ -61,7 +61,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_bg"
-                android:fontFamily="@font/rubrik_semibold"
+
                 android:gravity="center"
                 android:text="exit"
                 android:textColor="#ffffff"

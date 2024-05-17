@@ -33,8 +33,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="1dp"
-                android:fontFamily="@font/inter"
-                android:text="Welcome to Live Desi Girls! if you have any problem on Live Desi Girls, please report to us through feedback. Have fun on Live Desi Girls!!"
+
+                android:text="Welcome to Chathub! if you have any problem on Chathub app, please report to us through feedback. Have fun on Live Desi Girls!!"
                 android:textColor="@color/black"
                 android:textSize="15dp" />
 
@@ -45,7 +45,7 @@
                 android:layout_marginStart="1dp"
                 android:layout_marginTop="5dp"
                 android:padding="7dp"
-                android:fontFamily="@font/inter"
+
                 android:text="How to be a member?"
                 android:textColor="@color/themeColor"
                 android:textSize="15dp" />
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="1dp"
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/inter"
+
                 android:padding="7dp"
                 android:text="Cancel subscription"
                 android:textColor="@color/themeColor"
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="1dp"
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/inter"
+
                 android:padding="7dp"
                 android:text="Why am I banned?"
                 android:textColor="@color/themeColor"
@@ -81,7 +81,7 @@
                 android:layout_marginStart="1dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:fontFamily="@font/inter"
+
                 android:padding="7dp"
                 android:text="Report &amp; Complaints"
                 android:textColor="@color/themeColor"
@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginStart="1dp"
-            android:fontFamily="@font/inter"
+
             android:paddingLeft="20dp"
             android:visibility="gone"
             android:paddingTop="10dp"

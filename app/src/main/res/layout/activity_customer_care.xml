@@ -1,53 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/customerCareFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/customerCareFragment"
     android:orientation="vertical"
     android:paddingTop="15dp"
-    android:paddingBottom="10dp">
+    android:paddingBottom="15dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/ll1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:orientation="horizontal">
 
+
         <ImageView
-            android:id="@+id/profileimgg"
+            android:id="@+id/backArrow"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/customer_care" />
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/back_arrow"
+            app:tint="@color/semiblack" />
 
         <LinearLayout
+            android:id="@+id/adminPanel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/adminPanel"
-            android:layout_marginLeft="10dp"
+            android:layout_centerInParent="true"
+            android:gravity="center"
             android:orientation="vertical">
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/rubrik_semibold"
+                android:fontFamily="@font/poppins_bold"
                 android:text="ChatHub Team"
                 android:textColor="@color/black"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+                android:textSize="20dp" />
 
-            <TextView
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:id="@+id/onlineLayout"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/inter"
-                android:text="Online"
-                android:textColor="@color/gmts_light_gray"
-                android:textSize="15dp" />
+                android:layout_gravity="center"
+                android:gravity="center">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="Online"
+                    android:textColor="@color/grey"
+                    android:textSize="11dp" />
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginBottom="1dp"
+                    android:src="@drawable/dot" />
+
+            </LinearLayout>
+
+
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recylerview"
@@ -65,10 +89,10 @@
         android:layout_above="@id/ll2"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="8dp"
-        android:fontFamily="@font/rubrik_semibold"
+
+        android:fontFamily="@font/poppins_bold"
         android:text="Clear messages"
         android:textColor="@color/gmts_light_gray"
-        android:textStyle="bold"
         android:visibility="gone" />
 
     <LinearLayout
@@ -115,7 +139,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@null"
-                android:fontFamily="@font/inter"
                 android:hint="Type The Messages..."
                 android:paddingStart="15dp"
                 android:textSize="16dp" />

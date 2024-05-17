@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:background="@null"
-                android:fontFamily="@font/inter"
+
                 android:hint="Nick name"
                 android:textColor="@color/gmts_light_gray"
                 android:textSize="18dp" />
@@ -106,7 +106,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:fontFamily="@font/inter"
+
                     android:gravity="top"
                     android:inputType="textMultiLine"
                     android:lines="4"
@@ -129,7 +129,7 @@
             android:layout_marginTop="25dp"
             android:layout_marginBottom="15dp"
             android:background="@drawable/btn_bg"
-            android:fontFamily="@font/rubrik_semibold"
+
             android:gravity="center"
             android:text="save"
             android:textColor="#ffffff"

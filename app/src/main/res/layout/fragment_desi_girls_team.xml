@@ -32,16 +32,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/rubrik_semibold"
                 android:text="ChatHub Team"
                 android:textColor="@color/black"
                 android:textSize="18dp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/poppins_bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/inter"
+
                 android:text="Online"
                 android:textColor="@color/gmts_light_gray"
                 android:textSize="15dp" />
@@ -65,10 +64,9 @@
         android:layout_above="@id/ll2"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="8dp"
-        android:fontFamily="@font/rubrik_semibold"
         android:text="Clear messages"
         android:textColor="@color/gmts_light_gray"
-        android:textStyle="bold"
+        android:fontFamily="@font/poppins_bold"
         android:visibility="gone" />
 
     <LinearLayout
@@ -115,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@null"
-                android:fontFamily="@font/inter"
+
                 android:hint="Type The Messages..."
                 android:paddingStart="15dp"
                 android:textSize="16dp" />

@@ -22,10 +22,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:fontFamily="@font/inter"
+
             android:gravity="center"
             android:text="Block User"
-            android:textStyle="bold"
+            android:fontFamily="@font/poppins_bold"
             android:textColor="#000000"
             android:textSize="23dp" />
 
@@ -36,7 +36,7 @@
             android:gravity="center"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:fontFamily="@font/inter"
+
             android:paddingBottom="20dp"
             android:text="Are you sure want to block this user?"
             android:textColor="@color/gmts_light_gray"
@@ -57,7 +57,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:elevation="10dp"
-                android:fontFamily="@font/rubrik_semibold"
+
                 android:gravity="center"
                 android:text="cancel"
                 android:textColor="@color/themeColor"
@@ -72,7 +72,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"                android:layout_weight="1"
                 android:background="@drawable/btn_bg"
-                android:fontFamily="@font/rubrik_semibold"
+
                 android:gravity="center"
                 android:text="confirm"
                 android:textColor="#ffffff"

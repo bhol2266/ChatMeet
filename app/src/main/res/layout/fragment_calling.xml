@@ -36,7 +36,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="220dp"
-            android:fontFamily="@font/rubrik_semibold"
+
             android:text="Meera Das"
             android:textColor="@color/white"
             android:textSize="25dp" />

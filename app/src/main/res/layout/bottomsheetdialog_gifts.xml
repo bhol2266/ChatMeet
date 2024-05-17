@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:background="@drawable/pinkbg"
-        android:fontFamily="@font/inter"
+
         android:padding="5dp"
         android:text="Send gifts to your favourite girl, she'll be thrilled~"
         android:textAlignment="center"
@@ -49,7 +49,7 @@
                 android:id="@+id/coin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/inter"
+
                 android:padding="5dp"
                 android:text="500"
                 android:textAlignment="center"
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/textview_border"
-                android:fontFamily="@font/inter"
+
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
                 android:paddingRight="10dp"
