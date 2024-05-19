@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 
 //        fullscreenMode();
         checkForupdate();
@@ -83,28 +83,18 @@ public class MainActivity extends AppCompatActivity {
 //        Intent intent = new Intent(MainActivity.this, IncomingCallService.class);
 //        startService(intent);
 
+        for (int i = 1; i <20 ; i++) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+                    showFragment();
+                }
+            }, 10000*i);
 
-                showFragment();
-            }
-        }, 20000);
+        }
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                showFragment();
-            }
-        }, 90000);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                showFragment();
-            }
-        }, 210000);
 
     }
 
