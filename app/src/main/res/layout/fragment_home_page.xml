@@ -6,38 +6,71 @@
     android:layout_height="match_parent"
     tools:context=".Fragment_HomePage">
 
-    <ImageView
-        android:id="@+id/worldmap"
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/map"
-        android:text="Homepage"
-        android:textColor="@color/white"
-        android:textSize="100dp"
-        app:tint="@color/themeColor" />
+        android:layout_height="350dp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="50dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView2"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp" />
+            android:layout_gravity="center"
+            android:alpha="0.1"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/pulse_anim"
+            app:lottie_repeatCount="20"
+            app:lottie_speed="1" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView3"
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/gretypulse_anim"
+            app:lottie_repeatCount="20"
+            app:lottie_speed="1" />
+
+
+        <ImageView
+            android:id="@+id/group1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp" />
-    </LinearLayout>
+            android:padding="20dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/beforecamera_im1" />
+
+        <ImageView
+            android:id="@+id/group3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:src="@drawable/beforecamera_im3" />
+
+        <ImageView
+            android:id="@+id/group2"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_gravity="center"
+            android:src="@drawable/beforecamera_im2" />
+
+        <ImageView
+            android:id="@+id/group4"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_gravity="center"
+            android:src="@drawable/beforecamera_im4" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImage"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
 
 
     <LinearLayout

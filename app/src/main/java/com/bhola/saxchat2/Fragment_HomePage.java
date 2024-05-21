@@ -1,6 +1,7 @@
 package com.bhola.saxchat2;
 
 import android.Manifest;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,6 +35,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,13 +57,13 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class Fragment_HomePage extends Fragment {
 
-    private RecyclerView recyclerView1, recyclerView2, recyclerView3;
-    private ImageAdapter imageAdapter, imageAdapter2, imageAdapter3;
-    LinearSmoothScroller smoothScroller1, smoothScroller2, smoothScroller3;
-    private Handler handlerAnimation, blinkhandler, countHandler;
+    ImageView group1, group2;
+
     RelativeLayout btnRelativelayout;
     int randomNumber, current_value;
     TextView onlineCountTextview;
@@ -104,13 +108,9 @@ public class Fragment_HomePage extends Fragment {
         });
 
 
-        if (MyApplication.App_updating.equals("inactive")) {
-            loadDatabase(); //this will load images for moving images and call method    setimagesScrolling()
-        }
         setButtonAnimation(view, context);
-        blinkWorldMap(view, context);
         update_onlineCount(view, context);
-
+        rotateImageview();
 
         PERMISSIONS = new String[]{
 
@@ -119,7 +119,45 @@ public class Fragment_HomePage extends Fragment {
         };
 
         return view;
+
+
     }
+    private void rotateImageview() {
+
+
+        group1 = view.findViewById(R.id.group1);
+        group2 = view.findViewById(R.id.group2);
+
+
+
+        CircleImageView profileImage = view.findViewById(R.id.profileImage);
+        Picasso.get().load(MyApplication.userModel.getProfilepic()).into(profileImage);
+
+
+
+        ImageView group1 = view.findViewById(R.id.group1);
+        ImageView group2 = view.findViewById(R.id.group2);
+
+// Create rotation animator for group1
+        ObjectAnimator rotateAnimatorGroup1 = ObjectAnimator.ofFloat(group1, "rotation", 0f, 360f);
+        rotateAnimatorGroup1.setDuration(12000); // Duration in milliseconds (10000ms = 10 seconds)
+        rotateAnimatorGroup1.setInterpolator(new LinearInterpolator());
+        rotateAnimatorGroup1.setRepeatCount(ObjectAnimator.INFINITE); // Infinite repeat
+        rotateAnimatorGroup1.setRepeatMode(ObjectAnimator.RESTART); // Restart the animation after each cycle
+
+// Create rotation animator for group2
+        ObjectAnimator rotateAnimatorGroup2 = ObjectAnimator.ofFloat(group2, "rotation", 0f, 360f);
+        rotateAnimatorGroup2.setDuration(12000); // Duration in milliseconds (10000ms = 10 seconds)
+        rotateAnimatorGroup2.setInterpolator(new LinearInterpolator());
+        rotateAnimatorGroup2.setRepeatCount(ObjectAnimator.INFINITE); // Infinite repeat
+        rotateAnimatorGroup2.setRepeatMode(ObjectAnimator.RESTART); // Restart the animation after each cycle
+
+// Start both animations
+        rotateAnimatorGroup1.start();
+        rotateAnimatorGroup2.start();
+
+    }
+
 
 
     private void requestPermission() {
@@ -207,24 +245,15 @@ public class Fragment_HomePage extends Fragment {
 
     }
 
-    private void blinkWorldMap(View view, Context context) {
-        ImageView worldmap;
-
-        worldmap = view.findViewById(R.id.worldmap);
-        Animation animation = AnimationUtils.loadAnimation(context, R.anim.blink_animation);
-        worldmap.startAnimation(animation);
-
-        blinkhandler = new Handler();
-        blinkhandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                blinkWorldMap(view, context);
-            }
-        }, 1000);
-
-    }
 
     private void setButtonAnimation(View view, Context context) {
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                btnRelativelayout.performClick();
+            }
+        }, 3000);
 
         ImageView Shine, worldmap;
         TextView btnTextview;
@@ -264,9 +293,6 @@ public class Fragment_HomePage extends Fragment {
                 });
             }
         }, 2, 5, TimeUnit.SECONDS);
-
-
-        handlerAnimation = new Handler();
 
     }
 
@@ -333,191 +359,6 @@ public class Fragment_HomePage extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (recyclerView1 != null) {
-            moveImages();
-
-        }
-
-
-    }
-
-    private void setimagesScrolling() {
-        recyclerView1 = view.findViewById(R.id.recyclerView1);
-        recyclerView2 = view.findViewById(R.id.recyclerView2);
-        recyclerView3 = view.findViewById(R.id.recyclerView3);
-
-
-        LinearLayoutManager layoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true) {
-            @Override
-            public boolean canScrollHorizontally() {
-                return false; // Disable horizontal scrolling for recyclerView1
-            }
-        };
-        recyclerView1.setLayoutManager(layoutManager1);
-
-        LinearLayoutManager layoutManager2 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true) {
-            @Override
-            public boolean canScrollHorizontally() {
-                return false; // Disable horizontal scrolling for recyclerView2
-            }
-        };
-        recyclerView2.setLayoutManager(layoutManager2);
-
-        LinearLayoutManager layoutManager3 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true) {
-            @Override
-            public boolean canScrollHorizontally() {
-                return false; // Disable horizontal scrolling for recyclerView3
-            }
-        };
-        recyclerView3.setLayoutManager(layoutManager3);
-
-
-        // Create a list of image resources from the drawable folder
-        List<String> imageList = new ArrayList<>();
-        List<String> imageList2 = new ArrayList<>();
-        List<String> imageList3 = new ArrayList<>();
-
-        int listSize = imageList_MomingIMages.size();
-        int partSize = listSize / 3;
-        for (int i = 0; i < imageList_MomingIMages.size(); i++) {
-            String imageUrl = imageList_MomingIMages.get(i);
-            if (i < partSize) {
-                imageList.add(imageUrl);
-            } else if (i < partSize * 2) {
-                imageList2.add(imageUrl);
-            } else {
-                imageList3.add(imageUrl);
-            }
-        }
-
-
-        imageAdapter = new ImageAdapter(context, imageList);
-        imageAdapter2 = new ImageAdapter(context, imageList2);
-        imageAdapter3 = new ImageAdapter(context, imageList3);
-        recyclerView1.setAdapter(imageAdapter);
-        recyclerView2.setAdapter(imageAdapter2);
-        recyclerView3.setAdapter(imageAdapter3);
-        recyclerView2.scrollToPosition(imageList2.size());
-
-
-    }
-
-    private void moveImages() {
-
-
-        smoothScroller1 = new LinearSmoothScroller(recyclerView1.getContext()) {
-            @Override
-            protected int calculateTimeForScrolling(int dx) {
-                return super.calculateTimeForScrolling(dx) * 200; // scroll speed
-            }
-        };
-
-        smoothScroller1.setTargetPosition(Integer.MAX_VALUE);
-        recyclerView1.getLayoutManager().startSmoothScroll(smoothScroller1);
-
-//-----------------------------------------------------------------------------------------
-
-        smoothScroller2 = new LinearSmoothScroller(recyclerView2.getContext()) {
-            @Override
-            protected int calculateTimeForScrolling(int dx) {
-                return super.calculateTimeForScrolling(dx) * 200; // scroll speed
-            }
-        };
-
-        smoothScroller2.setTargetPosition(-Integer.MAX_VALUE);
-        recyclerView2.getLayoutManager().startSmoothScroll(smoothScroller2);
-
-//-----------------------------------------------------------------------------------------
-
-
-        smoothScroller3 = new LinearSmoothScroller(recyclerView3.getContext()) {
-            @Override
-            protected int calculateTimeForScrolling(int dx) {
-                return super.calculateTimeForScrolling(dx) * 200; // scroll speed
-            }
-        };
-        smoothScroller3.setTargetPosition(Integer.MAX_VALUE);
-        recyclerView3.getLayoutManager().startSmoothScroll(smoothScroller3);
-    }
-
-    private void loadDatabase() {
-        imageList_MomingIMages=new ArrayList<>();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    // Open the JSON file from the assets folder
-                    InputStream inputStream = context.getAssets().open("users.json");
-
-                    // Create a BufferedReader to read the file
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-
-                    // Read the file line by line
-                    String line;
-                    StringBuilder jsonString = new StringBuilder();
-                    while ((line = bufferedReader.readLine()) != null) {
-                        jsonString.append(line);
-                    }
-
-                    // Close the input stream
-                    inputStream.close();
-
-                    // Parse the JSON string
-                    JSONArray jsonArray = new JSONArray(jsonString.toString());
-
-                    List<String> shuffledList = new ArrayList<>();
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        shuffledList.add(jsonArray.getString(i));
-                    }
-                    Collections.shuffle(shuffledList);
-
-                    // Read the first 100 items
-                    int count = Math.min(shuffledList.size(), 100);
-                    for (int i = 0; i < count; i++) {
-                        String item = shuffledList.get(i);
-                        imageList_MomingIMages.add(MyApplication.databaseURL_images + "VideoChatProfiles/" + Utils.decryption(item) + "/profile.jpg");
-                    }
-
-                } catch (JSONException | IOException e) {
-                }
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-//                        createJSON();
-                        setimagesScrolling();
-                    }
-                });
-            }
-        }).start();
-
-    }
-
-    private void createJSON() {
-        try {
-            JSONArray jsonArray = new JSONArray();
-
-            for (String item : imageList_MomingIMages) {
-                jsonArray.put(item);
-            }
-
-
-            FileWriter fileWriter = new FileWriter(context.getFilesDir() + "/myjsonfile.json");
-            fileWriter.write(jsonArray.toString());
-            fileWriter.close();
-
-        } catch (Exception e) {
-            Log.d(MyApplication.TAG, "run: " + e.getMessage());
-        }
-
-
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        handlerAnimation.removeCallbacksAndMessages(null);
-        blinkhandler.removeCallbacksAndMessages(null);
 
     }
 

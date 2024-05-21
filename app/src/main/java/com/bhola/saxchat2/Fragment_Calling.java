@@ -168,6 +168,8 @@ public class Fragment_Calling extends Fragment {
 
                 float scale = (float) videoView_Height / viewHeight;
 
+                Log.d("onPrepared", "onPrepared: " + scale);
+
                 videoView.setScaleY(scale);
                 videoView.setScaleX(scale);
 
@@ -178,8 +180,8 @@ public class Fragment_Calling extends Fragment {
                     @Override
                     public void run() {
                         videoView.setBackgroundResource(android.R.color.transparent);
-                        ImageView profileImageView_BG=view.findViewById(R.id.profileImageView_BG);
-                        profileImageView_BG.setVisibility(View.GONE);
+                        FrameLayout profileImageView_BG_Flayout = view.findViewById(R.id.profileImageView_BG_Flayout);
+                        profileImageView_BG_Flayout.setVisibility(View.GONE);
                     }
                 }, 1500);
 
@@ -210,7 +212,7 @@ public class Fragment_Calling extends Fragment {
                             public void run() {
                                 Log.d("setImageinGridLayout", "run: " + model_profile.getImages());
                                 ImageView profileImageView_BG = view.findViewById(R.id.profileImageView_BG);
-                                if(model_profile.getImages().isEmpty()){
+                                if (model_profile.getImages().isEmpty()) {
                                     Picasso.get().load(profileImage).into(profileImageView_BG);
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                                         profileImageView_BG.setRenderEffect(RenderEffect.createBlurEffect(10, 10, Shader.TileMode.MIRROR));
@@ -219,7 +221,7 @@ public class Fragment_Calling extends Fragment {
                                 }
                                 Picasso.get().load(model_profile.getImages().get(0)).into(profileImageView_BG);
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                                    profileImageView_BG.setRenderEffect(RenderEffect.createBlurEffect(10, 10, Shader.TileMode.MIRROR));
+//                                    profileImageView_BG.setRenderEffect(RenderEffect.createBlurEffect(5, 5, Shader.TileMode.MIRROR));
                                 }
 
 

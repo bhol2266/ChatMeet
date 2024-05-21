@@ -83,16 +83,6 @@ public class MainActivity extends AppCompatActivity {
 //        Intent intent = new Intent(MainActivity.this, IncomingCallService.class);
 //        startService(intent);
 
-        for (int i = 1; i <20 ; i++) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-
-                    showFragment();
-                }
-            }, 10000*i);
-
-        }
 
 
 
