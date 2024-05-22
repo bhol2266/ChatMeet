@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.InsetDrawable;
@@ -36,6 +37,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bhola.saxchat2.Models.Model_Profile;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -63,6 +65,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Fragment_HomePage extends Fragment {
 
     ImageView group1, group2;
+    private Handler blinkhandler, handler1;
 
     RelativeLayout btnRelativelayout;
     int randomNumber, current_value;
@@ -76,6 +79,8 @@ public class Fragment_HomePage extends Fragment {
     List<String> imageList_MomingIMages = new ArrayList<>();
     View view;
     Context context;
+    ArrayList<Model_Profile> randomGirlsList;
+    CircleImageView girl1,girl2,girl3,girl4,girl5,girl6;
 
     public Fragment_HomePage() {
         // Required empty public constructor
@@ -110,7 +115,16 @@ public class Fragment_HomePage extends Fragment {
 
         setButtonAnimation(view, context);
         update_onlineCount(view, context);
-        rotateImageview();
+        handler1=new Handler();
+        handler1.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                blinkWorldMap(view, context);
+                setGirlImages();
+                rotateImageview();
+            }
+        },1000);
+
 
         PERMISSIONS = new String[]{
 
@@ -122,6 +136,80 @@ public class Fragment_HomePage extends Fragment {
 
 
     }
+
+    private void setGirlImages() {
+        randomGirlsList = new ArrayList<>();
+        girl1=view.findViewById(R.id.girl1);
+        girl2=view.findViewById(R.id.girl2);
+        girl3=view.findViewById(R.id.girl3);
+        girl4=view.findViewById(R.id.girl4);
+        girl5=view.findViewById(R.id.girl5);
+        girl6=view.findViewById(R.id.girl6);
+        loadDatabase_randomGirls();
+
+    }
+
+    private void loadDatabase_randomGirls() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Cursor cursor = null;
+                try {
+                    DatabaseHelper dbHelper = new DatabaseHelper(context, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile");
+                    cursor = dbHelper.readRandomGirls();
+
+                    if (cursor.moveToFirst()) {
+                        do {
+                            randomGirlsList.add(Utils.readCursor(cursor));
+                        } while (cursor.moveToNext());
+                    }
+
+                } catch (Exception e) {
+                    // Log error or handle it as needed
+                    e.printStackTrace();
+                } finally {
+                    if (cursor != null) {
+                        cursor.close();
+                    }
+                }
+
+                // Make sure we are on a valid activity before interacting with UI
+                if (getActivity() != null) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                          Picasso.get().load(randomGirlsList.get(0).getProfilePhoto()).into(girl1);
+                          Picasso.get().load(randomGirlsList.get(1).getProfilePhoto()).into(girl2);
+                          Picasso.get().load(randomGirlsList.get(2).getProfilePhoto()).into(girl3);
+                          Picasso.get().load(randomGirlsList.get(3).getProfilePhoto()).into(girl4);
+                          Picasso.get().load(randomGirlsList.get(4).getProfilePhoto()).into(girl5);
+                          Picasso.get().load(randomGirlsList.get(5).getProfilePhoto()).into(girl6);
+                        }
+                    });
+                }
+            }
+        }).start();
+    }
+
+
+    private void blinkWorldMap(View view, Context context) {
+        ImageView worldmap;
+
+        worldmap = view.findViewById(R.id.worldmap);
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.blink_animation);
+        worldmap.startAnimation(animation);
+
+        blinkhandler = new Handler();
+        blinkhandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                blinkWorldMap(view, context);
+            }
+        }, 1000);
+
+    }
+
+
     private void rotateImageview() {
 
 
@@ -131,7 +219,10 @@ public class Fragment_HomePage extends Fragment {
 
 
         CircleImageView profileImage = view.findViewById(R.id.profileImage);
-        Picasso.get().load(MyApplication.userModel.getProfilepic()).into(profileImage);
+        try {
+            Picasso.get().load(MyApplication.userModel.getProfilepic()).into(profileImage);
+        } catch (Exception e) {
+        }
 
 
 
@@ -187,8 +278,8 @@ public class Fragment_HomePage extends Fragment {
         Random random = new Random();
 
 //get random number between 1000 - 4000
-        int min = 1000;
-        int max = 4000;
+        int min = 200;
+        int max = 1100;
         randomNumber = random.nextInt(max - min + 1) + min;
         current_value = randomNumber;
 
@@ -359,6 +450,15 @@ public class Fragment_HomePage extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        blinkhandler.removeCallbacksAndMessages(null);
+        handler1.removeCallbacksAndMessages(null);
 
     }
 

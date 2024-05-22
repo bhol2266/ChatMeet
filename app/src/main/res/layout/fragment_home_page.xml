@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".Fragment_HomePage">
 
+    <ImageView
+        android:id="@+id/worldmap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-20dp"
+        android:src="@drawable/map"
+        android:textColor="@color/white"
+        app:tint="@color/themeColorlight" />
+
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -38,16 +47,24 @@
             android:id="@+id/group1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp"
             android:layout_marginBottom="10dp"
+            android:padding="20dp"
             android:src="@drawable/beforecamera_im1" />
 
         <ImageView
-            android:id="@+id/group3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:src="@drawable/beforecamera_im3" />
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="300dp"
+            android:src="@drawable/beforecamera_chat" />
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/beforecamera_telephone" />
+
 
         <ImageView
             android:id="@+id/group2"
@@ -56,21 +73,70 @@
             android:layout_gravity="center"
             android:src="@drawable/beforecamera_im2" />
 
-        <ImageView
-            android:id="@+id/group4"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
-            android:layout_gravity="center"
-            android:src="@drawable/beforecamera_im4" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profileImage"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:src="@drawable/student"
             android:layout_gravity="center" />
 
-    </FrameLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/girl1"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="20dp"
+             />
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/girl2"
+            android:layout_width="60dp"
+
+            android:layout_height="60dp"
+            android:layout_marginLeft="300dp"
+            android:layout_marginTop="60dp"
+             />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/girl3"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="220dp"
+             />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/girl4"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="270dp"
+
+            android:layout_marginTop="260dp"
+             />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/girl5"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="170dp"
+
+            android:layout_marginTop="230dp"
+             />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/girl6"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="210dp"
+
+            android:layout_marginTop="75dp"
+             />
+
+
+    </FrameLayout>
 
 
     <LinearLayout
@@ -85,8 +151,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="4158"
             android:inputType="number"
+            android:text="545"
             android:textColor="@color/themeColor"
             android:textSize="35dp" />
 
@@ -110,16 +176,16 @@
             <TextView
                 android:id="@+id/img"
                 android:layout_width="250dp"
-                app:backgroundTint="@null"
                 android:layout_height="match_parent"
                 android:background="@drawable/btn_bg"
-
-                android:textColor="@color/white"
-                android:textAlignment="center"
                 android:gravity="center"
+
                 android:scaleType="centerCrop"
                 android:text="Start Talking"
-                android:textSize="20dp" />
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                app:backgroundTint="@null" />
 
             <ImageView
                 android:id="@+id/shine"
@@ -138,7 +204,6 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:text="Find your soulmate right now!"
-            android:textColor="@color/themeColor"
             android:textSize="12dp" />
 
     </LinearLayout>

@@ -21,6 +21,7 @@
     <uses-permission
         android:name="android.permission.ACCESS_FINE_LOCATION"
         tools:ignore="CoarseFineLocation" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <uses-feature
         android:name="android.hardware.sensor.accelerometer"
@@ -91,9 +92,7 @@
         <activity
             android:name=".Feedback"
             android:exported="false" />
-        <activity
-            android:name=".BeforeVideoCall"
-            android:exported="false" />
+
         <activity
             android:name=".VipMembership"
             android:exported="false" />

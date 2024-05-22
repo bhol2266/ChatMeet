@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,6 +35,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -111,6 +115,7 @@ public class VipMembership extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vip_membership);
         actionBar();
+        fullscreenMode();
         progressBar = findViewById(R.id.progressBar);
         offerTimer = findViewById(R.id.offerTimer);
         offerTextview = findViewById(R.id.offerTextview);
@@ -185,18 +190,15 @@ public class VipMembership extends AppCompatActivity {
             filter.addAction("timer-update");
             filter.addAction("timer-finish");
 
-
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                registerReceiver(timerUpdateReceiverCheck, filter, Context.RECEIVER_NOT_EXPORTED);
+                registerReceiver(timerUpdateReceiverCheck, filter, Context.RECEIVER_EXPORTED);
             } else {
                 registerReceiver(timerUpdateReceiverCheck, filter);
             }
-
         }
 
 
     }
-
     void connectGooglePlayBilling() {
         billingClient.startConnection(new BillingClientStateListener() {
             @Override
@@ -561,6 +563,7 @@ public class VipMembership extends AppCompatActivity {
 
     }
 
+
     private void startOfferTimer() {
 
 
@@ -578,7 +581,7 @@ public class VipMembership extends AppCompatActivity {
         filter.addAction("timer-finish");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            registerReceiver(timerUpdateReceiver, filter, Context.RECEIVER_NOT_EXPORTED);
+            registerReceiver(timerUpdateReceiver, filter, Context.RECEIVER_EXPORTED);
         } else {
             registerReceiver(timerUpdateReceiver, filter);
         }
@@ -587,7 +590,6 @@ public class VipMembership extends AppCompatActivity {
         startService(intent);
 
     }
-
 
     private void updateTimerTextView(long remainingTime) {
 
@@ -722,8 +724,8 @@ public class VipMembership extends AppCompatActivity {
     public void onBackPressed() {
         Log.d(MyApplication.TAG, "backpressCount: " + backpressCount);
         if (backpressCount == 0) {
-//            exit_dialog();
-            super.onBackPressed();
+            exit_dialog();
+//            super.onBackPressed();
 
             backpressCount++;
         } else {
@@ -778,6 +780,53 @@ public class VipMembership extends AppCompatActivity {
         }
     }
 
+    private void fullscreenMode() {
+        // Clear any fullscreen flags affecting both status bar and navigation bar
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        // Ensure the content fits the window
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+
+        // Create WindowInsetsControllerCompat to manage system bars visibility
+        WindowInsetsControllerCompat windowInsetsCompat = new WindowInsetsControllerCompat(getWindow(), getWindow().getDecorView());
+
+        // Hide only the status bar
+        windowInsetsCompat.hide(WindowInsetsCompat.Type.statusBars());
+
+        // Set the behavior for showing system bars transiently by swipe
+        windowInsetsCompat.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
+
+        // Ensure the navigation bar remains visible
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
+                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        );
+
+        // Set the navigation bar color
+        getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.vip_membership_goldcolor));
+
+        // For devices with display cutouts, allow content to layout in cutout areas if needed
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            getWindow().getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+        }
+
+        // Handle older Android versions
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+            // Clear any previously set fullscreen flag
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+            // Hide status bar for older versions
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
+                            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+                            View.SYSTEM_UI_FLAG_FULLSCREEN | // Hide the status bar
+                            View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+            );
+        }
+    }
+
+
 }
 
 class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder> {
@@ -819,7 +868,7 @@ class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder> {
         if (position == selectedItemPosition) {
             holder.itemView.setSelected(true);
 
-            int backgroundColor = R.color.themeColor;
+            int backgroundColor = R.color.vip_membership_goldcolor;
             int color = ContextCompat.getColor(context, backgroundColor);
             holder.card.setCardBackgroundColor(color);
             int textColor = Color.parseColor("#FFFFFF"); // Replace "#FF0000" with your desired color

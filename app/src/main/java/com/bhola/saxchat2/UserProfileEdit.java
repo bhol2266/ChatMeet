@@ -481,11 +481,6 @@ public class UserProfileEdit extends AppCompatActivity {
                         profileImage.setImageURI(croppedImageUri);
                         photoUrl = downloadUrl;
 
-                        try {
-                            new Utils().downloadProfile_andGetURI(photoUrl, UserProfileEdit.this);
-                        } catch (IOException e) {
-                            Log.d("SpaceError", "saveProfileDetails: " + e.getMessage());
-                        }
 
                         new Utils().updateProfileonFireStore("profilepic", photoUrl);
 

@@ -152,6 +152,7 @@ public class Fill_details extends AppCompatActivity {
 
     private void saveProfileDetails() {
 
+        Log.d("sdafdsafsdaf", "photoUrl: "+photoUrl);
         Intent receivedIntent = getIntent();
         String email = receivedIntent.getStringExtra("email");
 
@@ -203,11 +204,7 @@ public class Fill_details extends AppCompatActivity {
         });
 
 
-        try {
-            new Utils().downloadProfile_andGetURI(photoUrl, Fill_details.this);
-        } catch (IOException e) {
-            Log.d("SpaceError", "saveProfileDetails: " + e.getMessage());
-        }
+
 
     }
 

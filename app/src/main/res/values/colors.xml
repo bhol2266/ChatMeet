@@ -21,6 +21,7 @@
     <color name="color_333333">#333333</color>
     <color name="cardView_bg">#F1F1F1</color>
     <color name="male_icon">#3F51B5</color>
+    <color name="vip_membership_goldcolor">#F79F3D</color>
 
 
 </resources>
