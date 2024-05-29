@@ -366,7 +366,6 @@ public class LoginScreen extends AppCompatActivity {
         MyApplication.userLoggedIn = true;
         Log.d("dasfsadf", "LoginInComplete: " + loggedAs);
         MyApplication.userLoggedIAs = loggedAs;
-        finish();
         Intent intent = new Intent(LoginScreen.this, Fill_details.class);
         intent.putExtra("loggedAs", loggedAs);
         intent.putExtra("nickName", displayName);

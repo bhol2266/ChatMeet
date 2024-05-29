@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,6 +26,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 
 import com.bhola.saxchat2.Models.GalleryModel;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -64,6 +69,7 @@ public class Fill_details extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fill_details);
+        fullscreenMode();
 
         loggedAs = getIntent().getStringExtra("loggedAs");
         generateUserID();
@@ -150,9 +156,9 @@ public class Fill_details extends AppCompatActivity {
     }
 
 
+
     private void saveProfileDetails() {
 
-        Log.d("sdafdsafsdaf", "photoUrl: "+photoUrl);
         Intent receivedIntent = getIntent();
         String email = receivedIntent.getStringExtra("email");
 
@@ -393,5 +399,55 @@ public class Fill_details extends AppCompatActivity {
 
     }
 
+    private void fullscreenMode() {
+        // Clear any fullscreen flags affecting both status bar and navigation bar
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        // Ensure the content fits the window
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+
+        // Create WindowInsetsControllerCompat to manage system bars visibility
+        WindowInsetsControllerCompat windowInsetsCompat = new WindowInsetsControllerCompat(getWindow(), getWindow().getDecorView());
+
+        // Hide only the status bar
+        windowInsetsCompat.hide(WindowInsetsCompat.Type.statusBars());
+
+        // Set the behavior for showing system bars transiently by swipe
+        windowInsetsCompat.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
+
+        // Ensure the navigation bar remains visible
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
+                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        );
+
+        // Set the navigation bar color
+//        getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.vip_membership_goldcolor));
+
+        // For devices with display cutouts, allow content to layout in cutout areas if needed
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            getWindow().getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+        }
+
+        // Handle older Android versions
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+            // Clear any previously set fullscreen flag
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+            // Hide status bar for older versions
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
+                            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+                            View.SYSTEM_UI_FLAG_FULLSCREEN | // Hide the status bar
+                            View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+            );
+        }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
