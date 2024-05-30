@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
 
                     android:longClickable="true"
-                    android:text="ChatHub Live"
+                    android:text="CamGirl Live"
 
                     android:textColor="@color/white"
                     android:textFontWeight="700"

@@ -1,6 +1,6 @@
 {
   "id": -1,
-  "initialMsg": "Welcome to ChatHub Chat! if you have any problem on ChatHub Chat, please report to us through feedback. Have fun on ChatHub Chat!!",
+  "initialMsg": "Welcome to CamGirl Chat! if you have any problem on CamGirl Chat, please report to us through feedback. Have fun on CamGirl Chat!!",
   "questionsWithReply": [
     {
       "id": 0,
@@ -29,7 +29,7 @@
   ],
   "customerCareMsg": {
     "id": 0,
-    "msg": "Welcome to ChatHub Chat! if you have any problem on ChatHub Chat, please report to us through feedback. Have fun on ChatHub Chat!!",
+    "msg": "Welcome to CamGirl Chat! if you have any problem on CamGirl Chat, please report to us through feedback. Have fun on CamGirl Chat!!",
     "mimeType": "mimeType/text/customerCare",
     "dateTime": "",
     "nextMsgDelay": 20000

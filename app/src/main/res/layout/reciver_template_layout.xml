@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="1dp"
 
-                android:text="Welcome to Chathub! if you have any problem on Chathub app, please report to us through feedback. Have fun on Live Desi Girls!!"
+                android:text="Welcome to CamGirl! if you have any problem on CamGirl app, please report to us through feedback. Have fun on Live Desi Girls!!"
                 android:textColor="@color/black"
                 android:textSize="15dp" />
 

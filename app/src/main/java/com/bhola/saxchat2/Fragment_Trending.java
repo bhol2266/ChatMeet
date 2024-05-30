@@ -161,6 +161,7 @@ public class Fragment_Trending extends Fragment {
         NearbyTextview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (MyApplication.App_updating.equals("active")) {
                     return;
                 }
@@ -287,6 +288,7 @@ public class Fragment_Trending extends Fragment {
 
         if (MyApplication.currentCountry.length() != 0) {
             loadDatabase_Country_NearBy(MyApplication.currentCountry);
+
         } else {
             loadDatabase_NearBy();
         }
@@ -681,6 +683,18 @@ public class Fragment_Trending extends Fragment {
 
                 }
                 cursor.close();
+
+                if(girlsList_nearBy.isEmpty()){
+                    // this is becauce , suppose when country is nepal, but there is not girls for nepal in database, so for the selecting random girls
+                    Cursor cursor2 = new DatabaseHelper(context, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile").readRandomGirls();
+                    if (cursor2.moveToFirst()) {
+                        do {
+                            girlsList_nearBy.add(Utils.readCursor(cursor2));
+                        } while (cursor2.moveToNext());
+
+                    }
+                    cursor2.close();
+                }
                 ((Activity) context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -1087,7 +1101,7 @@ class NearByAdapter extends RecyclerView.Adapter<NearByAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView profileImage;
         TextView name, age, location;
-        CardView message;
+        ImageView message;
         ImageView videocall;
 
         public ViewHolder(View itemView) {

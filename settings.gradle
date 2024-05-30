@@ -29,5 +29,5 @@ dependencyResolutionManagement {
     }
     
 }
-rootProject.name = "ChatHub - Random Video Call"
+rootProject.name = "CamGirl - Private Video Chat"
 include ':app'
