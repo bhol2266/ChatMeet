@@ -176,9 +176,6 @@ public class Profile extends AppCompatActivity {
         ShapeableImageView profileImage = findViewById(R.id.profileImage);
         Picasso.get().load(model_profile.getProfilePhoto()).into(profileImage);
 
-
-        Log.d("nationality", "getProfilePhoto: "+model_profile.getProfilePhoto() + "           username              "+Utils.encryption(model_profile.getUsername()));
-
         TextView id = findViewById(R.id.id);
         id.setText(convertUsernameto_number(model_profile.getUsername()));
         TextView profileName = findViewById(R.id.profileName);
@@ -609,7 +606,7 @@ class ProfileGirlImageAdapter extends RecyclerView.Adapter<ProfileGirlImageAdapt
         Map<String, String> imageItem = imageList.get(position);
 //        holder.bind(imageItem);
 
-        Picasso.get().load(imageItem.get("url")).resize(150, 0) // Set the width in pixels and let Picasso calculate the height
+        Picasso.get().load(imageItem.get("url")).fit().centerCrop() // Set the width in pixels and let Picasso calculate the height
                 .into(holder.imageView);
 
         int widthInPixels = holder.imageView.getWidth(); // Get the current width

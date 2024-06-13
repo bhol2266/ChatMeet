@@ -132,7 +132,6 @@ public class LoginScreen extends AppCompatActivity {
                     finishAffinity();
                     finish();
                     System.exit(0);
-                    finish();
                     exitDialog.dismiss();
 
                 }
@@ -364,7 +363,6 @@ public class LoginScreen extends AppCompatActivity {
     private void LoginInComplete(String loggedAs, String displayName, String email, String photoUrl) {
         //new login
         MyApplication.userLoggedIn = true;
-        Log.d("dasfsadf", "LoginInComplete: " + loggedAs);
         MyApplication.userLoggedIAs = loggedAs;
         Intent intent = new Intent(LoginScreen.this, Fill_details.class);
         intent.putExtra("loggedAs", loggedAs);
@@ -372,6 +370,9 @@ public class LoginScreen extends AppCompatActivity {
         intent.putExtra("email", email);
         intent.putExtra("photoUrl", photoUrl);
         startActivity(intent);
+        if (loggedAs.equals("Google") && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
     }
 
 

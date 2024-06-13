@@ -119,7 +119,7 @@ public class Fragment_Calling extends Fragment {
         TextView profileName = view.findViewById(R.id.profileName);
         profileName.setText(name);
         CircleImageView profileImageView = view.findViewById(R.id.profileImageView);
-        Picasso.get().load(profileImage).into(profileImageView);
+        Picasso.get().load(profileImage).fit().into(profileImageView);
 
 
         TextView message = view.findViewById(R.id.message);

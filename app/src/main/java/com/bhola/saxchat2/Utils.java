@@ -319,8 +319,6 @@ public class Utils {
                 nationality = countryInfo_model.getNationality();
             }
         }
-        if (nationality.isEmpty())
-            Log.d("nationality", "getProfilePhoto: " + Country);
 
 
         String profilePhoto = MyApplication.databaseURL_images + "VideoChatProfiles/" + nationality + "/" + Username + "/profile.jpg";

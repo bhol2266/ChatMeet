@@ -43,7 +43,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageViewHolder> {
         int widthInPixels = (int) (dpWidth * density);
         int heightInPixels = (int) (dpHeight * density);
 
-        Picasso.get().load(imageList.get(positionInList)).resize(widthInPixels, heightInPixels)
+        Picasso.get().load(imageList.get(positionInList)).fit()
                 .into(holder.imageView);
     }
 

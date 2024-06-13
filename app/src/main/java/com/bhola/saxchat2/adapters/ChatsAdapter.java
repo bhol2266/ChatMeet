@@ -94,7 +94,7 @@ public class ChatsAdapter extends RecyclerView.Adapter {
         if (chats.getViewType() == 2) {
             ChatsAdapter.ReciverViewHolder reciverViewHolder = (ReciverViewHolder) holder;
             reciverViewHolder.timeStamp.setText(formattedDate);
-            Picasso.get().load(chats.getProfileUrl()).into(reciverViewHolder.profileImage);
+            Picasso.get().load(chats.getProfileUrl().replace("profile","profile_original")).fit().into(reciverViewHolder.profileImage);
 
             if (chats.getMessageType().equals("mimeType/text")) {
                 reciverViewHolder.textMsg.setText(chats.getMessage());

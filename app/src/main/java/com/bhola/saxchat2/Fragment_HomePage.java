@@ -178,12 +178,12 @@ public class Fragment_HomePage extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                          Picasso.get().load(randomGirlsList.get(0).getProfilePhoto()).into(girl1);
-                          Picasso.get().load(randomGirlsList.get(1).getProfilePhoto()).into(girl2);
-                          Picasso.get().load(randomGirlsList.get(2).getProfilePhoto()).into(girl3);
-                          Picasso.get().load(randomGirlsList.get(3).getProfilePhoto()).into(girl4);
-                          Picasso.get().load(randomGirlsList.get(4).getProfilePhoto()).into(girl5);
-                          Picasso.get().load(randomGirlsList.get(5).getProfilePhoto()).into(girl6);
+                          Picasso.get().load(randomGirlsList.get(0).getProfilePhoto()).fit().into(girl1);
+                          Picasso.get().load(randomGirlsList.get(1).getProfilePhoto()).fit().into(girl2);
+                          Picasso.get().load(randomGirlsList.get(2).getProfilePhoto()).fit().into(girl3);
+                          Picasso.get().load(randomGirlsList.get(3).getProfilePhoto()).fit().into(girl4);
+                          Picasso.get().load(randomGirlsList.get(4).getProfilePhoto()).fit().into(girl5);
+                          Picasso.get().load(randomGirlsList.get(5).getProfilePhoto()).fit().into(girl6);
                         }
                     });
                 }

@@ -98,7 +98,7 @@ public class Fragment_LargePhotoViewer extends Fragment {
         cross.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fragmentManager= ((Activity) context).getFragmentManager();
+                FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
                 fragmentManager.beginTransaction().remove(Fragment_LargePhotoViewer.this).commit();
 
                 getActivity().setRequestedOrientation(
@@ -174,7 +174,7 @@ class ImagePagerAdapter extends RecyclerView.Adapter<ImagePagerAdapter.ImageView
 
         public void bind(int position) {
 
-            Log.d("TAGA", "bind: "+imageUrls.get(position).get("url"));
+            Log.d("TAGA", "bind: " + imageUrls.get(position).get("url"));
 
             Picasso.get()
                     .load(imageUrls.get(position).get("url"))
@@ -184,9 +184,9 @@ class ImagePagerAdapter extends RecyclerView.Adapter<ImagePagerAdapter.ImageView
             if (MyApplication.coins == 0) {
                 if (imageUrls.get(position).get("type").equals("premium")) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                        if(MyApplication.userLoggedIn && MyApplication.userLoggedIAs.equals("Google")){
-                        imageView.setRenderEffect(RenderEffect.createBlurEffect(100, 100, Shader.TileMode.MIRROR));
-                        }else{
+                        if (MyApplication.userLoggedIn && MyApplication.userLoggedIAs.equals("Google")) {
+                            imageView.setRenderEffect(RenderEffect.createBlurEffect(100, 100, Shader.TileMode.MIRROR));
+                        } else {
                             imageView.setRenderEffect(RenderEffect.createBlurEffect(200, 200, Shader.TileMode.MIRROR));
                         }
                     }

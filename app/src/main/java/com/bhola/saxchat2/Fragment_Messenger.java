@@ -143,7 +143,7 @@ public class Fragment_Messenger extends Fragment {
         chatItemClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.viewPager2.setCurrentItem(3); // Switch to Fragment B
+               startActivity(new Intent(context, CustomerCare.class));
             }
         });
 
@@ -603,7 +603,8 @@ class MessengeItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         Date currentTime = new Date();
         String formattedTime = dateFormat.format(currentTime);
 
-        Picasso.get().load(MyApplication.databaseURL_images + modelClass.getProfileImage()).into(userItem_viewholder.profileUrl);
+        Picasso.get().load(modelClass.getProfileImage().replace("profile","profile_original")).fit().into(userItem_viewholder.profileUrl);
+
 
         userItem_viewholder.chatItemClick.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1014,7 +1015,7 @@ class FavouriteSliderAdapter extends RecyclerView.Adapter<FavouriteSliderAdapter
     public void onBindViewHolder(@androidx.annotation.NonNull viewholder holder, int position) {
         Model_Profile item = girllist.get(position);
         holder.title.setText(item.getName());
-        Picasso.get().load(item.getProfilePhoto()).into(holder.thumbnail);
+        Picasso.get().load(item.getProfilePhoto()).fit().into(holder.thumbnail);
 
         holder.sliderlayout.setOnClickListener(new View.OnClickListener() {
             @Override

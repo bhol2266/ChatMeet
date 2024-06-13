@@ -844,7 +844,7 @@ class GirlsCardAdapter extends RecyclerView.Adapter<GirlsCardAdapter.GridViewHol
         holder.name.setText(item.getName());
         Picasso.get()
                 .load(item.getProfilePhoto())
-                .resize(400, 400)  // Provide target width and height
+                .fit()  // Provide target width and height
                 .centerInside()         // Maintain aspect ratio and fit within ImageView bounds
                 .into(holder.profile);
 
@@ -980,7 +980,7 @@ class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.viewholder> {
     public void onBindViewHolder(@androidx.annotation.NonNull viewholder holder, int position) {
         Model_Profile item = girllist.get(position);
         holder.title.setText(item.getName());
-        Picasso.get().load(item.getProfilePhoto()).resize(100, 100).into(holder.thumbnail);
+        Picasso.get().load(item.getProfilePhoto().replace("profile","profile_original")).fit().into(holder.thumbnail);
 
         holder.sliderlayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1037,7 +1037,7 @@ class NearByAdapter extends RecyclerView.Adapter<NearByAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@android.support.annotation.NonNull ViewHolder holder, int position) {
         Model_Profile model_profile = girlsList.get(position);
-        Picasso.get().load(model_profile.getProfilePhoto()).resize(150, 150).into(holder.profileImage);
+        Picasso.get().load(model_profile.getProfilePhoto().replace("profile","profile_original")).fit().into(holder.profileImage);
 
         holder.age.setText(model_profile.getAge().replace("years old", "").trim());
         holder.location.setText(model_profile.getFrom());
