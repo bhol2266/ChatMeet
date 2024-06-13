@@ -176,6 +176,9 @@ public class Profile extends AppCompatActivity {
         ShapeableImageView profileImage = findViewById(R.id.profileImage);
         Picasso.get().load(model_profile.getProfilePhoto()).into(profileImage);
 
+
+        Log.d("nationality", "getProfilePhoto: "+model_profile.getProfilePhoto() + "           username              "+Utils.encryption(model_profile.getUsername()));
+
         TextView id = findViewById(R.id.id);
         id.setText(convertUsernameto_number(model_profile.getUsername()));
         TextView profileName = findViewById(R.id.profileName);

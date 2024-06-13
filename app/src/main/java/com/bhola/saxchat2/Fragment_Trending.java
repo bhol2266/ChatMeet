@@ -269,7 +269,7 @@ public class Fragment_Trending extends Fragment {
 
         countrylist_forRecyclerview.add(0, countryInfoModel);
 
-        countryRecyclerViewAdapter = new CountryRecyclerViewAdapter(context,countrylist_forRecyclerview);
+        countryRecyclerViewAdapter = new CountryRecyclerViewAdapter(context, countrylist_forRecyclerview);
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -684,7 +684,7 @@ public class Fragment_Trending extends Fragment {
                 }
                 cursor.close();
 
-                if(girlsList_nearBy.isEmpty()){
+                if (girlsList_nearBy.isEmpty()) {
                     // this is becauce , suppose when country is nepal, but there is not girls for nepal in database, so for the selecting random girls
                     Cursor cursor2 = new DatabaseHelper(context, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile").readRandomGirls();
                     if (cursor2.moveToFirst()) {
@@ -842,14 +842,17 @@ class GirlsCardAdapter extends RecyclerView.Adapter<GirlsCardAdapter.GridViewHol
         Model_Profile item = girlsList.get(position);
 
         holder.name.setText(item.getName());
-        Picasso.get().load(item.getProfilePhoto()).into(holder.profile);
+        Picasso.get()
+                .load(item.getProfilePhoto())
+                .resize(400, 400)  // Provide target width and height
+                .centerInside()         // Maintain aspect ratio and fit within ImageView bounds
+                .into(holder.profile);
 
         for (CountryInfo_Model countryMap : MyApplication.countryList) {
             if (item.getFrom().equals(countryMap.getCountry())) {
                 holder.country.setText(countryMap.getCountry());
             }
         }
-
 
         holder.cardView1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -861,7 +864,6 @@ class GirlsCardAdapter extends RecyclerView.Adapter<GirlsCardAdapter.GridViewHol
                 context.startActivity(intent);
             }
         });
-
 
 
         censoredBtn(item.getCensored(), item.getUsername(), holder.censoredBtn, holder.getAbsoluteAdapterPosition(), item);
@@ -922,8 +924,6 @@ class GirlsCardAdapter extends RecyclerView.Adapter<GirlsCardAdapter.GridViewHol
     }
 
 
-
-
     @Override
     public int getItemCount() {
         return girlsList.size();
@@ -931,7 +931,7 @@ class GirlsCardAdapter extends RecyclerView.Adapter<GirlsCardAdapter.GridViewHol
 
 
     public static class GridViewHolder extends RecyclerView.ViewHolder {
-        TextView name,country;
+        TextView name, country;
         ImageView profile, hello;
         CardView cardView1;
         Button censoredBtn;
@@ -980,7 +980,7 @@ class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.viewholder> {
     public void onBindViewHolder(@androidx.annotation.NonNull viewholder holder, int position) {
         Model_Profile item = girllist.get(position);
         holder.title.setText(item.getName());
-        Picasso.get().load(item.getProfilePhoto()).into(holder.thumbnail);
+        Picasso.get().load(item.getProfilePhoto()).resize(100, 100).into(holder.thumbnail);
 
         holder.sliderlayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1037,7 +1037,7 @@ class NearByAdapter extends RecyclerView.Adapter<NearByAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@android.support.annotation.NonNull ViewHolder holder, int position) {
         Model_Profile model_profile = girlsList.get(position);
-        Picasso.get().load(model_profile.getProfilePhoto()).into(holder.profileImage);
+        Picasso.get().load(model_profile.getProfilePhoto()).resize(150, 150).into(holder.profileImage);
 
         holder.age.setText(model_profile.getAge().replace("years old", "").trim());
         holder.location.setText(model_profile.getFrom());

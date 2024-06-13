@@ -300,6 +300,9 @@ public class Utils {
         String Username = Utils.decryption(cursor.getString(0));
         String Name = Utils.decryption(cursor.getString(1));
         String Country = cursor.getString(2);
+        if (Country.contains(",")) Country = Country.split(",")[0].trim();
+
+
         String Languages = cursor.getString(3);
         String Age = cursor.getString(4);
         String InterestedIn = cursor.getString(5);
@@ -309,8 +312,19 @@ public class Utils {
         String Hair = cursor.getString(9);
         String EyeColor = cursor.getString(10);
         String Subculture = cursor.getString(11);
-        String profilePhoto = Utils.decryption(cursor.getString(13));
-        String coverPhoto = Utils.decryption(cursor.getString(14));
+
+        String nationality = "";
+        for (CountryInfo_Model countryInfo_model : MyApplication.countryList) {
+            if (Country.toLowerCase().trim().equals(countryInfo_model.getCountry().toLowerCase().trim())) {
+                nationality = countryInfo_model.getNationality();
+            }
+        }
+        if (nationality.isEmpty())
+            Log.d("nationality", "getProfilePhoto: " + Country);
+
+
+        String profilePhoto = MyApplication.databaseURL_images + "VideoChatProfiles/" + nationality + "/" + Username + "/profile.jpg";
+        String coverPhoto = profilePhoto;
         int censored = cursor.getInt(17);
         int like = cursor.getInt(18);
         int selectedBot = cursor.getInt(19);
@@ -323,12 +337,6 @@ public class Utils {
         List<Map<String, String>> Interests = gson.fromJson(interestsJson, new TypeToken<List<Map<String, String>>>() {
         }.getType());
 
-        String nationality = "";
-        for (CountryInfo_Model countryInfo_model : MyApplication.countryList) {
-            if (Country.equals(countryInfo_model.getCountry())) {
-                nationality = countryInfo_model.getNationality();
-            }
-        }
 
         String imagesJson = Utils.decryption(cursor.getString(15));
         List<String> images = new ArrayList<>();
@@ -438,7 +446,7 @@ public class Utils {
     }
 
 
-    public static void scaleUp(FrameLayout frameLayout){
+    public static void scaleUp(FrameLayout frameLayout) {
         ObjectAnimator scaleAnimator = ObjectAnimator.ofFloat(frameLayout, "scaleX", 1.0f, 1.1f);
         scaleAnimator.setDuration(300);
         scaleAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
@@ -451,7 +459,7 @@ public class Utils {
 
     }
 
-    public static void scaleDown(FrameLayout frameLayout){
+    public static void scaleDown(FrameLayout frameLayout) {
         ObjectAnimator scaleAnimator = ObjectAnimator.ofFloat(frameLayout, "scaleX", 1.05f, 1.0f);
         scaleAnimator.setDuration(300);
         scaleAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
@@ -462,8 +470,6 @@ public class Utils {
         scaleYAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         scaleYAnimator.start();
     }
-
-
 
 
 }
