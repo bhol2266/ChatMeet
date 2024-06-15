@@ -29,5 +29,5 @@ dependencyResolutionManagement {
     }
     
 }
-rootProject.name = "CamGirl - Private Video Chat"
+rootProject.name = "Live Video Chat 5"
 include ':app'

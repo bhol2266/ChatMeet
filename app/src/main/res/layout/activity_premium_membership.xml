@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
 
                     android:longClickable="true"
-                    android:text="CamGirl Live"
+                    android:text="ChatMeet Live"
 
                     android:textColor="@color/white"
                     android:textFontWeight="700"

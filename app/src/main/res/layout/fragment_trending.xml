@@ -109,7 +109,7 @@
 
 
 
-                        <com.bhola.saxchat2.CustomRecyclerView
+                        <com.bhola.livevideochat5.CustomRecyclerView
                             android:id="@+id/recyclerView_slider"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

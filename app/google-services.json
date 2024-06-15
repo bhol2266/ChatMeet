@@ -1,42 +1,42 @@
 {
   "project_info": {
-    "project_number": "789062274076",
-    "firebase_url": "https://saxchat-2-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "saxchat-2",
-    "storage_bucket": "saxchat-2.appspot.com"
+    "project_number": "252219919481",
+    "firebase_url": "https://live-video-chat-5-fdc3a-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "live-video-chat-5-fdc3a",
+    "storage_bucket": "live-video-chat-5-fdc3a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:789062274076:android:af80e42f34df907f5123d9",
+        "mobilesdk_app_id": "1:252219919481:android:6de4a8e5dbff52bdaf18a8",
         "android_client_info": {
-          "package_name": "com.bhola.saxchat2"
+          "package_name": "com.bhola.livevideochat5"
         }
       },
       "oauth_client": [
         {
-          "client_id": "789062274076-t02vgccieiulnsik6m8rdl66v1aaseru.apps.googleusercontent.com",
+          "client_id": "252219919481-539p586quknqdsulu61nd3ge19qspb40.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.bhola.saxchat2",
+            "package_name": "com.bhola.livevideochat5",
             "certificate_hash": "ea9ebb17d0b5b9dbe882c4492b6f40153960aabd"
           }
         },
         {
-          "client_id": "789062274076-5c3cfom7beh6r0cm44cn0hbvee4fkb2g.apps.googleusercontent.com",
+          "client_id": "252219919481-hguugqdvsp2ij42bgfrt796o2dg29tsm.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC-jW8AquYUZvgWh5lCVi3pVizLMpOeCzI"
+          "current_key": "AIzaSyDx3xO7uf3mHxsjcuoaO1d0PiPpJlDzTKA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "789062274076-5c3cfom7beh6r0cm44cn0hbvee4fkb2g.apps.googleusercontent.com",
+              "client_id": "252219919481-hguugqdvsp2ij42bgfrt796o2dg29tsm.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -481,7 +481,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="15dp"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="Team CamGirl Support"
+                    android:text="Team ChatMeet Support"
                     android:textColor="@color/semiblack"
                     android:textSize="18dp" />
 

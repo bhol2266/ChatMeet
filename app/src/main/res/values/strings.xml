@@ -1,23 +1,21 @@
 <resources>
-
-    <string name="app_name">CamGirl - Private Video Chat</string>
-
-    <string name="app_ID">ca-app-pub-8226562131234590~6332697722</string>
+    <string name="app_name">ChatMeet - Video Chat</string>
+    <string name="app_ID">ca-app-pub-8226562131234590~5482948231</string>
 
 
     ADMOB Real Ads ID :
-    <string name="Interstitial">ca-app-pub-8226562131234590/9916719515</string>
+    <string name="Interstitial">ca-app-pub-8226562131234590/4769520413</string>
 
 
     ADMOB Test Ads ID:
 
-    <!--        <string name="BannerAd">ca-app-pub-3940256099942544/6300978111</string>-->
-    <!--        <string name="NativeAd">ca-app-pub-3940256099942544/2247696110</string>-->
-    <!--        <string name="AppOpen">ca-app-pub-3940256099942544/3419835294</string>-->
-    <!--        <string name="Interstitial">ca-app-pub-3940256099942544/1033173712</string>-->
+    <!--            <string name="BannerAd">ca-app-pub-3940256099942544/6300978111</string>-->
+    <!--            <string name="NativeAd">ca-app-pub-3940256099942544/2247696110</string>-->
+    <!--            <string name="AppOpen">ca-app-pub-3940256099942544/3419835294</string>-->
+    <!--            <string name="Interstitial">ca-app-pub-3940256099942544/1033173712</string>-->
 
     Facebook Ads ID:
-    <string name="Facebook_InterstitialAdUnit">788707286191157_788708279524391</string>
+    <string name="Facebook_InterstitialAdUnit">1089659182308061_1089660882307891</string>
 
 
     <!-- Strings used for fragments for navigation -->
@@ -26,7 +24,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="title_activity_chat_screen_user">ChatScreen_User</string>
-    <!-- TODO: Remove or change this placeholder text -->
 
 
 </resources>
