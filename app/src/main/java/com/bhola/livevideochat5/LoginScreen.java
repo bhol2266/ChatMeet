@@ -8,16 +8,30 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.InsetDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +43,9 @@ import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 
+import com.bhola.livevideochat5.Fill_details_fragment.Fill_details_fragment_holder;
 import com.bhola.livevideochat5.Models.GalleryModel;
+import com.bhola.livevideochat5.Models.UserModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -54,6 +70,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -72,6 +91,7 @@ public class LoginScreen extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
     ProgressDialog progressDialog;
+    Handler handlerAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +103,19 @@ public class LoginScreen extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
         addUnderlineTerms_privacy();
         loginStuffs();
+        loginButtonGlareAnim();
+
+    }
+
+
+
+    private void loginButtonGlareAnim( ) {
+
+        TextView loginWithGoogle=findViewById(R.id.loginWithGoogle);
+        ImageView button_glare=findViewById(R.id.button_glare);
+
+        Animation glareAnimation = AnimationUtils.loadAnimation(this, R.anim.glare_animation);
+        button_glare.startAnimation(glareAnimation);
 
     }
 
@@ -173,24 +206,31 @@ public class LoginScreen extends AppCompatActivity {
 
 
     private void addUnderlineTerms_privacy() {
-        TextView terms = findViewById(R.id.terms);
-        TextView privaciy = findViewById(R.id.privacy);
-        terms.setPaintFlags(terms.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        privaciy.setPaintFlags(privaciy.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        TextView termsTextView = findViewById(R.id.termsText);
+        TextView privacyPolicyTextView = findViewById(R.id.privacyPolicyText);
 
-        terms.setOnClickListener(new View.OnClickListener() {
+        // Set underline for terms and privacy policy
+        termsTextView.setPaintFlags(termsTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        privacyPolicyTextView.setPaintFlags(privacyPolicyTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+        // Set onClick listener for terms
+        termsTextView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginScreen.this, Terms_Conditions.class));
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginScreen.this, Terms_Conditions.class);
+                startActivity(intent);
             }
         });
-        privaciy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginScreen.this, PrivacyPolicy.class));
 
+        // Set onClick listener for privacy policy
+        privacyPolicyTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginScreen.this, PrivacyPolicy.class);
+                startActivity(intent);
             }
         });
+
     }
 
     private void fullscreenMode() {
@@ -364,7 +404,7 @@ public class LoginScreen extends AppCompatActivity {
         //new login
         MyApplication.userLoggedIn = true;
         MyApplication.userLoggedIAs = loggedAs;
-        Intent intent = new Intent(LoginScreen.this, Fill_details.class);
+        Intent intent = new Intent(LoginScreen.this, Fill_details_fragment_holder.class);
         intent.putExtra("loggedAs", loggedAs);
         intent.putExtra("nickName", displayName);
         intent.putExtra("email", email);
@@ -455,183 +495,3 @@ class DownloadImageTask extends AsyncTask<ArrayList<GalleryModel>, Void, Void> {
 }
 
 
-class UserModel {
-
-    String fullname, email, profilepic, loggedAs, selectedGender, birthday, location, language, bio, intrestedIn;
-    boolean streamer;
-    int coins;
-    int userId;
-    Date date;
-    String memberShipExpiryDate;
-    ArrayList<GalleryModel> galleryImages;
-    private String fcmToken;
-    boolean banned;
-
-    public UserModel() {
-    }
-
-    public UserModel(String fullname, String email, String profilepic, String loggedAs, String selectedGender, String birthday, String location, String language, String bio, String intrestedIn, boolean streamer, int coins, int userId, Date date, String memberShipExpiryDate, ArrayList<GalleryModel> galleryImages, String fcmToken, boolean banned) {
-        this.fullname = fullname;
-        this.email = email;
-        this.profilepic = profilepic;
-        this.loggedAs = loggedAs;
-        this.selectedGender = selectedGender;
-        this.birthday = birthday;
-        this.location = location;
-        this.language = language;
-        this.bio = bio;
-        this.intrestedIn = intrestedIn;
-        this.streamer = streamer;
-        this.coins = coins;
-        this.userId = userId;
-        this.date = date;
-        this.memberShipExpiryDate = memberShipExpiryDate;
-        this.galleryImages = galleryImages;
-        this.fcmToken = fcmToken;
-        this.banned = banned;
-    }
-
-    public String getFullname() {
-        return fullname;
-    }
-
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getProfilepic() {
-        return profilepic;
-    }
-
-    public void setProfilepic(String profilepic) {
-        this.profilepic = profilepic;
-    }
-
-    public String getLoggedAs() {
-        return loggedAs;
-    }
-
-    public void setLoggedAs(String loggedAs) {
-        this.loggedAs = loggedAs;
-    }
-
-    public String getSelectedGender() {
-        return selectedGender;
-    }
-
-    public void setSelectedGender(String selectedGender) {
-        this.selectedGender = selectedGender;
-    }
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public String getBio() {
-        return bio;
-    }
-
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
-
-    public String getIntrestedIn() {
-        return intrestedIn;
-    }
-
-    public void setIntrestedIn(String intrestedIn) {
-        this.intrestedIn = intrestedIn;
-    }
-
-    public boolean isStreamer() {
-        return streamer;
-    }
-
-    public void setStreamer(boolean streamer) {
-        this.streamer = streamer;
-    }
-
-    public int getCoins() {
-        return coins;
-    }
-
-    public void setCoins(int coins) {
-        this.coins = coins;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getMemberShipExpiryDate() {
-        return memberShipExpiryDate;
-    }
-
-    public void setMemberShipExpiryDate(String memberShipExpiryDate) {
-        this.memberShipExpiryDate = memberShipExpiryDate;
-    }
-
-    public ArrayList<GalleryModel> getGalleryImages() {
-        return galleryImages;
-    }
-
-    public void setGalleryImages(ArrayList<GalleryModel> galleryImages) {
-        this.galleryImages = galleryImages;
-    }
-
-    public String getFcmToken() {
-        return fcmToken;
-    }
-
-    public void setFcmToken(String fcmToken) {
-        this.fcmToken = fcmToken;
-    }
-
-    public boolean isBanned() {
-        return banned;
-    }
-
-    public void setBanned(boolean banned) {
-        this.banned = banned;
-    }
-}

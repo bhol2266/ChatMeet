@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bhola.livevideochat5.Models.GalleryModel;
+import com.bhola.livevideochat5.Models.UserModel;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 

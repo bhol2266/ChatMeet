@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".LoginScreen">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:src="@drawable/live_login_bg" />
-
 
     <View
         android:layout_width="match_parent"
@@ -40,103 +40,142 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/poppins_semibold"
                 android:gravity="center"
-                android:padding="5dp"
-                android:text="Instantly Meet New friends"
-                android:textColor="#ffffff"
                 android:letterSpacing="0.1"
-                android:textSize="35dp" />
+                android:text="Begin your adventure "
+                android:textColor="#ffffff"
+                android:textSize="25dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginBottom="70dp"
                 android:fontFamily="@font/poppins_semibold"
-                android:padding="5dp"
                 android:text="Say hello to your next adventure"
                 android:textColor="#ffffff"
-                android:layout_marginBottom="70dp"
                 android:textSize="16dp" />
 
 
-            <TextView
-                android:id="@+id/loginWithGoogle"
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/btn_bg"
-                android:elevation="10dp"
-                android:fontFamily="@font/poppins_semibold"
-                android:gravity="center"
-                android:text="Login with Google"
-                android:textColor="#ffffff"
-                android:textSize="16dp" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                app:cardBackgroundColor="@android:color/transparent"                android:layout_height="wrap_content"
+                android:elevation="0dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="20dp">
 
-            <TextView
-                android:id="@+id/loginAsguest"
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/btn_bg"
-                android:elevation="10dp"
-                android:fontFamily="@font/poppins_semibold"
-                android:gravity="center"
-                android:text="Login as Guest"
-                android:textColor="#ffffff"
-                android:textSize="16dp" />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="50dp"
-                android:fontFamily="@font/poppins_semibold"
-                android:padding="5dp"
-                android:text="By continuing you agree to the"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
+
+
+                    <TextView
+                        android:id="@+id/loginWithGoogle"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/btn_bg"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:text="Login with Google"
+                        android:textColor="#ffffff"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:id="@+id/button_glare"
+                        android:layout_width="580dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="-180dp"
+                        android:layout_marginLeft="-580dp"
+                        android:alpha="0.8"
+                        android:src="@drawable/button_glare" />
+                </FrameLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:letterSpacing="0.1"
+                    android:text="Continue as guest?"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/loginAsguest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text=" Sign in"
+                    android:textColor="@color/themeColorlight"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/terms"
+                    android:id="@+id/getStartedText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="5dp"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="Terms and Services"
+                    android:text="By tapping get Started, you agreed our "
                     android:textColor="#ffffff"
-                    android:textSize="14dp" />
+                    android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/termsText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="&amp;"
+                    android:text="Terms"
                     android:textColor="#ffffff"
-                    android:textSize="14dp" />
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="2dp"
+
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/privacy"
+                    android:id="@+id/privacyText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="Privacy Policy"
+                    android:text="See how we process your data in "
                     android:textColor="#ffffff"
-                    android:textSize="14dp" />
+                    android:textSize="14sp" />
 
-
+                <TextView
+                    android:id="@+id/privacyPolicyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="privacy policy"
+                    android:textColor="#ffffff"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
 

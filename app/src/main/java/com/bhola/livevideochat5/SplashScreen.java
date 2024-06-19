@@ -24,6 +24,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.bhola.livevideochat5.Models.UserModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -129,7 +130,7 @@ public class SplashScreen extends AppCompatActivity {
     private void allUrl() {
         if (Utils.isInternetAvailable(SplashScreen.this)) {
             {
-                url_mref = FirebaseDatabase.getInstance().getReference().child("SaxChat");
+                url_mref = FirebaseDatabase.getInstance().getReference().child("Desi_Girls_Video_Chat");
                 url_mref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {

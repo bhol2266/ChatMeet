@@ -287,17 +287,8 @@ public class UserProfileEdit extends AppCompatActivity {
 
     private void changeProfileImage() {
         profileImage = findViewById(R.id.profileImage);
-        if (photoUrl.length() != 0) {
-            if (photoUrl.startsWith("http")) {
-                Picasso.get().load(photoUrl).into(profileImage);
-            } else {
-                profileImage.setImageURI(Uri.parse(photoUrl));
-            }
-        } else {
-            if (Gender.equals("female")) {
-                profileImage.setImageResource(R.drawable.female_logo);
-            }
-        }
+        Picasso.get().load(photoUrl).into(profileImage);
+
         LinearLayout profileImageLayout = findViewById(R.id.profileImageLayout);
         profileImageLayout.setOnClickListener(new View.OnClickListener() {
             @Override

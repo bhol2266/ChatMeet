@@ -52,7 +52,7 @@ public class admin_panel extends AppCompatActivity {
 
     private void initViews() {
 
-        mref = FirebaseDatabase.getInstance().getReference().child("SaxChat");
+        mref = FirebaseDatabase.getInstance().getReference().child("Desi_Girls_Video_Chat");
         notificationMref = FirebaseDatabase.getInstance().getReference();
         Ad_Network = findViewById(R.id.Ad_Network);
         switch_Activate_Ads = findViewById(R.id.Activate_Ads);

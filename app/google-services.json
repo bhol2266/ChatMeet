@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "252219919481-1aj09k5prq9qg8ohcdftq5g1kj5qpp9h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bhola.livevideochat5",
+            "certificate_hash": "1832c7dc2554790e9e860c09dc3a88c8ad86a2e2"
+          }
+        },
+        {
+          "client_id": "252219919481-24g2g8dgps6gagif2bj6d2a4jh7qif1g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bhola.livevideochat5",
+            "certificate_hash": "1b8252f47e89bbdc3002ea307d5b80eb88919ab4"
+          }
+        },
+        {
           "client_id": "252219919481-539p586quknqdsulu61nd3ge19qspb40.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

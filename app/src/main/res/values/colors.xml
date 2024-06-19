@@ -8,8 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="semiblack">#2E2E2E</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="themeColor">#F82971</color>
-    <color name="themeColorlight">#FFD0E1</color>
+    <color name="themeColor">#8B16F5</color>
+    <color name="themeColorlight">#EC22F5</color>
     <color name="themeColorExtralight">#FDE1EB</color>
     <color name="themeColor2">#FC741C</color>
     <color name="yellow_dim">#dcc3a0</color>
@@ -22,6 +22,5 @@
     <color name="cardView_bg">#F1F1F1</color>
     <color name="male_icon">#3F51B5</color>
     <color name="vip_membership_goldcolor">#F79F3D</color>
-
 
 </resources>

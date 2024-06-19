@@ -5,7 +5,8 @@
 
     <gradient
         android:startColor="@color/themeColor"
-        android:endColor="@color/themeColor2"
+        android:centerColor="@color/themeColorlight"
+        android:endColor="@color/themeColor"
 
         />
     <corners

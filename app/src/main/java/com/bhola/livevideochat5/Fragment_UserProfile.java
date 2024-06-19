@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -131,8 +132,6 @@ public class Fragment_UserProfile extends Fragment {
             }
         });
 
-        String urll = sh.getString("photoUrl", "");
-        String Gender = sh.getString("Gender", "");
         String Birthday = sh.getString("Birthday", "");
         int age = 0;
         try {
@@ -158,16 +157,8 @@ public class Fragment_UserProfile extends Fragment {
             String fullname = sh.getString("nickName", "not set");
             name.setText(fullname + ", " + String.valueOf(age));
 
-            if (urll.startsWith("http")) {
 
-                Picasso.get()
-                        .load(urll)
-                        .into(profileImage);
-            } else {
-                if (urll.length() > 0) {
-                    profileImage.setImageURI(Uri.parse(urll));
-                }
-            }
+            Picasso.get().load(MyApplication.userModel.getProfilepic()).into(profileImage);
 
         }
 
