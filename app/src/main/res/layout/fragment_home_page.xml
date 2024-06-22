@@ -3,17 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/homepage_bg"
     android:layout_height="match_parent"
     tools:context=".Fragment_HomePage">
 
-    <ImageView
-        android:id="@+id/worldmap"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-20dp"
-        android:src="@drawable/map"
-        android:textColor="@color/white"
-        app:tint="@color/themeColorlight" />
+
 
 
     <FrameLayout
@@ -153,7 +147,7 @@
             android:layout_gravity="center"
             android:inputType="number"
             android:text="545"
-            android:textColor="@color/themeColor"
+            android:textColor="@color/white"
             android:textSize="35dp" />
 
         <TextView
@@ -161,8 +155,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:text="Girls are waiting for you"
-            android:textColor="@color/themeColor"
+            android:text="Find your Interest Match instantly"
+            android:textColor="@color/white"
             android:textSize="16dp" />
 
 
@@ -203,6 +197,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
+            android:textColor="@color/white"
             android:text="Find your soulmate right now!"
             android:textSize="12dp" />
 

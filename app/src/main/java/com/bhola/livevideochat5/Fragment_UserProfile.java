@@ -101,7 +101,7 @@ public class Fragment_UserProfile extends Fragment {
         int userId = sh.getInt("userId", 0);
 
         id.setText(String.valueOf(userId));
-        coins.setText(String.valueOf("Coins: " + MyApplication.coins));
+        coins.setText(String.valueOf("Gems: " + MyApplication.coins));
         logout = view.findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -4,6 +4,7 @@
     android:id="@+id/fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/app_bg1"
     android:orientation="vertical">
 
 
@@ -30,7 +31,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/back_arrow"
-                app:tint="@color/semiblack" />
+                android:tint="@color/white"
+                app:tint="@color/white" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -56,15 +58,15 @@
                         android:maxWidth="200dp"
                         android:maxLines="1"
                         android:text="Sunanda"
-                        android:textColor="@color/semiblack"
+                        android:textColor="@color/white"
                         android:textSize="22dp" />
 
                     <LinearLayout
                         android:id="@+id/onlineLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_gravity="center">
+                        android:layout_gravity="center"
+                        android:gravity="center">
 
 
                         <TextView
@@ -72,21 +74,20 @@
                             android:layout_height="wrap_content"
 
                             android:text="Online"
-                            android:textColor="@color/grey"
+                            android:textColor="@color/white"
                             android:textSize="10dp" />
 
                         <ImageView
                             android:layout_width="10dp"
                             android:layout_height="10dp"
-                            android:layout_marginBottom="1dp"
                             android:layout_marginLeft="3dp"
+                            android:layout_marginBottom="1dp"
                             android:src="@drawable/dot" />
 
                     </LinearLayout>
 
 
                 </LinearLayout>
-
 
 
             </LinearLayout>
@@ -104,14 +105,20 @@
                     android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:layout_marginRight="20dp"
-                    android:src="@drawable/phone" />
+                    android:src="@drawable/phone"
+
+                    android:tint="@color/white"
+                    app:tint="@color/white" />
 
                 <ImageView
                     android:id="@+id/videoCall"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/video" />
+                    android:src="@drawable/video"
+
+                    android:tint="@color/white"
+                    app:tint="@color/white" />
 
             </LinearLayout>
 
@@ -123,7 +130,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll1"
-            android:background="@color/themeColorExtralight"
+            android:background="@color/navigationBar"
             android:paddingStart="10dp"
             android:paddingTop="3dp"
             android:paddingEnd="10dp"
@@ -146,7 +153,7 @@
                 android:layout_gravity="center"
 
                 android:text="Don't disclose sensitive info while chatting"
-                android:textColor="#929497"
+                android:textColor="@color/white"
                 android:textSize="10dp" />
 
             <ImageView
@@ -155,7 +162,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:src="@drawable/x" />
+                android:src="@drawable/x"
+                android:tint="@color/white" />
 
 
         </RelativeLayout>
@@ -197,7 +205,7 @@
 
                         android:padding="5dp"
                         android:text="View Profile"
-                        android:textColor="@color/themeColor"
+                        android:textColor="@color/white"
                         android:textSize="18dp" />
 
 
@@ -277,7 +285,9 @@
                 android:layout_width="43dp"
                 android:layout_height="43dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/plus" />
+
+                android:padding="7dp"
+                android:src="@drawable/add1" />
 
 
             <androidx.cardview.widget.CardView
@@ -285,9 +295,9 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="7dp"
-                android:layout_marginEnd="7dp"
+                android:layout_marginEnd="3dp"
                 android:layout_weight="2"
-                app:cardBackgroundColor="#F3F3F3"
+                app:cardBackgroundColor="#531C7C"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="0dp">
 
@@ -304,6 +314,8 @@
                         android:hint="Type The Messages..."
                         android:paddingStart="15dp"
                         android:scrollbars="vertical"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
                         android:textSize="16dp" />
 
                     <ImageView
@@ -360,8 +372,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center|bottom"
-                android:background="@drawable/bg_mic"
-                android:padding="12dp"
+                android:padding="9dp"
                 android:scaleType="centerInside"
                 app:mic_icon="@drawable/mic" />
 

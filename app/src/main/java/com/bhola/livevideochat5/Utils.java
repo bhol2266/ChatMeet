@@ -6,6 +6,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
@@ -20,6 +23,10 @@ import android.renderscript.ScriptIntrinsicBlur;
 import android.util.Log;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
+import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.bhola.livevideochat5.Models.CountryInfo_Model;
 import com.bhola.livevideochat5.Models.Model_Profile;
@@ -460,6 +467,35 @@ public class Utils {
         scaleYAnimator.setDuration(300);
         scaleYAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         scaleYAnimator.start();
+    }
+
+
+    public static void applyGradientToTextView(Context context, TextView textView) {
+        if (textView == null) {
+            return;
+        }
+        Typeface typeface = ResourcesCompat.getFont(context, R.font.poppins_bold);
+        textView.setTypeface(typeface);
+        // Measure the width of the text to apply the gradient
+        float width = textView.getPaint().measureText(textView.getText().toString());
+
+        // Create a LinearGradient shader
+        Shader textShader = new LinearGradient(
+                0, 0, width, textView.getTextSize(),
+                new int[]{
+                        ContextCompat.getColor(context, R.color.themeColor),
+                        ContextCompat.getColor(context, R.color.themeColorlight),
+                        ContextCompat.getColor(context, R.color.themeColor)
+                },
+                new float[]{0, 0.5f, 1},
+                Shader.TileMode.CLAMP
+        );
+
+        // Apply the shader to the TextView's paint
+        textView.getPaint().setShader(textShader);
+
+        // Invalidate the TextView to redraw it with the shader applied
+        textView.invalidate();
     }
 
 

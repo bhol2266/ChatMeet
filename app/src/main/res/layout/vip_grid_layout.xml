@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
 
-                android:text="Coins"
+                android:text="Gems"
                 android:textColor="@color/gmts_light_gray"
                 android:textSize="15dp" />
 

@@ -12,7 +12,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
 import android.media.ExifInterface;
 import android.media.MediaPlayer;
@@ -117,7 +119,7 @@ public class ChatScreen_User extends Activity {
         setContentView(R.layout.activity_chat_screen_user);
 
         if (MyApplication.Ads_State.equals("active")) {
-            showAds();
+//            showAds();
         }
 
         getModalClass();
@@ -322,6 +324,8 @@ public class ChatScreen_User extends Activity {
                 int textLength = charSequence.length();
                 CardView sendbtnn = findViewById(R.id.sendbtnn);
                 RecordButton record_button = findViewById(R.id.record_button);
+
+
                 if (textLength != 0) {
                     sendbtnn.setVisibility(View.VISIBLE);
                     record_button.setVisibility(View.GONE);

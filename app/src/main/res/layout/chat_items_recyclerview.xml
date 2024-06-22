@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_semibold"
             android:text="Sunaina Delhi  dafasdf asdf:)"
-            android:textColor="@color/semiblack"
+            android:textColor="@color/white"
             android:textSize="18dp" />
 
         <TextView
@@ -39,7 +39,7 @@
             android:maxLines="1"
 
             android:text="Welcome to ChatMeet Team"
-            android:textColor="#7A7A7A"
+            android:textColor="@color/white"
             android:textSize="12dp" />
 
     </LinearLayout>

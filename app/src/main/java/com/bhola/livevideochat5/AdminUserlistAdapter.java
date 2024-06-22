@@ -75,7 +75,7 @@ public class AdminUserlistAdapter extends RecyclerView.Adapter<AdminUserlistAdap
         String formattedDate = dateFormat.format(item.getDate());
 
         holder.timestamp.setText(formattedDate);
-        holder.coins.setText(String.valueOf(item.getCoins()) + " Coins");
+        holder.coins.setText(String.valueOf(item.getCoins()) + " Gems");
 
         if (item.isStreamer()) {
             int tintColor = ContextCompat.getColor(context, R.color.green); // Use your desired color resource

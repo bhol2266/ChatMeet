@@ -25,20 +25,17 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#F3F3F3"
+            android:background="@color/navigationBar"
             android:paddingTop="5dp"
-            android:paddingBottom="8dp"
+            android:paddingBottom="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:tabIconTint="@color/gmts_light_gray"
-            app:tabIndicator="@drawable/custom_tab_indicator"
-            app:tabIndicatorColor="@color/themeColor"
-            app:tabIndicatorHeight="3dp"
+            app:tabIconTint="@color/themeColor"
+            app:tabIndicatorHeight="0dp"
             app:tabMode="fixed"
-            app:tabRippleColor="#ADC9FF"
+            app:tabRippleColor="#00000000"
             app:tabSelectedTextAppearance="@color/themeColor"
+            app:tabSelectedTextColor="@color/themeColor" />
 
-            app:tabSelectedTextColor="@color/themeColor"
-            app:tabTextColor="@color/themeColor" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewpager"

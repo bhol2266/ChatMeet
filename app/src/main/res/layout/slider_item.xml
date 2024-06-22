@@ -55,6 +55,7 @@
         android:layout_marginTop="3dp"
         android:maxWidth="60dp"
         android:maxLines="1"
+        android:textColor="@color/white"
         android:text="asdfdsa"
         android:textSize="11dp" />
 

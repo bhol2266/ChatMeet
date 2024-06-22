@@ -106,7 +106,6 @@ public class Fragment_HomePage extends Fragment {
         handler1.postDelayed(new Runnable() {
             @Override
             public void run() {
-                blinkWorldMap(view, context);
                 setGirlImages();
                 rotateImageview();
             }
@@ -179,22 +178,7 @@ public class Fragment_HomePage extends Fragment {
     }
 
 
-    private void blinkWorldMap(View view, Context context) {
-        ImageView worldmap;
 
-        worldmap = view.findViewById(R.id.worldmap);
-        Animation animation = AnimationUtils.loadAnimation(context, R.anim.blink_animation);
-        worldmap.startAnimation(animation);
-
-        blinkhandler = new Handler();
-        blinkhandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                blinkWorldMap(view, context);
-            }
-        }, 1000);
-
-    }
 
 
     private void rotateImageview() {

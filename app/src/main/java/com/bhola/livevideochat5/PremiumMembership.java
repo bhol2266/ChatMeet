@@ -195,7 +195,7 @@ public class PremiumMembership extends AppCompatActivity {
         SliderImageModel slide2 = new SliderImageModel(mm_slide_2, "VIP Greetings", "All your greeting will be given preference in the chatlist");
         SliderImageModel slide3 = new SliderImageModel(mm_slide_3, "VIP Badge", "Become a VIP will be more attractive to the girl you want");
         SliderImageModel slide4 = new SliderImageModel(mm_slide_4, "Fresh Girl", "Becoming a VIP will give you priority to recommend  new girls");
-        SliderImageModel slide5 = new SliderImageModel(mm_slide_5, "Monthly Coins", "Becoming a VIP will get extra coins");
+        SliderImageModel slide5 = new SliderImageModel(mm_slide_5, "Monthly Gems", "Becoming a VIP will get extra coins");
 
         slideImages.add(slide1);
         slideImages.add(slide2);

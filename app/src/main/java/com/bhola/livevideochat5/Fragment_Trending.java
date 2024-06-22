@@ -14,6 +14,8 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -43,6 +45,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.GravityCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -112,14 +115,21 @@ public class Fragment_Trending extends Fragment {
 
         context = getContext();
 
-        TextView HotTextview = view.findViewById(R.id.HotTextview);
+        TextView discover = view.findViewById(R.id.discover);
+        TextView party = view.findViewById(R.id.party);
 
-        TextView NearbyTextview = view.findViewById(R.id.NearbyTextview);
 
+        Utils.applyGradientToTextView(context, discover);
+        discover.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
 
-        HotTextview.setOnClickListener(new View.OnClickListener() {
+        discover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Utils.applyGradientToTextView(context, discover);
+                discover.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
+                setTextViewProperties_Unselected(context, party);
+
+
                 if (currentSelectedView.equals("Hot")) {
                     return;
                 }
@@ -132,32 +142,16 @@ public class Fragment_Trending extends Fragment {
                 float scale = getResources().getDisplayMetrics().density;
                 int textSizeInPixels = (int) (textSizeInDp * scale + 0.5f);
                 int textSizeInPixels2 = (int) (16 * scale + 0.5f);
-
-// Set the text size in pixels
-                NearbyTextview.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInPixels2);
-                HotTextview.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInPixels);
-
-                int lightgray = getResources().getColor(com.google.android.ads.mediationtestsuite.R.color.gmts_light_gray); // Replace with your color resource or a specific color value
-                int semiblack = getResources().getColor(R.color.semiblack); // Replace with your color resource or a specific color value
-
-                NearbyTextview.setTextColor(lightgray);
-                HotTextview.setTextColor(semiblack);
-
-                Typeface poppins_regular = getResources().getFont(R.font.poppins_regular);
-                Typeface poppins_bold = getResources().getFont(R.font.poppins_bold);
-
-                HotTextview.setTypeface(poppins_bold);
-                NearbyTextview.setTypeface(poppins_regular);
-
-                HotTextview.setBackgroundResource(R.drawable.themecolor_outline);
-                NearbyTextview.setBackground(null);
-
             }
         });
 
-        NearbyTextview.setOnClickListener(new View.OnClickListener() {
+        party.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Utils.applyGradientToTextView(context, party);
+                party.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
+                setTextViewProperties_Unselected(context, discover);
 
                 if (MyApplication.App_updating.equals("active")) {
                     return;
@@ -184,25 +178,6 @@ public class Fragment_Trending extends Fragment {
                 int textSizeInPixels = (int) (textSizeInDp * scale + 0.5f);
                 int textSizeInPixels2 = (int) (16 * scale + 0.5f);
 
-// Set the text size in pixels
-                NearbyTextview.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInPixels);
-
-                HotTextview.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInPixels2);
-
-                int lightgray = getResources().getColor(com.google.android.ads.mediationtestsuite.R.color.gmts_light_gray); // Replace with your color resource or a specific color value
-                int semiblack = getResources().getColor(R.color.semiblack); // Replace with your color resource or a specific color value
-
-                NearbyTextview.setTextColor(semiblack);
-                HotTextview.setTextColor(lightgray);
-
-                Typeface poppins_regular = getResources().getFont(R.font.poppins_regular);
-                Typeface poppins_bold = getResources().getFont(R.font.poppins_bold);
-
-                HotTextview.setTypeface(poppins_regular);
-                NearbyTextview.setTypeface(poppins_bold);
-
-                HotTextview.setBackground(null);
-                NearbyTextview.setBackgroundResource(R.drawable.themecolor_outline);
 
             }
         });
@@ -224,6 +199,7 @@ public class Fragment_Trending extends Fragment {
             }
         });
 
+        setlocation();
         updateFlagIconButton();
         sideLayout_Countries();
         setUpSlider();
@@ -232,6 +208,22 @@ public class Fragment_Trending extends Fragment {
 
         return view;
     }
+
+    private void setlocation() {
+        TextView location = view.findViewById(R.id.location);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                String city = MyApplication.currentCity;
+                if (city.isEmpty()) {
+                    location.setText("World");
+                } else {
+                    location.setText(city + ", " + MyApplication.currentCountry);
+                }
+            }
+        }, 2000);
+    }
+
 
     private void updateFlagIconButton() {
         flagIcon = view.findViewById(R.id.flagIcon);
@@ -810,6 +802,21 @@ public class Fragment_Trending extends Fragment {
 
     }
 
+    private void setTextViewProperties_Unselected(Context context, TextView textView) {
+        // Set the text size
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+
+        // Set the text color
+        textView.setTextColor(ContextCompat.getColor(context, R.color.white));
+
+        // Set the font
+        Typeface typeface = ResourcesCompat.getFont(context, R.font.poppins_regular);
+        textView.setTypeface(typeface);
+
+        textView.getPaint().setShader(null);
+        textView.invalidate();  // Invalida
+    }
+
 
 }
 
@@ -977,7 +984,7 @@ class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.viewholder> {
     public void onBindViewHolder(@androidx.annotation.NonNull viewholder holder, int position) {
         Model_Profile item = girllist.get(position);
         holder.title.setText(item.getName());
-        Picasso.get().load(item.getProfilePhoto().replace("profile","profile_original")).fit().into(holder.thumbnail);
+        Picasso.get().load(item.getProfilePhoto().replace("profile", "profile_original")).fit().into(holder.thumbnail);
 
         holder.sliderlayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1034,7 +1041,7 @@ class NearByAdapter extends RecyclerView.Adapter<NearByAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@android.support.annotation.NonNull ViewHolder holder, int position) {
         Model_Profile model_profile = girlsList.get(position);
-        Picasso.get().load(model_profile.getProfilePhoto().replace("profile","profile_original")).fit().into(holder.profileImage);
+        Picasso.get().load(model_profile.getProfilePhoto().replace("profile", "profile_original")).fit().into(holder.profileImage);
 
         holder.age.setText(model_profile.getAge().replace("years old", "").trim());
         holder.location.setText(model_profile.getFrom());

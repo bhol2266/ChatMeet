@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager2.setOffscreenPageLimit(4);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
 
-
+        tabLayout.setSelectedTabIndicatorColor(Color.TRANSPARENT);
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
@@ -149,8 +149,6 @@ public class MainActivity extends AppCompatActivity {
                         view5.findViewById(R.id.icon).setBackgroundResource(R.drawable.trending);
                         ImageView icon1 = view5.findViewById(R.id.icon);
 
-                        icon1.setScaleX(1.1f);
-                        icon1.setScaleY(1.1f);
                         tab.setCustomView(view5);
 
                         //By default tab 0 will be selected to change the tint of that tab
@@ -164,8 +162,8 @@ public class MainActivity extends AppCompatActivity {
                         View view1 = getLayoutInflater().inflate(R.layout.customtab, null);
                         view1.findViewById(R.id.icon).setBackgroundResource(R.drawable.videocall2);
                         ImageView icon2 = view1.findViewById(R.id.icon);
-                        icon2.setScaleX(1.5f);
-                        icon2.setScaleY(1.5f);
+                        icon2.setScaleX(1.3f);
+                        icon2.setScaleY(1.3f);
 
                         tab.setCustomView(view1);
 
@@ -176,6 +174,8 @@ public class MainActivity extends AppCompatActivity {
                         View view2 = getLayoutInflater().inflate(R.layout.customtab, null);
                         view2.findViewById(R.id.icon).setBackgroundResource(R.drawable.chat);
                         ImageView icon3 = view2.findViewById(R.id.icon);
+                        icon3.setScaleX(0.9f);
+                        icon3.setScaleY(0.9f);
 
                         tab.setCustomView(view2);
                         unreadMessage_count = getUndreadMessage_Count();
