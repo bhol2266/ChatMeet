@@ -217,9 +217,12 @@ public class Fragment_Trending extends Fragment {
                 String city = MyApplication.currentCity;
                 if (city.isEmpty()) {
                     location.setText("World");
+
+
                 } else {
                     location.setText(city + ", " + MyApplication.currentCountry);
                 }
+
             }
         }, 2000);
     }

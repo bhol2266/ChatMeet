@@ -276,7 +276,7 @@ public class CameraActivity extends AppCompatActivity {
         TextView problem = findViewById(R.id.problem);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
 
-        String[] items = {"Rose", "Penghua", "TeddyBear", "Ring", "CrystalShoes", "LaserBall", "Crown", "Ferrari", "Motorcycle", "Yacht", "Bieshu", "Castle"};
+        String[] items = {"gift", "red-rose", "teddy-bear", "ballons", "cake", "candle", "card", "cup", "cup-cake", "cupid", "gift-box", "heart","letter","shopping-bag","wine-glass"};
 
         List<GiftItemModel> itemList = new ArrayList<>();
 

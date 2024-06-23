@@ -78,18 +78,17 @@ public class Profile extends AppCompatActivity {
     }
 
     private void favourite() {
-        CardView favouriteCardview = findViewById(R.id.favouriteCardview);
         ImageView favoriteImage = findViewById(R.id.favoriteImage);
-        favouriteCardview.setOnClickListener(view -> {
+        favoriteImage.setOnClickListener(view -> {
             if (!favourite) {
                 String res = new DatabaseHelper(Profile.this, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile").updateLike(model_profile.getUsername(), 1);
-                favoriteImage.setImageDrawable(getResources().getDrawable(R.drawable.star));
+                favoriteImage.setImageDrawable(getResources().getDrawable(R.drawable.user_added));
                 favourite = true;
                 showCustomToast();
 
             } else {
                 String res = new DatabaseHelper(Profile.this, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile").updateLike(model_profile.getUsername(), 0);
-                favoriteImage.setImageDrawable(getResources().getDrawable(R.drawable.favorite_start));
+                favoriteImage.setImageDrawable(getResources().getDrawable(R.drawable.user3));
                 favourite = false;
 
             }
@@ -109,7 +108,7 @@ public class Profile extends AppCompatActivity {
                 //set imageview favourite
             } else {
                 favourite = false;
-                favouriteImage.setImageDrawable(getResources().getDrawable(R.drawable.favorite_start)); // Set image drawable properly
+                favouriteImage.setImageDrawable(getResources().getDrawable(R.drawable.user3)); // Set image drawable properly
 
             }
         }
@@ -145,7 +144,7 @@ public class Profile extends AppCompatActivity {
         TextView problem = findViewById(R.id.problem);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
 
-        String[] items = {"Rose", "Penghua", "TeddyBear", "Ring", "CrystalShoes", "LaserBall", "Crown", "Ferrari", "Motorcycle", "Yacht", "Bieshu", "Castle"};
+        String[] items = {"gift", "red-rose", "teddy-bear", "ballons", "cake", "candle", "card", "cup", "cup-cake", "cupid", "gift-box", "heart","letter","shopping-bag","wine-glass"};
 
         List<GiftItemModel> itemList = new ArrayList<>();
 
@@ -171,8 +170,8 @@ public class Profile extends AppCompatActivity {
     private void bindDetails() {
         favourite();
 
-        ShapeableImageView profileImage = findViewById(R.id.profileImage);
-        Picasso.get().load(model_profile.getProfilePhoto()).into(profileImage);
+        ImageView profileImage = findViewById(R.id.profileImage);
+        Picasso.get().load(model_profile.getProfilePhoto()).placeholder(new ColorDrawable(Color.TRANSPARENT)).into(profileImage);
 
         TextView id = findViewById(R.id.id);
         id.setText(convertUsernameto_number(model_profile.getUsername()));
@@ -200,10 +199,10 @@ public class Profile extends AppCompatActivity {
             startActivity(intent);
         });
 
-        CardView gift = findViewById(R.id.gift);
-        gift.setOnClickListener(view -> {
-            openBottomSheetDialog();
-        });
+//        CardView gift = findViewById(R.id.gift);
+//        gift.setOnClickListener(view -> {
+//            openBottomSheetDialog();
+//        });
 
 
         TextView Languages = findViewById(R.id.Languages);

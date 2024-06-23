@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/homepage_bg">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,135 +14,183 @@
         android:orientation="vertical"
         tools:context=".Profile">
 
-
-        <FrameLayout
+        <RelativeLayout
+            android:id="@+id/ll1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp">
 
+            <ImageView
+                android:id="@+id/backArrow"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentLeft="true"
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/profileImage"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:adjustViewBounds="true"
-                android:paddingBottom="35dp"
-                android:scaleType="centerCrop"
-                app:shapeAppearanceOverlay="@style/ImageView.Corner"
-                app:srcCompat="@drawable/female_logo" />
+                android:layout_gravity="center"
+                android:src="@drawable/back_arrow"
+                app:tint="@color/white" />
 
-            <RelativeLayout
-                android:id="@+id/ll1"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingStart="15dp"
-                android:paddingTop="15dp"
-                android:paddingEnd="15dp"
-                android:paddingBottom="5dp">
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/poppins_semibold"
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentLeft="true"
-                    app:cardBackgroundColor="#99FFFFFF"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="0dp">
+                android:text="Profile Details"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
 
-                    <ImageView
-                        android:id="@+id/backArrow"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:src="@drawable/back_arrow"
-                        app:tint="@color/grey" />
-                </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/menuDots"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+
+                android:src="@drawable/three_dots" />
+
+
+        </RelativeLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@android:color/transparent"
+            android:elevation="0dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp">
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
 
                 <ImageView
-                    android:id="@+id/menuDots"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_gravity="center"
-
-                    android:src="@drawable/three_dots" />
-
-
-            </RelativeLayout>
+                    android:id="@+id/profileImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/female_logo" />
 
 
-            <RelativeLayout
-                android:layout_width="270dp"
-                android:layout_height="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|bottom"
+                    android:background="@drawable/profile_gradient_background"
+                    android:padding="15dp">
 
-                android:layout_gravity="bottom|center_horizontal"
-                android:orientation="horizontal">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/chat"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:background="@color/white"
-                    app:cardCornerRadius="25dp">
-
-                    <ImageView
+                    <LinearLayout
+                        android:id="@+id/sdfasd"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:padding="15dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/chat2" />
-
-                </androidx.cardview.widget.CardView>
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="horizontal">
 
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/gift"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:layout_centerInParent="true"
-                    android:layout_marginBottom="5dp"
-                    android:background="@color/white"
-                    app:cardCornerRadius="45dp">
+                        <TextView
+                            android:id="@+id/profileName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="Sunanda Delhi :),   21"
+                            android:textColor="@color/white"
+                            android:textSize="18dp" />
 
-                    <ImageView
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
+                            android:src="@drawable/female_icon" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:padding="13dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/gift" />
-
-                </androidx.cardview.widget.CardView>
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/sdfasd"
+                        android:orientation="horizontal">
 
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/favouriteCardview"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:background="@color/white"
-                    app:cardCornerRadius="25dp">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="15dp"
+                            android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/favoriteImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:padding="15dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/favorite_start" />
+                            <ImageView
+                                android:layout_width="17dp"
+                                android:layout_height="17dp"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="5dp"
+                                android:src="@drawable/location_icon"
+                                app:tint="@color/white" />
 
-                </androidx.cardview.widget.CardView>
+                            <TextView
+                                android:id="@+id/country"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="2dp"
+
+                                android:text="India"
+
+                                android:textColor="@color/white"
+                                android:textSize="15dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="15dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="5dp"
+                                android:src="@drawable/id"
+                                app:tint="@color/white" />
+
+                            <TextView
+                                android:id="@+id/id"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="2dp"
+
+                                android:gravity="center"
+                                android:text="6010"
+                                android:textColor="@color/white"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
 
 
-            </RelativeLayout>
+                    </LinearLayout>
 
-        </FrameLayout>
+
+                </RelativeLayout>
+
+
+            </FrameLayout>
+
+        </androidx.cardview.widget.CardView>
 
 
         <androidx.core.widget.NestedScrollView
@@ -156,129 +205,24 @@
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:orientation="horizontal">
 
 
-                    <TextView
-                        android:id="@+id/profileName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="Sunanda Delhi :),   21"
-                        android:textColor="@color/semiblack"
-                        android:textSize="18dp"
-                        android:fontFamily="@font/poppins_bold" />
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
-                        android:src="@drawable/female_icon" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="15dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="17dp"
-                            android:layout_height="17dp"
-                            android:layout_gravity="center"
-                            android:layout_marginRight="5dp"
-                            android:src="@drawable/location_icon"
-                            app:tint="@color/gmts_light_gray" />
-
-                        <TextView
-                            android:id="@+id/country"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="2dp"
-
-                            android:text="India"
-
-                            android:textColor="@color/gmts_light_gray"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="15dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:layout_gravity="center"
-                            android:layout_marginRight="5dp"
-                            android:src="@drawable/id"
-                            app:tint="@color/gmts_light_gray" />
-
-                        <TextView
-                            android:id="@+id/id"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="2dp"
-
-                            android:gravity="center"
-                            android:text="6010"
-                            android:textColor="@color/semiblack"
-                            android:textSize="14dp" />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/imageTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="5dp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="Images"
-                    android:textColor="@color/semiblack"
-                    android:textSize="18dp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingBottom="120dp">
+                    android:paddingBottom="20dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="5dp"
-
+android:fontFamily="@font/poppins_semibold"
                         android:text="Information"
-                        android:textColor="@color/gmts_light_gray"
+                        android:textColor="@color/white"
                         android:textSize="18dp" />
 
                     <LinearLayout
@@ -294,7 +238,7 @@
                             android:layout_height="wrap_content"
 
                             android:text="Languages    :"
-                            android:textColor="@color/gmts_light_gray"
+                            android:textColor="@color/white"
                             android:textSize="14dp" />
 
 
@@ -305,7 +249,7 @@
 
                             android:paddingLeft="20dp"
                             android:text=""
-                            android:textColor="@color/gmts_light_gray"
+                            android:textColor="@color/white"
                             android:textSize="14dp" />
                     </LinearLayout>
 
@@ -323,7 +267,7 @@
                             android:layout_height="wrap_content"
 
                             android:text="InterestedIn  :"
-                            android:textColor="@color/gmts_light_gray"
+                            android:textColor="@color/white"
                             android:textSize="14dp" />
 
 
@@ -334,7 +278,7 @@
 
                             android:paddingLeft="20dp"
                             android:text=""
-                            android:textColor="@color/gmts_light_gray"
+                            android:textColor="@color/white"
                             android:textSize="14dp" />
                     </LinearLayout>
 
@@ -351,7 +295,7 @@
                             android:layout_height="wrap_content"
 
                             android:text="BodyType      :"
-                            android:textColor="@color/gmts_light_gray"
+                            android:textColor="@color/white"
                             android:textSize="14dp" />
 
 
@@ -362,7 +306,7 @@
 
                             android:paddingLeft="20dp"
                             android:text=""
-                            android:textColor="@color/gmts_light_gray"
+                            android:textColor="@color/white"
                             android:textSize="14dp" />
                     </LinearLayout>
 
@@ -380,7 +324,7 @@
                             android:layout_height="wrap_content"
 
                             android:text="Specifics       :"
-                            android:textColor="@color/gmts_light_gray"
+                            android:textColor="@color/white"
                             android:textSize="14dp" />
 
 
@@ -391,7 +335,7 @@
 
                             android:paddingLeft="20dp"
                             android:text=""
-                            android:textColor="@color/gmts_light_gray"
+                            android:textColor="@color/white"
                             android:textSize="14dp" />
                     </LinearLayout>
 
@@ -408,7 +352,7 @@
                             android:layout_height="wrap_content"
 
                             android:text="Ethnicity        :"
-                            android:textColor="@color/gmts_light_gray"
+                            android:textColor="@color/white"
                             android:textSize="14dp" />
 
 
@@ -419,7 +363,7 @@
 
                             android:paddingLeft="20dp"
                             android:text=""
-                            android:textColor="@color/gmts_light_gray"
+                            android:textColor="@color/white"
                             android:textSize="14dp" />
 
 
@@ -438,7 +382,7 @@
                             android:layout_height="wrap_content"
 
                             android:text="Hair                :"
-                            android:textColor="@color/gmts_light_gray"
+                            android:textColor="@color/white"
                             android:textSize="14dp" />
 
 
@@ -449,7 +393,7 @@
 
                             android:paddingLeft="20dp"
                             android:text=""
-                            android:textColor="@color/gmts_light_gray"
+                            android:textColor="@color/white"
                             android:textSize="14dp" />
 
 
@@ -468,7 +412,7 @@
                             android:layout_height="wrap_content"
 
                             android:text="EyeColor       :"
-                            android:textColor="@color/gmts_light_gray"
+                            android:textColor="@color/white"
                             android:textSize="14dp" />
 
 
@@ -479,7 +423,7 @@
 
                             android:paddingLeft="20dp"
                             android:text=""
-                            android:textColor="@color/gmts_light_gray"
+                            android:textColor="@color/white"
                             android:textSize="14dp" />
 
 
@@ -498,7 +442,7 @@
                             android:layout_height="wrap_content"
 
                             android:text="Subculture    :"
-                            android:textColor="@color/gmts_light_gray"
+                            android:textColor="@color/white"
                             android:textSize="14dp" />
 
 
@@ -509,7 +453,7 @@
 
                             android:paddingLeft="20dp"
                             android:text=""
-                            android:textColor="@color/gmts_light_gray"
+                            android:textColor="@color/white"
                             android:textSize="14dp" />
 
 
@@ -518,11 +462,121 @@
                 </LinearLayout>
 
 
+                <TextView
+                    android:id="@+id/imageTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Images"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/chat"
+            android:layout_width="65dp"
+            android:layout_height="52dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            app:cardBackgroundColor="#482C5C"
+            app:cardCornerRadius="30dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:padding="18dp"
+                android:scaleType="centerCrop"
+
+                android:src="@drawable/chat" />
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/buttonCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@+id/favoriteImage"
+            android:layout_toRightOf="@+id/chat"
+            android:elevation="0dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="0dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/btn_next"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/btn_bg"
+                    android:gravity="center"
+                    android:text="Video Chat"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp" />
+
+                <ImageView
+                    android:id="@+id/button_glare"
+                    android:layout_width="580dp"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="-180dp"
+                    android:layout_marginLeft="-580dp"
+                    android:alpha="0.8"
+                    android:src="@drawable/button_glare" />
+            </FrameLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <ImageView
+
+            android:id="@+id/favoriteImage"
+            android:layout_width="65dp"
+            android:layout_height="52dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+
+            android:src="@drawable/user3" />
+
+
+    </RelativeLayout>
+
 
 </FrameLayout>
 

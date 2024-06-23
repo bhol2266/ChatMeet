@@ -30,6 +30,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -37,6 +38,8 @@ import com.bhola.livevideochat5.Models.Model_Profile;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -51,8 +54,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Fragment_HomePage extends Fragment {
 
-    ImageView group1, group2;
-    private Handler blinkhandler, handler1;
+    ImageView group1;
+    private Handler handler1;
 
     RelativeLayout btnRelativelayout;
     int randomNumber, current_value;
@@ -67,7 +70,9 @@ public class Fragment_HomePage extends Fragment {
     View view;
     Context context;
     ArrayList<Model_Profile> randomGirlsList;
-    CircleImageView girl1,girl2,girl3,girl4,girl5,girl6;
+    CircleImageView girl1, girl2, girl3, girl4, girl5, girl6;
+    private Handler handler = new Handler();
+    private Runnable loadGirlsRunnable;
 
     public Fragment_HomePage() {
         // Required empty public constructor
@@ -102,14 +107,14 @@ public class Fragment_HomePage extends Fragment {
 
         setButtonAnimation(view, context);
         update_onlineCount(view, context);
-        handler1=new Handler();
+        handler1 = new Handler();
         handler1.postDelayed(new Runnable() {
             @Override
             public void run() {
                 setGirlImages();
                 rotateImageview();
             }
-        },1000);
+        }, 1000);
 
 
         PERMISSIONS = new String[]{
@@ -125,12 +130,26 @@ public class Fragment_HomePage extends Fragment {
 
     private void setGirlImages() {
         randomGirlsList = new ArrayList<>();
-        girl1=view.findViewById(R.id.girl1);
-        girl2=view.findViewById(R.id.girl2);
-        girl3=view.findViewById(R.id.girl3);
-        girl4=view.findViewById(R.id.girl4);
-        girl5=view.findViewById(R.id.girl5);
-        girl6=view.findViewById(R.id.girl6);
+        girl1 = view.findViewById(R.id.girl1);
+        girl2 = view.findViewById(R.id.girl2);
+        girl3 = view.findViewById(R.id.girl3);
+        girl4 = view.findViewById(R.id.girl4);
+        girl5 = view.findViewById(R.id.girl5);
+        girl6 = view.findViewById(R.id.girl6);
+
+        // Make all image views invisible initially
+        girl1.setVisibility(View.INVISIBLE);
+        girl2.setVisibility(View.INVISIBLE);
+        girl3.setVisibility(View.INVISIBLE);
+        girl4.setVisibility(View.INVISIBLE);
+        girl5.setVisibility(View.INVISIBLE);
+        girl6.setVisibility(View.INVISIBLE);
+
+        // Start the repeated loading process
+        startLoadingGirls();
+    }
+
+    private void startLoadingGirls() {
         loadDatabase_randomGirls();
 
     }
@@ -144,6 +163,7 @@ public class Fragment_HomePage extends Fragment {
                     DatabaseHelper dbHelper = new DatabaseHelper(context, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile");
                     cursor = dbHelper.readRandomGirls();
 
+                    randomGirlsList.clear(); // Clear the list before adding new data
                     if (cursor.moveToFirst()) {
                         do {
                             randomGirlsList.add(Utils.readCursor(cursor));
@@ -164,12 +184,24 @@ public class Fragment_HomePage extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                          Picasso.get().load(randomGirlsList.get(0).getProfilePhoto()).fit().into(girl1);
-                          Picasso.get().load(randomGirlsList.get(1).getProfilePhoto()).fit().into(girl2);
-                          Picasso.get().load(randomGirlsList.get(2).getProfilePhoto()).fit().into(girl3);
-                          Picasso.get().load(randomGirlsList.get(3).getProfilePhoto()).fit().into(girl4);
-                          Picasso.get().load(randomGirlsList.get(4).getProfilePhoto()).fit().into(girl5);
-                          Picasso.get().load(randomGirlsList.get(5).getProfilePhoto()).fit().into(girl6);
+                            // Make all image views invisible initially
+                            girl1.setVisibility(View.INVISIBLE);
+                            girl2.setVisibility(View.INVISIBLE);
+                            girl3.setVisibility(View.INVISIBLE);
+                            girl4.setVisibility(View.INVISIBLE);
+                            girl5.setVisibility(View.INVISIBLE);
+                            girl6.setVisibility(View.INVISIBLE);
+
+                            // Load images into image views
+                            Picasso.get().load(randomGirlsList.get(0).getProfilePhoto()).fit().into(girl1);
+                            Picasso.get().load(randomGirlsList.get(1).getProfilePhoto()).fit().into(girl2);
+                            Picasso.get().load(randomGirlsList.get(2).getProfilePhoto()).fit().into(girl3);
+                            Picasso.get().load(randomGirlsList.get(3).getProfilePhoto()).fit().into(girl4);
+                            Picasso.get().load(randomGirlsList.get(4).getProfilePhoto()).fit().into(girl5);
+                            Picasso.get().load(randomGirlsList.get(5).getProfilePhoto()).fit().into(girl6);
+
+                            // Show images one by one with animation
+                            showImagesWithAnimation();
                         }
                     });
                 }
@@ -178,48 +210,54 @@ public class Fragment_HomePage extends Fragment {
     }
 
 
+    private void showImagesWithAnimation() {
+        View[] girlsArray = {girl1, girl2, girl3, girl4, girl5, girl6};
+        List<View> girlsList = Arrays.asList(girlsArray);
 
+        // Randomize the list
+        Collections.shuffle(girlsList);
+
+        // Convert back to array
+        final View[] girls = girlsList.toArray(new View[0]);
+
+        Handler animationHandler = new Handler();
+        for (int i = 0; i < girls.length; i++) {
+            final View girl = girls[i];
+            animationHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    girl.setVisibility(View.VISIBLE);
+                    girl.setAlpha(0f);
+                    girl.animate().alpha(1f).setDuration(500); // 1-second fade-in animation
+                }
+            }, i * 1000); // 1.5 seconds interval
+        }
+    }
 
 
     private void rotateImageview() {
 
-
         group1 = view.findViewById(R.id.group1);
-        group2 = view.findViewById(R.id.group2);
-
-
 
         CircleImageView profileImage = view.findViewById(R.id.profileImage);
         try {
             Picasso.get().load(MyApplication.userModel.getProfilepic()).into(profileImage);
         } catch (Exception e) {
+            // Handle the exception
         }
 
-
-
-        ImageView group1 = view.findViewById(R.id.group1);
-        ImageView group2 = view.findViewById(R.id.group2);
-
-// Create rotation animator for group1
+        // Create rotation animator for group1
         ObjectAnimator rotateAnimatorGroup1 = ObjectAnimator.ofFloat(group1, "rotation", 0f, 360f);
-        rotateAnimatorGroup1.setDuration(12000); // Duration in milliseconds (10000ms = 10 seconds)
+        rotateAnimatorGroup1.setDuration(12000); // Duration in milliseconds (12000ms = 12 seconds)
         rotateAnimatorGroup1.setInterpolator(new LinearInterpolator());
         rotateAnimatorGroup1.setRepeatCount(ObjectAnimator.INFINITE); // Infinite repeat
         rotateAnimatorGroup1.setRepeatMode(ObjectAnimator.RESTART); // Restart the animation after each cycle
 
-// Create rotation animator for group2
-        ObjectAnimator rotateAnimatorGroup2 = ObjectAnimator.ofFloat(group2, "rotation", 0f, 360f);
-        rotateAnimatorGroup2.setDuration(12000); // Duration in milliseconds (10000ms = 10 seconds)
-        rotateAnimatorGroup2.setInterpolator(new LinearInterpolator());
-        rotateAnimatorGroup2.setRepeatCount(ObjectAnimator.INFINITE); // Infinite repeat
-        rotateAnimatorGroup2.setRepeatMode(ObjectAnimator.RESTART); // Restart the animation after each cycle
 
-// Start both animations
+        // Start all animations
         rotateAnimatorGroup1.start();
-        rotateAnimatorGroup2.start();
 
     }
-
 
 
     private void requestPermission() {
@@ -310,51 +348,20 @@ public class Fragment_HomePage extends Fragment {
 
     private void setButtonAnimation(View view, Context context) {
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                btnRelativelayout.performClick();
-            }
-        }, 3000);
+        ImageView button_glare = view.findViewById(R.id.button_glare);
 
-        ImageView Shine, worldmap;
-        TextView btnTextview;
-
-        btnTextview = view.findViewById(R.id.img);
-        btnTextview.setOnClickListener(new View.OnClickListener() {
+        Animation glareAnimation = AnimationUtils.loadAnimation(view.getContext(), R.anim.glare_animation);
+        button_glare.startAnimation(glareAnimation);
+        TextView btn_next = view.findViewById(R.id.btn_next);
+        btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 requestPermission(); // this method will check permissions and if permission are granted it will take to BeforeCameraActivity
 
             }
         });
-        Shine = view.findViewById(R.id.shine);
 
-
-        btnRelativelayout = view.findViewById(R.id.btnRelativelayout);
-
-        //Start the animations preoidically by calling 'shineStart' method with ScheduledExecutorService
-        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-
-        executorService.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        Animation animation = new TranslateAnimation(0, btnTextview.getWidth() + Shine.getWidth(), 0, 0);
-                        animation.setDuration(1500);
-                        animation.setFillAfter(false);
-                        animation.setInterpolator(new AccelerateDecelerateInterpolator());
-                        Shine.startAnimation(animation);
-                        startAnimation(context);
-
-                    }
-                });
-            }
-        }, 2, 5, TimeUnit.SECONDS);
+        startAnimation(context);
 
     }
 
@@ -402,8 +409,9 @@ public class Fragment_HomePage extends Fragment {
 
     private void startAnimation(Context context) {
         // Assuming you have a view object, e.g., myView
+        CardView buttonCardView=view.findViewById(R.id.buttonCardView);
         Animation animationUp = AnimationUtils.loadAnimation(context, R.anim.bottom_scaleup);
-        btnRelativelayout.startAnimation(animationUp);
+        buttonCardView.startAnimation(animationUp);
 
 
         Handler handler = new Handler();
@@ -411,7 +419,7 @@ public class Fragment_HomePage extends Fragment {
             @Override
             public void run() {
                 Animation animationDown = AnimationUtils.loadAnimation(context, R.anim.bottom_scaledown);
-                btnRelativelayout.startAnimation(animationDown);
+                buttonCardView.startAnimation(animationDown);
             }
         }, 800);
 
@@ -427,9 +435,8 @@ public class Fragment_HomePage extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
-        blinkhandler.removeCallbacksAndMessages(null);
         handler1.removeCallbacksAndMessages(null);
+        handler.removeCallbacks(loadGirlsRunnable);
 
     }
 
