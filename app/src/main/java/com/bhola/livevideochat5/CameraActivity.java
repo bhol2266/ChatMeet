@@ -50,6 +50,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -71,6 +72,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.bhola.livevideochat5.Models.GiftItemModel;
 import com.bhola.livevideochat5.Models.Model_Profile;
+import com.bhola.livevideochat5.adapters.CustomSpinnerAdapter;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.common.reflect.TypeToken;
 import com.google.firebase.database.DataSnapshot;
@@ -85,11 +87,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -158,7 +159,7 @@ public class CameraActivity extends AppCompatActivity {
     Handler callhandler;
     Runnable callRunnable;
 
-    public static TextView send;
+    public static LinearLayout sendlayout;
     boolean favourite;
 
 
@@ -252,50 +253,53 @@ public class CameraActivity extends AppCompatActivity {
         BottomSheetDialog bottomSheetDialog;
 
         bottomSheetDialog = new BottomSheetDialog(this);
-        View view = getLayoutInflater().inflate(R.layout.bottomsheetdialog_gifts, null);
-        bottomSheetDialog.setContentView(view);
-        bottomSheetDialog.show();
 
-        send = view.findViewById(R.id.send);
-        send.setOnClickListener(new View.OnClickListener() {
+        View view = LayoutInflater.from(getApplicationContext()).inflate(
+                R.layout.bottomsheetdialog_gifts,
+                null
+        );
+
+        TextView Recharge = view.findViewById(R.id.Recharge);
+        Recharge.setOnClickListener(v -> {
+            startActivity(new Intent(CameraActivity.this, VipMembership.class));
+        });
+
+        Spinner giftCountSpinner = view.findViewById(R.id.giftCountSpinner);
+        List<String> giftCounts = Arrays.asList(getResources().getStringArray(R.array.gift_counts));
+
+        CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(this, giftCounts);
+        giftCountSpinner.setAdapter(adapter);
+
+        sendlayout = view.findViewById(R.id.sendlayout);
+        sendlayout.setVisibility(View.INVISIBLE);
+
+
+        TextView sendBtn_gift = view.findViewById(R.id.sendBtn);
+        sendBtn_gift.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rechargeDialog(view.getContext());
+                rechargeDialog(CameraActivity.this);
 
             }
         });
         TextView coinCount = view.findViewById(R.id.coin);
         coinCount.setText(String.valueOf(MyApplication.coins));
-        TextView topup = view.findViewById(R.id.topup);
-        topup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(CameraActivity.this, VipMembership.class));
-            }
-        });
-        TextView problem = findViewById(R.id.problem);
+
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
 
-        String[] items = {"gift", "red-rose", "teddy-bear", "ballons", "cake", "candle", "card", "cup", "cup-cake", "cupid", "gift-box", "heart","letter","shopping-bag","wine-glass"};
 
         List<GiftItemModel> itemList = new ArrayList<>();
+        itemList = Utils.readGiftsJson_FromAsset(CameraActivity.this);
 
-        for (int i = 0; i < items.length; i++) {
-            String item = items[i];
-            int coin = 99 + (i * 100); // Calculate the "coin" value based on the index
-
-            GiftItemModel giftItemModel = new GiftItemModel(item, coin, false);
-            Map<String, Object> itemMap = new HashMap<>();
-            itemMap.put("gift", item);
-            itemMap.put("coin", coin);
-
-            itemList.add(giftItemModel);
-        }
 
         GiftItemAdapter giftItemAdapter = new GiftItemAdapter(CameraActivity.this, itemList);
-        GridLayoutManager layoutManager = new GridLayoutManager(CameraActivity.this, 4);
+        GridLayoutManager layoutManager = new GridLayoutManager(CameraActivity.this, 2, GridLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(giftItemAdapter);
+
+
+        bottomSheetDialog.setContentView(view);
+        bottomSheetDialog.show();
 
     }
 
@@ -649,7 +653,7 @@ public class CameraActivity extends AppCompatActivity {
                                         profileImage.performClick();
                                     }
                                 });
-                                Picasso.get().load(model_profile.getProfilePhoto().replace("profile","profile_original")).fit().into(profileImage);
+                                Picasso.get().load(model_profile.getProfilePhoto().replace("profile", "profile_original")).fit().into(profileImage);
                                 profileImage.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {

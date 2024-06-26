@@ -1,0 +1,107 @@
+[
+  {
+    "giftname": "Card",
+    "filename": "card",
+    "isSelected": false,
+    "gem": 99,
+    "giftShadow": "white"
+  },
+  {
+    "giftname": "Ballons",
+    "filename": "ballons",
+    "isSelected": false,
+    "gem": 149,  // Updated gem value for Ballons
+    "giftShadow": "red"
+  },
+  {
+    "giftname": "Cup",
+    "filename": "cup",
+    "isSelected": false,
+    "gem": 199,
+    "giftShadow": "red"
+  },
+  {
+    "giftname": "Candle",
+    "filename": "candle",
+    "isSelected": false,
+    "gem": 249,
+    "giftShadow": "white"
+  },
+  {
+    "giftname": "Cup cake",
+    "filename": "cup-cake",
+    "isSelected": false,
+    "gem": 299,
+    "giftShadow": "red"
+  },
+  {
+    "giftname": "Cake",
+    "filename": "cake",
+    "isSelected": false,
+    "gem": 349,
+    "giftShadow": "red"
+  },
+  {
+    "giftname": "Letter",
+    "filename": "letter",
+    "isSelected": false,
+    "gem": 399,  // Updated gem value for Letter
+    "giftShadow": "white"
+  },
+  {
+    "giftname": "Gift",
+    "filename": "gift",
+    "isSelected": false,
+    "gem": 449,
+    "giftShadow": "red"
+  },
+  {
+    "giftname": "Red rose",
+    "filename": "red-rose",
+    "isSelected": false,
+    "gem": 499,
+    "giftShadow": "red"
+  },
+  {
+    "giftname": "Heart",
+    "filename": "heart",
+    "isSelected": false,
+    "gem": 549,
+    "giftShadow": "red"
+  },
+  {
+    "giftname": "Teddy bear",
+    "filename": "teddy-bear",
+    "isSelected": false,
+    "gem": 599,
+    "giftShadow": "white"
+  },
+  {
+    "giftname": "Cupid",
+    "filename": "cupid",
+    "isSelected": false,
+    "gem": 649,
+    "giftShadow": "red"
+  },
+  {
+    "giftname": "Shopping bag",
+    "filename": "shopping-bag",
+    "isSelected": false,
+    "gem": 699,
+    "giftShadow": "red"
+  },
+  {
+    "giftname": "Gift box",
+    "filename": "gift-box",
+    "isSelected": false,
+    "gem": 749,
+    "giftShadow": "red"
+  },
+  {
+    "giftname": "Wine glass",
+    "filename": "wine-glass",
+    "isSelected": false,
+    "gem": 799,
+    "giftShadow": "white"
+  }
+]

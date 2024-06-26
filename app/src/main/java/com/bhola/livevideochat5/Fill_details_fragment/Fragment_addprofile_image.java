@@ -161,7 +161,7 @@ public class Fragment_addprofile_image extends Fragment {
 
     private void uploadImagetoFirebaseStorage(Uri croppedImageUri) {
         Utils utils = new Utils();
-        utils.showLoadingDialog(context, "Uploading...");
+        utils.showCustomProgressDialog(context, "Uploading...");
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
         // Get a reference to the location where you want to store the file in Firebase Storage
@@ -187,7 +187,7 @@ public class Fragment_addprofile_image extends Fragment {
                         String downloadUrl = uri.toString();
                         photoUrl = downloadUrl;
 
-                        utils.dismissLoadingDialog();
+                        utils.dismissCustomProgressDialog();
 
                         saveProfileDetails();
                         Toast.makeText(context, "Logged In!", Toast.LENGTH_SHORT).show();

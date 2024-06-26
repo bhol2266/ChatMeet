@@ -41,8 +41,8 @@ public class GiftItemAdapter extends RecyclerView.Adapter<GiftItemAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         GiftItemModel giftItemModel = itemList.get(position);
-        String gift = (String) giftItemModel.getGiftName();
-        int coin = (int) giftItemModel.getCoin();
+        String gift = (String) giftItemModel.getFilename();
+        int coin = (int) giftItemModel.getGem();
 
         // Load and set the image from the asset folder
         try {
@@ -81,9 +81,11 @@ public class GiftItemAdapter extends RecyclerView.Adapter<GiftItemAdapter.ViewHo
                 if (activityName.equals("Profile")) {
                     Profile.send.setAlpha(1);
                 } else if (activityName.equals("CameraActivity")) {
-                    CameraActivity.send.setAlpha(1);
+                    CameraActivity.sendlayout.setAlpha(1);
+                    CameraActivity.sendlayout.setVisibility(View.VISIBLE);
                 } else {
-                    ChatScreen_User.send.setAlpha(1);
+                    ChatScreen_User.sendlayout.setAlpha(1);
+                    ChatScreen_User.sendlayout.setVisibility(View.VISIBLE);
 
                 }
             }

@@ -206,9 +206,6 @@
                 android:paddingRight="20dp">
 
 
-
-
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -220,7 +217,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="5dp"
-android:fontFamily="@font/poppins_semibold"
+                        android:fontFamily="@font/poppins_semibold"
                         android:text="Information"
                         android:textColor="@color/white"
                         android:textSize="18dp" />
@@ -476,6 +473,17 @@ android:fontFamily="@font/poppins_semibold"
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+
+
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_gifts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="80dp"
+                    android:layout_marginTop="40dp"
+                    android:orientation="horizontal" />
 
 
             </LinearLayout>

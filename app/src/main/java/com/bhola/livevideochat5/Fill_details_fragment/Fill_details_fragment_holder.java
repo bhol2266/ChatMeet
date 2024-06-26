@@ -23,6 +23,8 @@ public class Fill_details_fragment_holder extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS); // makes the background fullscree without hiding status bar and navbar
+
         setContentView(R.layout.activity_fill_details_fragment_holder);
 //        fullscreenMode();
 

@@ -382,7 +382,7 @@ public class UserProfileEdit extends AppCompatActivity {
 
 
         Utils utils = new Utils();
-        utils.showLoadingDialog(UserProfileEdit.this, "Uploading...");
+        utils.showCustomProgressDialog(UserProfileEdit.this, "Uploading...");
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
         long currentTimeMillis = System.currentTimeMillis();
@@ -417,7 +417,7 @@ public class UserProfileEdit extends AppCompatActivity {
                         updateGalleryonFireStore();
 
                         save_userInfo_gallery(UserProfileEdit.this, galleryImages);
-                        utils.dismissLoadingDialog();
+                        utils.dismissCustomProgressDialog();
                     });
                 })
                 .addOnFailureListener(e -> {
@@ -446,7 +446,7 @@ public class UserProfileEdit extends AppCompatActivity {
 
     private void uploadImagetoFirebaseStorageProfile(Uri croppedImageUri, String path) {
         Utils utils = new Utils();
-        utils.showLoadingDialog(UserProfileEdit.this, "Uploading...");
+        utils.showCustomProgressDialog(UserProfileEdit.this, "Uploading...");
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
         int orientation = ImageResizer.getImageOrientation(croppedImageUri, UserProfileEdit.this);
@@ -476,7 +476,7 @@ public class UserProfileEdit extends AppCompatActivity {
                         new Utils().updateProfileonFireStore("profilepic", photoUrl);
 
                         save_userInfo_alldetails();
-                        utils.dismissLoadingDialog();
+                        utils.dismissCustomProgressDialog();
 
                     });
                 })
@@ -775,7 +775,7 @@ class GalleryImageAdapter extends RecyclerView.Adapter<GalleryImageAdapter.Image
 
     private void removeFromFirebaseStorage(String imagePath, int i) {
         Utils utils = new Utils();
-        utils.showLoadingDialog(context, "deleting...");
+        utils.showCustomProgressDialog(context, "deleting...");
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
 
@@ -790,7 +790,7 @@ class GalleryImageAdapter extends RecyclerView.Adapter<GalleryImageAdapter.Image
 
                     updateOnFirestore(imageList);
                     Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_SHORT).show();
-                    utils.dismissLoadingDialog();
+                    utils.dismissCustomProgressDialog();
 
                 })
                 .addOnFailureListener(e -> {

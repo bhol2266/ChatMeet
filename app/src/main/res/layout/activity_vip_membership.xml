@@ -2,43 +2,14 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parentLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/app_bg1"
     android:orientation="vertical"
-    android:id="@+id/parentLayout"
+    android:padding="15dp"
     tools:context=".VipMembership">
 
-
-    <ImageView
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:layout_gravity="top|left|start"
-        android:layout_marginLeft="-5dp"
-        android:layout_marginTop="-5dp"
-        android:src="@drawable/vip_membership_img3" />
-
-
-    <ImageView
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_gravity="top|right"
-        android:layout_marginRight="-30dp"
-        android:src="@drawable/vip_membership_img2" />
-
-    <ImageView
-        android:layout_width="280dp"
-        android:layout_height="280dp"
-        android:layout_gravity="bottom|end|right"
-        android:layout_marginRight="-75dp"
-        android:layout_marginBottom="-20dp"
-        android:src="@drawable/vip_membership_img1" />
-
-    <ImageView
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:layout_gravity="top|right"
-        android:layout_marginTop="120dp"
-        android:src="@drawable/vip_membership_coins_bg" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,162 +19,86 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp">
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Gem Shop"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
 
             <ImageView
                 android:id="@+id/back_arrow"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
+
                 android:alpha="0.7"
                 android:clickable="true"
                 android:focusable="true"
                 app:srcCompat="@drawable/cross"
-                app:tint="@color/semiblack" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/specialOffer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/back_arrow"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:elevation="0dp"
-
-                app:cardCornerRadius="15dp">
+                app:tint="@color/white" />
 
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/semiblack"
-                    android:fontFamily="@font/inter"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="3dp"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="3dp"
-                    android:text="SPECIAL OFFER"
-                    android:textColor="@color/vip_membership_goldcolor"
-                    android:textSize="22dp" />
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="5dp">
 
-            </androidx.cardview.widget.CardView>
 
             <TextView
-                android:layout_width="360dp"
+                android:id="@+id/sdafasdf"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/specialOffer"
-                android:layout_gravity="bottom|left"
-                android:fontFamily="@font/inter"
-                android:paddingLeft="22dp"
-                android:paddingTop="10dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="5dp"
-                android:text="Buy Coin at special Price , Grab the deal Super Fast"
-                android:textColor="@color/semiblack"
-                android:textSize="26dp"
-                android:textStyle="bold" />
+                android:text="Balance   :    "
+                android:textColor="@color/white"
+                android:textSize="14dp" />
+
+            <ImageView
+                android:id="@+id/gemIcon"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/sdafasdf"
+
+                app:srcCompat="@drawable/gem" />
+
+
+            <TextView
+                android:id="@+id/coins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/gemIcon"
+                android:paddingLeft="10dp"
+                android:text="7000 gems"
+                android:textColor="@color/white"
+                android:textSize="14dp" />
 
 
         </RelativeLayout>
 
 
-        <LinearLayout
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:src="@drawable/vipmembership_img1" />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left|bottom"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/check_icon" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:alpha="0.6"
-                    android:fontFamily="@font/inter"
-                    android:text="Chat with 1000+ streamers"
-                    android:textColor="@color/black"
-                    android:textSize="14dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/check_icon" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:alpha="0.6"
-
-
-                    android:fontFamily="@font/inter"
-
-                    android:text="Have 24 hours video call at any time"
-                    android:textColor="@color/black"
-                    android:textSize="14dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/check_icon" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:alpha="0.6"
-                    android:fontFamily="@font/inter"
-
-
-                    android:text="Enjoy high quality video stream"
-                    android:textColor="@color/black"
-                    android:textSize="14dp" />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:text="Stand out from the crowd! Purchase gems to customize your profile and attract more matches"
+            android:textColor="@color/white"
+            android:textSize="14dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -219,17 +114,16 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:indeterminateTint="@color/vip_membership_goldcolor" />
+                    android:indeterminateTint="@color/themeColorlight" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:columnCount="3"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
                     android:rowCount="2" />
 
 
@@ -238,8 +132,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
                 android:layout_marginTop="5dp"
-                android:background="@android:color/transparent"                android:layout_gravity="bottom|center_horizontal"
+                android:background="@android:color/transparent"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -258,7 +153,7 @@
 
                         android:fontFamily="@font/poppins_bold"
                         android:text="20% Off"
-                        android:textColor="@color/vip_membership_goldcolor"
+                        android:textColor="@color/white"
                         android:textSize="17dp"
                         android:visibility="gone" />
 
@@ -267,36 +162,29 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-
+                        android:alpha="0.6"
                         android:text="Offer ends in 59:00"
-                        android:textColor="@color/gmts_light_gray"
+                        android:textColor="@color/white"
                         android:textSize="16dp"
                         android:visibility="gone" />
                 </LinearLayout>
 
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnContinue"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:elevation="0dp"
-                    app:cardCornerRadius="15dp">
+                    android:background="@drawable/btn_bg"
+                    android:fontFamily="@font/poppins_semibold"
 
-                    <TextView
-                        android:id="@+id/btnContinue"
-                        android:layout_width="250dp"
-                        android:layout_height="wrap_content"
-                        android:background="@color/vip_membership_goldcolor"
-                        android:fontFamily="@font/inter"
+                    android:gravity="center"
 
-                        android:gravity="center"
-
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:text="CONTINUE"
-                        android:textColor="@color/white"
-                        android:textSize="20dp" />
-                </androidx.cardview.widget.CardView>
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:text="Purchase"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -361,7 +249,6 @@
     </LinearLayout>
 
 
-
     <LinearLayout
         android:id="@+id/progressBar"
         android:layout_width="match_parent"
@@ -381,8 +268,8 @@
             android:layout_gravity="center"
             android:layout_marginRight="10dp"
 
-            android:backgroundTint="@color/themeColor"
-            android:indeterminateTint="@color/themeColor" />
+            android:backgroundTint="@color/white"
+            android:indeterminateTint="@color/themeColorlight" />
 
         <TextView
             android:layout_width="wrap_content"

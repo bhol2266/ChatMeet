@@ -122,6 +122,8 @@ public class LoginScreen extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
+        Utils.dismissCustomProgressDialog();
+
         exit_dialog();
 
     }
@@ -253,8 +255,8 @@ public class LoginScreen extends AppCompatActivity {
 
 
     private void googleSignInStuffs() {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.show();
+        Utils.showCustomProgressDialog(this, "Loading...");
+
 
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
@@ -276,9 +278,8 @@ public class LoginScreen extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            if (progressDialog != null && progressDialog.isShowing()) {
-                                progressDialog.cancel();
-                            }
+                            Utils.dismissCustomProgressDialog();
+
                             ArrayList<String> keyword = new ArrayList<>();
                             checkUserExist(account.getEmail(), account.getDisplayName(), account.getPhotoUrl().toString());
 
@@ -295,7 +296,7 @@ public class LoginScreen extends AppCompatActivity {
     }
 
     private void checkUserExist(String email, String displayName, String picUrl) {
-        showLoadingDialog();
+        Utils.showCustomProgressDialog(this, "Loading data...");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("Users");
 
@@ -344,7 +345,7 @@ public class LoginScreen extends AppCompatActivity {
                             Utils.replaceFCMToken();
 
 
-                            dismissLoadingDialog();
+                            Utils.dismissCustomProgressDialog();
                             if (MyApplication.userModel.getGalleryImages().size() > 1) {
                                 saveGalleryImages(MyApplication.userModel.getGalleryImages()); // save gallery images to local storeage from firebase storage
                             } else {
@@ -385,19 +386,7 @@ public class LoginScreen extends AppCompatActivity {
     }
 
 
-    private void showLoadingDialog() {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Fetching details...");
-        progressDialog.setIndeterminate(true);
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-    }
 
-    private void dismissLoadingDialog() {
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.dismiss();
-        }
-    }
 
 
     private void LoginInComplete(String loggedAs, String displayName, String email, String photoUrl) {
@@ -421,7 +410,6 @@ public class LoginScreen extends AppCompatActivity {
 
 class DownloadImageTask extends AsyncTask<ArrayList<GalleryModel>, Void, Void> {
 
-    private ProgressDialog progressBarDialog;
     private Context context;
 
     public DownloadImageTask(Context context) {
@@ -472,17 +460,15 @@ class DownloadImageTask extends AsyncTask<ArrayList<GalleryModel>, Void, Void> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progressBarDialog = new ProgressDialog(context);
-        progressBarDialog.setMessage("Downloading user images...");
-        progressBarDialog.setCancelable(false);
-        progressBarDialog.show();
+        Utils.showCustomProgressDialog(context,"Downloading user images...");
+
 
     }
 
     @Override
     protected void onPostExecute(Void unused) {
         super.onPostExecute(unused);
-        progressBarDialog.dismiss();
+        Utils.dismissCustomProgressDialog();
         LoginScreen.saveGalleryImagesToSharedPreferences(context);
         context.startActivity(new Intent(context, MainActivity.class));
 

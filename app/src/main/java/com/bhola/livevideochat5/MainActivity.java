@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,6 +30,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.bhola.livevideochat5.Models.ChatItem_ModelClass;
 import com.bhola.livevideochat5.Models.Model_Profile;
 import com.bhola.livevideochat5.Models.UserBotMsg;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.common.reflect.TypeToken;
@@ -70,10 +72,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         initializeBottonFragments();
-        startIncomingCallService();
-
+//        startIncomingCallService();
 
     }
+
+
 
     private void startIncomingCallService() {
         if (MyApplication.App_updating.equals("active")) {
@@ -100,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
                 showFragment();
             }
         }, 210000);
-
 
 
     }

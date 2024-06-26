@@ -12,9 +12,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
 import android.media.ExifInterface;
 import android.media.MediaPlayer;
@@ -82,10 +80,8 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
@@ -105,13 +101,13 @@ public class ChatScreen_User extends Activity {
     private Handler handler;
     private Runnable myRunnable;
     private Thread myThread;
-    public static TextView send;
     LinearLayout answerslayout, ll2;   //ll2 is message writting box
     // voice message stuffs
     private AudioRecorder audioRecorder;
     private File recordFile;
     public static ArrayList<FirebaseTextMessage> conversation;
     boolean isOnline;
+    public static LinearLayout sendlayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -1133,7 +1129,6 @@ public class ChatScreen_User extends Activity {
         });
 
 
-
         alertBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -1313,9 +1308,18 @@ public class ChatScreen_User extends Activity {
         View view = getLayoutInflater().inflate(R.layout.bottomsheetdialog_gifts, null);
         bottomSheetDialog.setContentView(view);
         bottomSheetDialog.show();
+        TextView Recharge = view.findViewById(R.id.Recharge);
+        Recharge.setOnClickListener(v -> {
+            startActivity(new Intent(ChatScreen_User.this, VipMembership.class));
+        });
 
-        send = view.findViewById(R.id.send);
-        send.setOnClickListener(new View.OnClickListener() {
+//        RelativeLayout giftCountLayout = view.findViewById(R.id.giftCountLayout);
+//        giftCountLayout.setOnClickListener(v -> {
+//
+//        });
+        sendlayout = view.findViewById(R.id.sendlayout);
+        TextView sendBtn_gift = view.findViewById(R.id.sendBtn);
+        sendBtn_gift.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 rechargeDialog(view.getContext());
@@ -1324,36 +1328,17 @@ public class ChatScreen_User extends Activity {
         });
         TextView coinCount = view.findViewById(R.id.coin);
         coinCount.setText(String.valueOf(MyApplication.coins));
-        TextView topup = view.findViewById(R.id.topup);
-        topup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ChatScreen_User.this, VipMembership.class));
-            }
-        });
-        TextView problem = findViewById(R.id.problem);
+
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
 
-        String[] items = {"gift", "red-rose", "teddy-bear", "ballons", "cake", "candle", "card", "cup", "cup-cake", "cupid", "gift-box", "heart","letter","shopping-bag","wine-glass"};
-
         List<GiftItemModel> itemList = new ArrayList<>();
-
-        for (int i = 0; i < items.length; i++) {
-            String item = items[i];
-            int coin = 99 + (i * 100); // Calculate the "coin" value based on the index
-
-            GiftItemModel giftItemModel = new GiftItemModel(item, coin, false);
-            Map<String, Object> itemMap = new HashMap<>();
-            itemMap.put("gift", item);
-            itemMap.put("coin", coin);
-
-            itemList.add(giftItemModel);
-        }
+        itemList = Utils.readGiftsJson_FromAsset(ChatScreen_User.this);
 
         GiftItemAdapter giftItemAdapter = new GiftItemAdapter(ChatScreen_User.this, itemList);
-        GridLayoutManager layoutManager = new GridLayoutManager(ChatScreen_User.this, 4);
+        GridLayoutManager layoutManager = new GridLayoutManager(ChatScreen_User.this, 4, GridLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(giftItemAdapter);
+
 
     }
 

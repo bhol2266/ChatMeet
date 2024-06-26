@@ -92,7 +92,7 @@ public class AdminPanel_Userlist extends AppCompatActivity {
 
     public void getUserDetails(String query_term) {
         Utils utils = new Utils();
-        utils.showLoadingDialog(AdminPanel_Userlist.this, "loading..." + query_term);
+        utils.showCustomProgressDialog(AdminPanel_Userlist.this, "loading..." + query_term);
         userlist.clear();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("Users");
@@ -125,11 +125,11 @@ public class AdminPanel_Userlist extends AppCompatActivity {
                         UserModel userModel = document.toObject(UserModel.class);
                         userlist.add(userModel);
                         adapter.notifyDataSetChanged();
-                        utils.dismissLoadingDialog();
+                        utils.dismissCustomProgressDialog();
                     }
 
                 } else {
-                    utils.dismissLoadingDialog();
+                    utils.dismissCustomProgressDialog();
 
                     Log.d("dsafsadfsdaf", "Error getting documents: ", task.getException());
                 }
@@ -140,7 +140,7 @@ public class AdminPanel_Userlist extends AppCompatActivity {
     public void getUserFromId(int userId) {
 
         Utils utils = new Utils();
-        utils.showLoadingDialog(AdminPanel_Userlist.this, "loading..." + userId);
+        utils.showCustomProgressDialog(AdminPanel_Userlist.this, "loading..." + userId);
         userlist.clear();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("Users");
@@ -155,11 +155,11 @@ public class AdminPanel_Userlist extends AppCompatActivity {
                         UserModel userModel = document.toObject(UserModel.class);
                         userlist.add(userModel);
                         adapter.notifyDataSetChanged();
-                        utils.dismissLoadingDialog();
+                        utils.dismissCustomProgressDialog();
                     }
 
                 } else {
-                    utils.dismissLoadingDialog();
+                    utils.dismissCustomProgressDialog();
                     Toast.makeText(AdminPanel_Userlist.this, "not found", Toast.LENGTH_SHORT).show();
                     Log.d("dsafsadfsdaf", "Error getting documents: ", task.getException());
                 }

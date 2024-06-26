@@ -6,9 +6,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
@@ -21,6 +23,8 @@ import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -29,6 +33,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.bhola.livevideochat5.Models.CountryInfo_Model;
+import com.bhola.livevideochat5.Models.GiftItemModel;
 import com.bhola.livevideochat5.Models.Model_Profile;
 import com.google.common.reflect.TypeToken;
 import com.google.firebase.firestore.CollectionReference;
@@ -61,23 +66,40 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class Utils {
 
-    private ProgressDialog progressDialog;
+    private static ProgressDialog progressDialog;
 
 
-    public void showLoadingDialog(Context context, String message) {
+    public static void showCustomProgressDialog(Context context, String message) {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+
         progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage(message);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setCancelable(false);
+
+        // Inflate the custom layout
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View customView = inflater.inflate(R.layout.custom_progress_dialog, null);
+
+        // Set the custom view to the ProgressDialog
         progressDialog.show();
+        progressDialog.setContentView(customView);
+
+        // Optionally, you can customize further
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        // Set the message
+        TextView progressText = customView.findViewById(R.id.progress_text);
+        progressText.setText(message);
+
+        // Make it cancelable
+        progressDialog.setCancelable(false);
     }
 
-    public void dismissLoadingDialog() {
+    public static void dismissCustomProgressDialog() {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
     }
-
     public void updateProfileonFireStore(String key, String value) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("Users");
@@ -496,6 +518,54 @@ public class Utils {
 
         // Invalidate the TextView to redraw it with the shader applied
         textView.invalidate();
+    }
+
+
+    public static ArrayList<GiftItemModel> readGiftsJson_FromAsset(Context context) {
+        ArrayList<GiftItemModel> giftItems = new ArrayList<>();
+
+        try {
+            // Read JSON file from assets
+            String json = loadJSONFromAsset(context, "gifts/gifts.json");
+
+            // Parse JSON array
+            JSONArray jsonArray = new JSONArray(json);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                // Extract data from JSON object
+                String giftname = jsonObject.getString("giftname");
+                String filename = jsonObject.getString("filename");
+                boolean isSelected = jsonObject.getBoolean("isSelected");
+                int gem = jsonObject.getInt("gem");
+                String giftShadow = jsonObject.getString("giftShadow");
+
+
+                // Create GiftItemModel object and add to list
+                GiftItemModel giftItem = new GiftItemModel(giftname, filename, gem, isSelected, giftShadow);
+                giftItems.add(giftItem);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return giftItems;
+    }
+
+    private static String loadJSONFromAsset(Context context, String filename) {
+        String json = null;
+        try {
+            InputStream is = context.getAssets().open(filename);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return json;
     }
 
 

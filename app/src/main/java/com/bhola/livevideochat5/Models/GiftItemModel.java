@@ -2,17 +2,20 @@ package com.bhola.livevideochat5.Models;
 
 public class GiftItemModel {
     String giftName;
-    int coin;
+    String filename;
+    int gem;
     boolean isSelected;
-
+    String giftShadow;
 
     public GiftItemModel() {
     }
 
-    public GiftItemModel(String giftName, int coin, boolean isSelected) {
+    public GiftItemModel(String giftName, String filename, int gem, boolean isSelected, String giftShadow) {
         this.giftName = giftName;
-        this.coin = coin;
+        this.filename = filename;
+        this.gem = gem;
         this.isSelected = isSelected;
+        this.giftShadow = giftShadow;
     }
 
     public String getGiftName() {
@@ -23,12 +26,20 @@ public class GiftItemModel {
         this.giftName = giftName;
     }
 
-    public int getCoin() {
-        return coin;
+    public String getFilename() {
+        return filename;
     }
 
-    public void setCoin(int coin) {
-        this.coin = coin;
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    public int getGem() {
+        return gem;
+    }
+
+    public void setGem(int gem) {
+        this.gem = gem;
     }
 
     public boolean isSelected() {
@@ -37,5 +48,13 @@ public class GiftItemModel {
 
     public void setSelected(boolean selected) {
         isSelected = selected;
+    }
+
+    public String getGiftShadow() {
+        return giftShadow;
+    }
+
+    public void setGiftShadow(String giftShadow) {
+        this.giftShadow = giftShadow;
     }
 }

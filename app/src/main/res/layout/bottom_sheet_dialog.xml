@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#ffffff"
     android:orientation="vertical">
 
     <!-- Add your desired content for the bottom sheet dialog here -->
@@ -9,6 +10,7 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
+        android:layout_gravity="center"
         android:layout_height="wrap_content" />
 
 

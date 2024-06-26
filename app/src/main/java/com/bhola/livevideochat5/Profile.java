@@ -10,17 +10,21 @@ import android.graphics.Color;
 import android.graphics.RenderEffect;
 import android.graphics.Shader;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,15 +38,16 @@ import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bhola.livevideochat5.Models.ChatItem_ModelClass;
 import com.bhola.livevideochat5.Models.GiftItemModel;
 import com.bhola.livevideochat5.Models.Model_Profile;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.imageview.ShapeableImageView;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -74,6 +79,26 @@ public class Profile extends AppCompatActivity {
 
         getGirlProfile_DB();
         actionbar();
+        NextButtonGlareAnim();
+        giftsSlider();
+    }
+
+    private void giftsSlider() {
+
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerview_gifts);
+
+        // Set layout manager to horizontal
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+
+
+        List<GiftItemModel> itemList = new ArrayList<>();
+        itemList = Utils.readGiftsJson_FromAsset(Profile.this);
+
+        Log.d("sadfsadfsadf", "giftsSlider: "+itemList.size());
+        GiftSliderAdapter adapter = new GiftSliderAdapter(itemList, Profile.this);
+        recyclerView.setAdapter(adapter);
 
     }
 
@@ -104,7 +129,7 @@ public class Profile extends AppCompatActivity {
             Model_Profile model_profile = Utils.readCursor(cursor);
             if (model_profile.getLike() == 1) {
                 favourite = true;
-                favouriteImage.setImageDrawable(getResources().getDrawable(R.drawable.star)); // Set image drawable properly
+                favouriteImage.setImageDrawable(getResources().getDrawable(R.drawable.user_added)); // Set image drawable properly
                 //set imageview favourite
             } else {
                 favourite = false;
@@ -117,53 +142,53 @@ public class Profile extends AppCompatActivity {
 
 
     private void openBottomSheetDialog() {
-        BottomSheetDialog bottomSheetDialog;
-
-        bottomSheetDialog = new BottomSheetDialog(this);
-        View view = getLayoutInflater().inflate(R.layout.bottomsheetdialog_gifts, null);
-        bottomSheetDialog.setContentView(view);
-        bottomSheetDialog.show();
-
-        send = view.findViewById(R.id.send);
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                rechargeDialog(view.getContext());
-
-            }
-        });
-        TextView coinCount = view.findViewById(R.id.coin);
-        coinCount.setText(String.valueOf(MyApplication.coins));
-        TextView topup = view.findViewById(R.id.topup);
-        topup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Profile.this, VipMembership.class));
-            }
-        });
-        TextView problem = findViewById(R.id.problem);
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-
-        String[] items = {"gift", "red-rose", "teddy-bear", "ballons", "cake", "candle", "card", "cup", "cup-cake", "cupid", "gift-box", "heart","letter","shopping-bag","wine-glass"};
-
-        List<GiftItemModel> itemList = new ArrayList<>();
-
-        for (int i = 0; i < items.length; i++) {
-            String item = items[i];
-            int coin = 99 + (i * 100); // Calculate the "coin" value based on the index
-
-            GiftItemModel giftItemModel = new GiftItemModel(item, coin, false);
-            Map<String, Object> itemMap = new HashMap<>();
-            itemMap.put("gift", item);
-            itemMap.put("coin", coin);
-
-            itemList.add(giftItemModel);
-        }
-
-        GiftItemAdapter giftItemAdapter = new GiftItemAdapter(Profile.this, itemList);
-        GridLayoutManager layoutManager = new GridLayoutManager(Profile.this, 4);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(giftItemAdapter);
+//        BottomSheetDialog bottomSheetDialog;
+//
+//        bottomSheetDialog = new BottomSheetDialog(this);
+//        View view = getLayoutInflater().inflate(R.layout.bottomsheetdialog_gifts, null);
+//        bottomSheetDialog.setContentView(view);
+//        bottomSheetDialog.show();
+//
+//        send = view.findViewById(R.id.send);
+//        send.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                rechargeDialog(view.getContext());
+//
+//            }
+//        });
+//        TextView coinCount = view.findViewById(R.id.coin);
+//        coinCount.setText(String.valueOf(MyApplication.coins));
+//        TextView topup = view.findViewById(R.id.topup);
+//        topup.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(Profile.this, VipMembership.class));
+//            }
+//        });
+//        TextView problem = findViewById(R.id.problem);
+//        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+//
+//        String[] items = {"gift", "red-rose", "teddy-bear", "ballons", "cake", "candle", "card", "cup", "cup-cake", "cupid", "gift-box", "heart", "letter", "shopping-bag", "wine-glass"};
+//
+//        List<GiftItemModel> itemList = new ArrayList<>();
+//
+//        for (int i = 0; i < items.length; i++) {
+//            String item = items[i];
+//            int coin = 99 + (i * 100); // Calculate the "coin" value based on the index
+//
+//            GiftItemModel giftItemModel = new GiftItemModel(item, coin, false);
+//            Map<String, Object> itemMap = new HashMap<>();
+//            itemMap.put("gift", item);
+//            itemMap.put("coin", coin);
+//
+//            itemList.add(giftItemModel);
+//        }
+//
+//        GiftItemAdapter giftItemAdapter = new GiftItemAdapter(Profile.this, itemList);
+//        GridLayoutManager layoutManager = new GridLayoutManager(Profile.this, 4);
+//        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setAdapter(giftItemAdapter);
 
     }
 
@@ -320,42 +345,6 @@ public class Profile extends AppCompatActivity {
 
     }
 
-    private void blockUserDialog() {
-
-        final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(Profile.this);
-        LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
-        View promptView = inflater.inflate(R.layout.dialog_block_user, null);
-        builder.setView(promptView);
-        builder.setCancelable(true);
-
-        TextView confirm = promptView.findViewById(R.id.confirm);
-        TextView cancel = promptView.findViewById(R.id.cancel);
-
-
-        block_user_dialog = builder.create();
-        block_user_dialog.show();
-
-
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(Profile.this, "User blocked succesfully", Toast.LENGTH_SHORT).show();
-                block_user_dialog.dismiss();
-            }
-        });
-
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                block_user_dialog.dismiss();
-            }
-        });
-
-        ColorDrawable back = new ColorDrawable(Color.TRANSPARENT);
-        InsetDrawable inset = new InsetDrawable(back, 20);
-        block_user_dialog.getWindow().setBackgroundDrawable(inset);
-
-    }
 
     private void reportUserDialog() {
 
@@ -473,8 +462,8 @@ public class Profile extends AppCompatActivity {
             stringMap1.put("type", "premium");  //premium
             imageList.add(stringMap1);
         }
-        if(imageList.isEmpty()){
-            TextView imageTitle=findViewById(R.id.imageTitle);
+        if (imageList.isEmpty()) {
+            TextView imageTitle = findViewById(R.id.imageTitle);
             imageTitle.setVisibility(View.GONE);
         }
 
@@ -579,6 +568,21 @@ public class Profile extends AppCompatActivity {
     }
 
 
+    private void NextButtonGlareAnim() {
+
+        ImageView button_glare = findViewById(R.id.button_glare);
+
+        Animation glareAnimation = AnimationUtils.loadAnimation(Profile.this, R.anim.glare_animation);
+        button_glare.startAnimation(glareAnimation);
+
+        CardView buttonCardView = findViewById(R.id.buttonCardView);
+        buttonCardView.setOnClickListener(v -> {
+            rechargeDialog(Profile.this);
+
+        });
+
+    }
+
 }
 
 
@@ -666,5 +670,66 @@ class ProfileGirlImageAdapter extends RecyclerView.Adapter<ProfileGirlImageAdapt
 
     }
 }
+
+
+class GiftSliderAdapter extends RecyclerView.Adapter<GiftSliderAdapter.ViewHolder> {
+
+    private List<GiftItemModel> data;
+    private Context context;
+
+    public GiftSliderAdapter(List<GiftItemModel> data, Context context) {
+        this.data = data;
+        this.context = context;
+    }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gift_item_slider_profile, parent, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        GiftItemModel giftItemModel = data.get(position);
+        String giftName = (String) giftItemModel.getFilename();
+
+        try {
+            InputStream ims = context.getAssets().open("gifts/" + giftName + ".png");
+            Drawable d = Drawable.createFromStream(ims, null);
+            holder.giftImage.setImageDrawable(d);
+            ims.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (giftItemModel.getGiftShadow().equals("white")) {
+            holder.eclipse.setImageResource(R.drawable.white_eclipse);
+        }else{
+            holder.eclipse.setImageResource(R.drawable.red_eclipse);
+
+        }
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return data.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView giftImage, eclipse;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            giftImage = itemView.findViewById(R.id.giftImage);
+            eclipse = itemView.findViewById(R.id.eclipse);
+        }
+    }
+}
+
+
+
+
+
 
 

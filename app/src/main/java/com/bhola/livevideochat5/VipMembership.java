@@ -25,6 +25,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +33,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -86,6 +86,7 @@ public class VipMembership extends AppCompatActivity {
     private static final String CHANNEL_ID = "notification_channel_id";
     private static final int REQUEST_CODE = 123;
     public static GridAdapter adapter;
+    TextView gemsBalanceTextview;
 
     @Override
     protected void onResume() {
@@ -118,6 +119,8 @@ public class VipMembership extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         offerTimer = findViewById(R.id.offerTimer);
         offerTextview = findViewById(R.id.offerTextview);
+        gemsBalanceTextview = findViewById(R.id.coins);
+        gemsBalanceTextview.setText(MyApplication.coins + " gems");
 
         addUnderlineTerms_privacy();
         billingClient = BillingClient.newBuilder(this).enablePendingPurchases().setListener(new PurchasesUpdatedListener() {
@@ -198,6 +201,7 @@ public class VipMembership extends AppCompatActivity {
 
 
     }
+
     void connectGooglePlayBilling() {
         billingClient.startConnection(new BillingClientStateListener() {
             @Override
@@ -229,17 +233,18 @@ public class VipMembership extends AppCompatActivity {
         List<QueryProductDetailsParams.Product> list = new ArrayList<>();
 
         productIds.add("coins200");
-        productIds.add("coins450");
+        productIds.add("coins500");
         productIds.add("coins1000");
-        productIds.add("coins2500");
-        productIds.add("coins5000");
-        productIds.add("coins10000");
+        productIds.add("coins2000");
+        productIds.add("coins4000");
+        productIds.add("coins15000");
         productIds.add("coins200_offer");
-        productIds.add("coins450_offer");
+        productIds.add("coins500_offer");
         productIds.add("coins1000_offer");
-        productIds.add("coins2500_offer");
-        productIds.add("coins5000_offer");
+        productIds.add("coins2000_offer");
         productIds.add("coins10000_offer");
+        productIds.add("coins4000_offer");
+
 
 // Add more product IDs as needed
 
@@ -261,6 +266,8 @@ public class VipMembership extends AppCompatActivity {
                 ((Activity) VipMembership.this).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
+                        Log.d("sdafsdfsadf", "getProductDetails: " + productDetailsList.size());
 
                         sendDatatoRecyclerview(productDetailsList, offer);
 
@@ -305,13 +312,13 @@ public class VipMembership extends AppCompatActivity {
 
         GridItem_ModelClass item_modelClass2 = new GridItem_ModelClass();
         for (ProductDetails productDetails : productDetailsList) {
-            item_modelClass2.setCoins("450");
-            if (productDetails.getProductId().equals("coins450")) {
+            item_modelClass2.setCoins("500");
+            if (productDetails.getProductId().equals("coins500")) {
                 item_modelClass2.setMRP(productDetails.getOneTimePurchaseOfferDetails().getFormattedPrice().replace(".00", ""));
                 productlist.add(productDetails);
 
             }
-            if (productDetails.getProductId().equals("coins450_offer")) {
+            if (productDetails.getProductId().equals("coins500_offer")) {
                 item_modelClass2.setDISCOUNTED_PRICE(productDetails.getOneTimePurchaseOfferDetails().getFormattedPrice().replace(".00", ""));
                 productlist_offer.add(productDetails);
 
@@ -339,13 +346,13 @@ public class VipMembership extends AppCompatActivity {
 
         GridItem_ModelClass item_modelClass4 = new GridItem_ModelClass();
         for (ProductDetails productDetails : productDetailsList) {
-            item_modelClass4.setCoins("2500");
-            if (productDetails.getProductId().equals("coins2500")) {
+            item_modelClass4.setCoins("2000");
+            if (productDetails.getProductId().equals("coins2000")) {
                 item_modelClass4.setMRP(productDetails.getOneTimePurchaseOfferDetails().getFormattedPrice().replace(".00", ""));
                 productlist.add(productDetails);
 
             }
-            if (productDetails.getProductId().equals("coins2500_offer")) {
+            if (productDetails.getProductId().equals("coins2000_offer")) {
                 item_modelClass4.setDISCOUNTED_PRICE(productDetails.getOneTimePurchaseOfferDetails().getFormattedPrice().replace(".00", ""));
                 productlist_offer.add(productDetails);
 
@@ -356,13 +363,13 @@ public class VipMembership extends AppCompatActivity {
 
         GridItem_ModelClass item_modelClass5 = new GridItem_ModelClass();
         for (ProductDetails productDetails : productDetailsList) {
-            item_modelClass5.setCoins("5000");
-            if (productDetails.getProductId().equals("coins5000")) {
+            item_modelClass5.setCoins("4000");
+            if (productDetails.getProductId().equals("coins4000")) {
                 item_modelClass5.setMRP(productDetails.getOneTimePurchaseOfferDetails().getFormattedPrice().replace(".00", ""));
                 productlist.add(productDetails);
 
             }
-            if (productDetails.getProductId().equals("coins5000_offer")) {
+            if (productDetails.getProductId().equals("coins4000_offer")) {
                 item_modelClass5.setDISCOUNTED_PRICE(productDetails.getOneTimePurchaseOfferDetails().getFormattedPrice().replace(".00", ""));
                 productlist_offer.add(productDetails);
 
@@ -373,8 +380,8 @@ public class VipMembership extends AppCompatActivity {
 
         GridItem_ModelClass item_modelClass6 = new GridItem_ModelClass();
         for (ProductDetails productDetails : productDetailsList) {
-            item_modelClass6.setCoins("10000");
-            if (productDetails.getProductId().equals("coins10000")) {
+            item_modelClass6.setCoins("15000");
+            if (productDetails.getProductId().equals("coins15000")) {
                 item_modelClass6.setMRP(productDetails.getOneTimePurchaseOfferDetails().getFormattedPrice().replace(".00", ""));
                 productlist.add(productDetails);
 
@@ -684,6 +691,8 @@ public class VipMembership extends AppCompatActivity {
                             while (matcher.find()) {
                                 String number = matcher.group();
                                 coins = Integer.parseInt(number);
+                                if (coins == 10000)
+                                    coins = 15000; //becuase the inapp_product id is coins10000_offer but we are showing 15000 coins. this is because the coins15001_offer products details not coming from inapp product server. this is a workaround
                             }
 
                             savePurchaseDetails_inSharedPreference(purchase.getPurchaseToken(), coins, purchase.getPurchaseTime());
@@ -800,7 +809,7 @@ public class VipMembership extends AppCompatActivity {
         );
 
         // Set the navigation bar color
-        getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.vip_membership_goldcolor));
+        getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.navigationBar));
 
         // For devices with display cutouts, allow content to layout in cutout areas if needed
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
@@ -854,7 +863,10 @@ class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder> {
         if (!discountApplied) {
             holder.price.setText(item.getMRP());
             holder.mrp.setVisibility(View.GONE);
+            holder.discountCoupon.setVisibility(View.INVISIBLE);
+
         } else {
+            holder.discountCoupon.setVisibility(View.VISIBLE);
             holder.price.setText(item.getDISCOUNTED_PRICE());
             holder.mrp.setVisibility(View.VISIBLE);
             holder.mrp.setText(item.getMRP());
@@ -863,58 +875,11 @@ class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder> {
 
         if (position == selectedItemPosition) {
             holder.itemView.setSelected(true);
-
-            int backgroundColor = R.color.vip_membership_goldcolor;
-            int color = ContextCompat.getColor(context, backgroundColor);
-            holder.card.setCardBackgroundColor(color);
-            int textColor = Color.parseColor("#FFFFFF"); // Replace "#FF0000" with your desired color
-            holder.price.setTextColor(textColor);
-            holder.mrp.setTextColor(textColor);
+            holder.card.setBackgroundResource(R.drawable.vipcard_bg_selected);
             VipMembership.selectedCard[0] = holder.getAbsoluteAdapterPosition();
         } else {
             holder.itemView.setSelected(false);
-            int backgroundColor = R.color.white;
-            int color = ContextCompat.getColor(context, backgroundColor);
-            holder.card.setCardBackgroundColor(color);
-
-            int textColor = Color.parseColor("#000000"); // Replace "#FF0000" with your desired color
-            int textColor2 = Color.parseColor("#BF707070"); // Replace "#FF0000" with your desired color
-            holder.price.setTextColor(textColor);
-            holder.mrp.setTextColor(textColor2);
-        }
-
-        if (holder.getAbsoluteAdapterPosition() > 2) {
-            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.card.getLayoutParams();
-            int leftMarginDp = 5;  // Set your left margin in pixels
-            int topMarginDp = 5;   // Set your top margin in pixels
-            int rightMarginDp = 5; // Set your right margin in pixels
-            int bottomMarginDp = 20;// Set your bottom margin in pixels
-
-            float scale = context.getResources().getDisplayMetrics().density;
-            int leftMarginPx = (int) (leftMarginDp * scale + 0.5f);
-            int topMarginPx = (int) (topMarginDp * scale + 0.5f);
-            int rightMarginPx = (int) (rightMarginDp * scale + 0.5f);
-            int bottomMarginPx = (int) (bottomMarginDp * scale + 0.5f);
-
-// Create layout parameters with margins
-            layoutParams.setMargins(leftMarginPx, topMarginPx, rightMarginPx, bottomMarginPx);
-            holder.card.setLayoutParams(layoutParams);
-        } else {
-            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.card.getLayoutParams();
-            int leftMarginDp = 5;  // Set your left margin in pixels
-            int topMarginDp = 5;   // Set your top margin in pixels
-            int rightMarginDp = 5; // Set your right margin in pixels
-            int bottomMarginDp = 5;// Set your bottom margin in pixels
-
-            float scale = context.getResources().getDisplayMetrics().density;
-            int leftMarginPx = (int) (leftMarginDp * scale + 0.5f);
-            int topMarginPx = (int) (topMarginDp * scale + 0.5f);
-            int rightMarginPx = (int) (rightMarginDp * scale + 0.5f);
-            int bottomMarginPx = (int) (bottomMarginDp * scale + 0.5f);
-
-// Create layout parameters with margins
-            layoutParams.setMargins(leftMarginPx, topMarginPx, rightMarginPx, bottomMarginPx);
-            holder.card.setLayoutParams(layoutParams);
+            holder.card.setBackgroundResource(R.drawable.vipcard_bg);
 
         }
 
@@ -935,7 +900,8 @@ class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder> {
         TextView coins;
         TextView mrp;
         TextView price;
-        CardView card;
+        RelativeLayout card;
+        ImageView discountCoupon;
 
         public GridViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -943,6 +909,7 @@ class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder> {
             mrp = itemView.findViewById(R.id.mrp);
             price = itemView.findViewById(R.id.price);
             card = itemView.findViewById(R.id.card);
+            discountCoupon = itemView.findViewById(R.id.discountCoupon);
 
             card.setOnClickListener(new View.OnClickListener() {
                 @Override

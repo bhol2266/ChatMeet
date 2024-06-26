@@ -1,102 +1,131 @@
 <!-- bottom_sheet_dialog.xml -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/color_333333"
-    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@drawable/pinkbg"
-
-        android:padding="5dp"
-        android:text="Send gifts to your favourite girl, she'll be thrilled~"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="12dp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="10dp"
-        android:layout_height="wrap_content" />
+    android:background="@android:color/transparent">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:padding="12dp">
+        android:layout_height="360dp"
+        android:background="@drawable/bottomsheet_bg"
+        android:orientation="vertical">
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_marginBottom="10dp"
+            android:paddingTop="15dp" />
 
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/coin"
-
-                />
-
-            <TextView
-                android:id="@+id/coin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:padding="5dp"
-                android:text="500"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
-
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right">
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="12dp">
 
 
-            <TextView
-                android:id="@+id/topup"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/textview_border"
-
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="5dp"
-                android:text="Top-up"
-                android:textColor="#FFEB3B"
-                android:textSize="12dp" />
-
-            <TextView
-                android:id="@+id/send"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Send"
-                android:alpha="0.5"
-                android:layout_gravity="center"
-                android:textColor="@color/white"
-                android:paddingLeft="20dp"
                 android:gravity="center"
-                android:layout_marginLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:background="@drawable/btn_bg"/>
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/gem"
+
+                    />
+
+                <TextView
+                    android:id="@+id/coin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="500 Gems"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
+
+
+                <TextView
+                    android:id="@+id/Recharge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center"
+                    android:text="Recharge >"
+                    android:textAlignment="center"
+                    android:textColor="#FC0097"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sendlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="right"
+                android:alpha="0.5"
+                android:orientation="horizontal">
+
+
+
+
+                <LinearLayout
+                    android:id="@+id/sendBtnLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/giftCountSpinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:padding="7dp"
+                        style="@style/SpinnerTheme"
+                        android:textSize="14dp"
+                        android:spinnerMode="dropdown" />
+
+                    <TextView
+                        android:id="@+id/sendBtn"
+                        android:layout_width="80dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/btn_bg_pink"
+                        android:paddingBottom="3dp"
+                        android:gravity="center"
+                        android:text="send"
+                        android:textColor="@color/white"
+                        android:textSize="16dp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
 
 </LinearLayout>
+
+
+
+
+

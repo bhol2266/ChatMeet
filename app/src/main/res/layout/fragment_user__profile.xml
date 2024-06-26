@@ -410,8 +410,6 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="15dp"
                         android:layout_toRightOf="@id/coinsImage"
-
-                        android:fontFamily="@font/poppins_semibold"
                         android:text="Gems:"
                         android:textColor="@color/white"
                         android:textSize="18dp" />
