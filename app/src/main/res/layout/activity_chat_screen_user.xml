@@ -353,17 +353,17 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center|bottom"
                 android:visibility="gone"
-                app:cardBackgroundColor="#F3F3F3"
+                app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="25dp"
                 app:cardElevation="0dp">
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="27dp"
+                    android:layout_width="35dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="2dp"
+                    android:layout_marginStart="8dp"
                     android:background="@drawable/sendbut"
-                    android:backgroundTint="@color/gmts_dark_gray" />
+                    android:backgroundTint="@color/themeColor" />
 
             </androidx.cardview.widget.CardView>
 

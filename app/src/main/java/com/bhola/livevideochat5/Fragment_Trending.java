@@ -14,8 +14,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
-import android.graphics.Shader;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -87,13 +86,14 @@ public class Fragment_Trending extends Fragment {
     public static DrawerLayout drawerLayout;
     public static String selectedCountry = "All";
     public static CircleImageView flagIcon;
+    public static TextView userlocation_textview;
 
 
     public static GirlsCardAdapter adapter;
     SliderAdapter sliderAdapter;
     public static ArrayList<Model_Profile> girlsList;
     ArrayList<Model_Profile> girlsList_slider;
-    ArrayList<Model_Profile> girlsList_nearBy;
+    public static   ArrayList<Model_Profile> girlsList_nearBy;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     final int NOTIFICATION_REQUEST_CODE = 112;
     Boolean isScrolling = false;
@@ -204,27 +204,60 @@ public class Fragment_Trending extends Fragment {
         sideLayout_Countries();
         setUpSlider();
         setupRecycerView();
-
+        notificationIcon();
 
         return view;
     }
 
     private void setlocation() {
-        TextView location = view.findViewById(R.id.location);
+        userlocation_textview = view.findViewById(R.id.location);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 String city = MyApplication.currentCity;
                 if (city.isEmpty()) {
-                    location.setText("World");
+                    userlocation_textview.setText("World");
 
 
                 } else {
-                    location.setText(city + ", " + MyApplication.currentCountry);
+                    userlocation_textview.setText(city + ", " + MyApplication.currentCountry);
                 }
 
             }
         }, 2000);
+    }
+
+    public void notificationIcon() {
+        ImageView notificationIcon = view.findViewById(R.id.notificationIcon);
+
+        int yellow_tintColor = ContextCompat.getColor(context, R.color.yellow);
+        int white_tintColor = ContextCompat.getColor(context, R.color.white);
+
+        if (MyApplication.notificationEnabled) {
+            notificationIcon.setColorFilter(yellow_tintColor, PorterDuff.Mode.SRC_IN);
+
+        }
+
+        notificationIcon.setOnClickListener(v -> {
+            SharedPreferences sh = context.getSharedPreferences("UserInfo", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sh.edit();
+            if (MyApplication.notificationEnabled) {
+                MyApplication.notificationEnabled = false;
+                editor.putBoolean("Notification", false);
+                notificationIcon.setColorFilter(white_tintColor, PorterDuff.Mode.SRC_IN);
+                Toast.makeText(context, "Notification disabled!", Toast.LENGTH_SHORT).show();
+
+            } else {
+                MyApplication.notificationEnabled = true;
+                editor.putBoolean("Notification", true);
+                notificationIcon.setColorFilter(yellow_tintColor, PorterDuff.Mode.SRC_IN);
+                Toast.makeText(context, "Notification enabled!", Toast.LENGTH_SHORT).show();
+            }
+            editor.apply();
+
+        });
+
+
     }
 
 
@@ -852,7 +885,8 @@ class GirlsCardAdapter extends RecyclerView.Adapter<GirlsCardAdapter.GridViewHol
         Picasso.get()
                 .load(item.getProfilePhoto())
                 .fit()  // Provide target width and height
-                .centerInside()         // Maintain aspect ratio and fit within ImageView bounds
+                .centerInside()  // Maintain aspect ratio and fit within ImageView bounds
+                .placeholder(R.drawable.placeholder)  // Add placeholder drawable
                 .into(holder.profile);
 
         for (CountryInfo_Model countryMap : MyApplication.countryList) {
@@ -987,7 +1021,8 @@ class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.viewholder> {
     public void onBindViewHolder(@androidx.annotation.NonNull viewholder holder, int position) {
         Model_Profile item = girllist.get(position);
         holder.title.setText(item.getName());
-        Picasso.get().load(item.getProfilePhoto().replace("profile", "profile_original")).fit().into(holder.thumbnail);
+        Picasso.get().load(item.getProfilePhoto().replace("profile", "profile_original")).fit().placeholder(R.drawable.user_without_padding)  // Add placeholder drawable
+                .into(holder.thumbnail);
 
         holder.sliderlayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1044,7 +1079,7 @@ class NearByAdapter extends RecyclerView.Adapter<NearByAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@android.support.annotation.NonNull ViewHolder holder, int position) {
         Model_Profile model_profile = girlsList.get(position);
-        Picasso.get().load(model_profile.getProfilePhoto().replace("profile", "profile_original")).fit().into(holder.profileImage);
+        Picasso.get().load(model_profile.getProfilePhoto().replace("profile", "profile_original")).fit().placeholder(R.drawable.placeholder).into(holder.profileImage);
 
         holder.age.setText(model_profile.getAge().replace("years old", "").trim());
         holder.location.setText(model_profile.getFrom());

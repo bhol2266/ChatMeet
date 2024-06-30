@@ -35,8 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginRight="10dp"
-              >
+                android:layout_marginRight="10dp">
 
 
                 <ProgressBar
@@ -56,11 +55,11 @@
                     <ImageView
                         android:id="@+id/errorIcon"
                         android:layout_width="25dp"
-                        android:visibility="gone"
                         android:layout_height="25dp"
                         android:layout_gravity="top"
+                        android:scaleType="fitCenter"
                         android:src="@drawable/error"
-                        android:scaleType="fitCenter" />
+                        android:visibility="gone" />
                 </androidx.cardview.widget.CardView>
 
             </FrameLayout>
@@ -169,10 +168,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginEnd="1dp"
-
             android:padding="5dp"
             android:paddingRight="10dp"
             android:text="07-12-2023"
+            android:textColor="@color/white"
             android:textSize="10dp" />
 
 

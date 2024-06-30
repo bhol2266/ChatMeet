@@ -15,6 +15,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -148,7 +149,7 @@ public class Feedback extends AppCompatActivity {
 
     private void uploadImage() {
 
-        CardView uploadImage = findViewById(R.id.uploadImage);
+        ImageView uploadImage = findViewById(R.id.uploadImage);
         uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/app_bg1"
     android:orientation="vertical"
     tools:context=".Feedback">
 
@@ -23,7 +24,7 @@
             android:clickable="true"
             android:focusable="true"
             app:srcCompat="@drawable/back_arrow"
-            app:tint="@color/semiblack" />
+            app:tint="@color/white" />
 
         <TextView
             android:id="@+id/title_collection"
@@ -36,7 +37,7 @@
             android:gravity="center"
             android:longClickable="true"
             android:text="Feedback"
-            android:textColor="#454545"
+            android:textColor="@color/white"
             android:textFontWeight="700"
             android:textSize="22dp" />
 
@@ -58,50 +59,66 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Problem Type"
-                android:textSize="18dp" />
+                android:textColor="@color/white"
+
+                android:textSize="16dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:textColor="@color/themeColor"
                 android:text="*"
+                android:textColor="@color/white"
                 android:textSize="25dp" />
 
         </LinearLayout>
 
 
-
-        <RelativeLayout
-            android:id="@+id/problemOption"
-            android:layout_width="match_parent"
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="#FFF6F6"
-            android:paddingLeft="20dp"
-            android:paddingTop="15dp"
-            android:paddingRight="20dp"
-            android:paddingBottom="15dp">
+            app:cardCornerRadius="10dp"
+            android:elevation="0dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            >
 
-            <TextView
-                android:id="@+id/problem"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/problemOption"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="The Problem is related with"
-                android:textColor="@color/gmts_light_gray"
-                android:textSize="14dp" />
+                android:background="#26000000"
+
+                android:paddingLeft="20dp"
+                android:paddingTop="15dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="15dp">
 
 
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/right_arrow"
-                app:tint="@color/gmts_light_gray" />
+                <TextView
+                    android:id="@+id/problem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    app:cardBackgroundColor="@android:color/transparent"
+
+                    android:text="The Problem is related with"
+                    android:textColor="@color/white"
+                    android:textSize="14dp" />
 
 
-        </RelativeLayout>
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/right_arrow"
+                    app:tint="@color/white" />
+
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -110,17 +127,24 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:hint="Email"
-            android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
-            app:boxStrokeColor="@color/themeColor"
-            app:boxStrokeWidthFocused="1dp"
-            app:hintTextColor="@color/themeColor">
+            android:textColorHint="@color/white"
+            app:boxBackgroundColor="#531C7C"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/white"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:hintTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:textColor="@color/gmts_light_gray" />
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -131,22 +155,30 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:hint="Description"
+            android:textColorHint="@color/white"
             android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
-            app:boxStrokeColor="@color/themeColor"
-            app:boxStrokeWidthFocused="1dp"
+            app:boxBackgroundColor="#531C7C"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/white"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
             app:counterEnabled="true"
             app:counterMaxLength="1000"
-            app:hintTextColor="@color/themeColor">
+            app:counterTextColor="@color/white"
+            app:hintTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
-                android:minLines="3"
-                android:maxLines="10"
                 android:maxLength="1000"
-                android:textColor="@color/gmts_light_gray" />
+                android:maxLines="10"
+                android:minLines="3"
+                android:textColor="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -162,38 +194,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Screenshots"
-                android:textSize="18dp" />
-
-
+                android:textColor="@color/white"
+                android:textSize="15dp" />
 
 
             <GridLayout
                 android:id="@+id/gridLayout"
                 android:layout_width="match_parent"
-                android:layout_marginTop="5dp"
                 android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
                 android:columnCount="4"
                 android:rowCount="2">
-                <androidx.cardview.widget.CardView
+
+
+                <ImageView
                     android:id="@+id/uploadImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#FFF6F6"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="0dp">
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="left|top"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/add_bg" />
 
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
 
-                        android:padding="20dp"
-                        android:src="@drawable/add_icon"
-                        app:tint="@color/gmts_light_gray" />
-                </androidx.cardview.widget.CardView>
 
             </GridLayout>
-
 
 
         </LinearLayout>
@@ -203,7 +227,7 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="60dp"
             android:background="@drawable/btn_bg"
             android:gravity="center"
             android:padding="10dp"

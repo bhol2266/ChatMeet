@@ -15,7 +15,17 @@
         android:background="@color/white"
         android:orientation="vertical"
         android:paddingTop="5dp"
-        android:paddingBottom="25dp">
+        android:paddingBottom="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Low Balance"
+            android:layout_gravity="center"
+            android:textSize="18dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/semiblack" />
 
 
         <LinearLayout
@@ -24,7 +34,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:paddingBottom="10dp">
 
 
             <LinearLayout
@@ -34,24 +44,25 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginRight="5dp"
-                    android:src="@drawable/coins" />
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/vipcard_img1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="You don't have enough coins."
+                    android:text="You don't have enough gems."
                     android:textColor="@color/gmts_light_gray"
                     android:textSize="14dp" />
             </LinearLayout>
 
             <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center"
+                android:padding="15dp"
                 android:src="@drawable/oops" />
 
 

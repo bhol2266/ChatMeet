@@ -196,7 +196,7 @@ public class Profile extends AppCompatActivity {
         favourite();
 
         ImageView profileImage = findViewById(R.id.profileImage);
-        Picasso.get().load(model_profile.getProfilePhoto()).placeholder(new ColorDrawable(Color.TRANSPARENT)).into(profileImage);
+        Picasso.get().load(model_profile.getProfilePhoto()).placeholder(R.drawable.placeholder).into(profileImage);
 
         TextView id = findViewById(R.id.id);
         id.setText(convertUsernameto_number(model_profile.getUsername()));
@@ -230,59 +230,58 @@ public class Profile extends AppCompatActivity {
 //        });
 
 
-        TextView Languages = findViewById(R.id.Languages);
+        TextView Languages = findViewById(R.id.languages);
         Languages.setText(model_profile.getLanguages());
-        LinearLayout Languageslayout = findViewById(R.id.Languageslayout);
+        CardView Languageslayout = findViewById(R.id.languagesCard);
         if (model_profile.getLanguages().length() == 0) {
             Languageslayout.setVisibility(View.GONE);
         }
 
-        TextView InterestedIn = findViewById(R.id.InterestedIn);
-        InterestedIn.setText(model_profile.getInterested());
-        LinearLayout InterestedInlayout = findViewById(R.id.InterestedInlayout);
+        TextView InterestedIn = findViewById(R.id.interestedIn);
+        InterestedIn.setText("InterestedIn  :  "+model_profile.getInterested());
+        CardView InterestedInlayout = findViewById(R.id.interestedInCard);
         if (model_profile.getInterested().length() == 0) {
             InterestedInlayout.setVisibility(View.GONE);
         }
 
-        TextView BodyType = findViewById(R.id.BodyType);
+        TextView BodyType = findViewById(R.id.bodyType);
         BodyType.setText(model_profile.getBodyType());
-        LinearLayout BodyTypelayout = findViewById(R.id.BodyTypelayout);
+        CardView BodyTypelayout = findViewById(R.id.bodyTypeCard);
         if (model_profile.getBodyType().length() == 0) {
             BodyTypelayout.setVisibility(View.GONE);
         }
-        TextView Specifics = findViewById(R.id.Specifics);
+        TextView Specifics = findViewById(R.id.specifics);
         Specifics.setText(model_profile.getSpecifics());
-        LinearLayout Specificslayout = findViewById(R.id.Specificslayout);
+        CardView Specificslayout = findViewById(R.id.specificsCard);
         if (model_profile.getSpecifics().length() == 0 || MyApplication.App_updating.equals("active") || !MyApplication.userLoggedIAs.equals("Google")) {
             Specificslayout.setVisibility(View.GONE);
         }
 
-        TextView Ethnicity = findViewById(R.id.Ethnicity);
-        Ethnicity.setText(model_profile.getEthnicity());
-        LinearLayout Ethnicitylayout = findViewById(R.id.Ethnicitylayout);
+        TextView Ethnicity = findViewById(R.id.ethnicity);
+        Ethnicity.setText("Ethnicity  :  "+model_profile.getEthnicity());
+        CardView Ethnicitylayout = findViewById(R.id.ethnicityCard);
         if (model_profile.getEthnicity().length() == 0) {
             Ethnicitylayout.setVisibility(View.GONE);
         }
 
 
-        TextView Hair = findViewById(R.id.Hair);
-        Hair.setText(model_profile.getHair());
-        Ethnicity.setText(model_profile.getEthnicity());
-        LinearLayout Hairlayout = findViewById(R.id.Hairlayout);
+        TextView Hair = findViewById(R.id.hair);
+        Hair.setText("Hair  :  "+model_profile.getHair());
+        CardView Hairlayout = findViewById(R.id.hairCard);
         if (model_profile.getHair().length() == 0) {
             Hairlayout.setVisibility(View.GONE);
         }
 
-        TextView EyeColor = findViewById(R.id.EyeColor);
-        EyeColor.setText(model_profile.getEyeColor());
-        LinearLayout EyeColorlayout = findViewById(R.id.EyeColorlayout);
+        TextView EyeColor = findViewById(R.id.eyeColor);
+        EyeColor.setText("EyeColor  :  "+model_profile.getEyeColor());
+        CardView EyeColorlayout = findViewById(R.id.eyeColorCard);
         if (model_profile.getEyeColor().length() == 0) {
             EyeColorlayout.setVisibility(View.GONE);
         }
 
-        TextView Subculture = findViewById(R.id.Subculture);
-        Subculture.setText(model_profile.getSubculture());
-        LinearLayout Subculturelayout = findViewById(R.id.Subculturelayout);
+        TextView Subculture = findViewById(R.id.subculture);
+        Subculture.setText("Subculture  :  "+model_profile.getSubculture());
+        CardView Subculturelayout = findViewById(R.id.subcultureCard);
         if (model_profile.getSubculture().length() == 0) {
             Subculturelayout.setVisibility(View.GONE);
         }
@@ -607,7 +606,7 @@ class ProfileGirlImageAdapter extends RecyclerView.Adapter<ProfileGirlImageAdapt
         Map<String, String> imageItem = imageList.get(position);
 //        holder.bind(imageItem);
 
-        Picasso.get().load(imageItem.get("url")).fit().centerCrop() // Set the width in pixels and let Picasso calculate the height
+        Picasso.get().load(imageItem.get("url")).fit().placeholder(R.drawable.placeholder).centerCrop() // Set the width in pixels and let Picasso calculate the height
                 .into(holder.imageView);
 
         int widthInPixels = holder.imageView.getWidth(); // Get the current width

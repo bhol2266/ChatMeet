@@ -16,7 +16,9 @@
             android:layout_height="fill_parent"
             android:layout_gravity="center"
             android:scaleType="centerCrop"
-            android:src="@drawable/woman" />
+            android:background="@android:color/transparent"
+
+           />
 
 
         <ImageView

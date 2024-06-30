@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#ffffff"
+    android:background="@drawable/app_bg1"
     android:orientation="vertical">
 
     <!-- Add your desired content for the bottom sheet dialog here -->

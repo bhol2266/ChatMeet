@@ -24,6 +24,7 @@
 
 
             <ImageView
+                android:id="@+id/notificationIcon"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_centerVertical="true"
@@ -204,7 +205,7 @@
         android:layout_width="160dp"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        android:background="@color/themeColorExtralight"
+        android:background="@drawable/app_bg1"
         android:orientation="vertical">
 
         <TextView
@@ -215,7 +216,7 @@
             android:layout_marginBottom="20dp"
 
             android:text="World Travel"
-            android:textColor="@color/semiblack"
+            android:textColor="@color/white"
             android:textSize="18dp" />
 
 

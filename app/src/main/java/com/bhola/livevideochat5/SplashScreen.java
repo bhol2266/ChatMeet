@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -60,7 +61,7 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.splash_screen);
         fullscreenMode();
         allUrl();
-
+setVideo();
 
         topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation);
         bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
@@ -99,6 +100,47 @@ public class SplashScreen extends AppCompatActivity {
 //backgroundVideoPlayback();
 
 //        clearChats();
+    }
+
+    private void setVideo() {
+
+        VideoView videoView = findViewById(R.id.videoView);
+        Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.splashscreen_video);
+        videoView.setVideoURI(videoUri);
+
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                // Get the dimensions of the video
+                int videoWidth = mp.getVideoWidth();
+                int videoHeight = mp.getVideoHeight();
+
+                // Get the width and height of the VideoView
+                int videoViewWidth = videoView.getWidth();
+                int videoViewHeight = videoView.getHeight();
+
+                // Calculate aspect ratio
+                float videoRatio = (float) videoWidth / videoHeight;
+                float screenRatio = (float) videoViewWidth / videoViewHeight;
+
+                // Adjust the size of the VideoView
+                if (videoRatio > screenRatio) {
+                    // Video is wider than the screen
+                    ViewGroup.LayoutParams layoutParams = videoView.getLayoutParams();
+                    layoutParams.width = videoViewWidth;
+                    layoutParams.height = (int) (videoViewWidth / videoRatio);
+                    videoView.setLayoutParams(layoutParams);
+                } else {
+                    // Video is taller than the screen
+                    ViewGroup.LayoutParams layoutParams = videoView.getLayoutParams();
+                    layoutParams.width = (int) (videoViewHeight * videoRatio);
+                    layoutParams.height = videoViewHeight;
+                    videoView.setLayoutParams(layoutParams);
+                }
+
+                videoView.start();
+            }
+        });
     }
 
     private void backgroundVideoPlayback() {
@@ -164,6 +206,8 @@ public class SplashScreen extends AppCompatActivity {
 
         //Reading Login Times and login details
         SharedPreferences sh = getSharedPreferences("UserInfo", MODE_PRIVATE);
+         MyApplication.notificationEnabled = sh.getBoolean("Notification", false); // Default value is false if not found
+
         int a = sh.getInt("loginTimes", 0);
         int userId = sh.getInt("userId", 0);
         MyApplication.coins = sh.getInt("coins", 0);

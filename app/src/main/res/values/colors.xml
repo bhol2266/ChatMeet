@@ -11,19 +11,15 @@
     <color name="themeColor">#8B16F5</color>
     <color name="themeColorlight">#EC22F5</color>
     <color name="themeColorExtralight">#E6CAFF</color>
-    <color name="themeColor2">#FC741C</color>
     <color name="yellow_dim">#dcc3a0</color>
     <color name="yellow">#FFD185</color>
     <color name="brown">#82766a</color>
-    <color name="btn_brown">#120a0d</color>
 
-    <color name="grey">#BF707070</color>
     <color name="color_333333">#333333</color>
     <color name="cardView_bg">#F1F1F1</color>
     <color name="male_icon">#3F51B5</color>
-    <color name="vip_membership_goldcolor">#F79F3D</color>
     <color name="navigationBar">#220136</color>
-    <color name="tabRippleColour">#50E6CAFF</color>
+    <color name="mtrl_textinput_default_box_stroke_color">@color/themeColorlight</color>
 
 
 </resources>

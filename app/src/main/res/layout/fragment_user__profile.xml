@@ -95,13 +95,16 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="15dp">
+                android:paddingTop="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                >
 
 
                 <ImageView
                     android:id="@+id/background_image"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="270dp"
                     android:layout_alignParentTop="true"
                     android:adjustViewBounds="true"
                     android:scaleType="fitXY"
@@ -115,12 +118,13 @@
                     android:layout_alignTop="@id/background_image"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:paddingTop="30dp">
+                    android:paddingTop="10dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/profileUrl"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:layout_marginTop="5dp"
                         android:layout_centerHorizontal="true"
                         android:src="@drawable/student" />
 
@@ -212,7 +216,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/dsfsdaf"
-                    android:layout_marginTop="10dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -374,12 +379,90 @@
 
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/subscriptionButton"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@android:color/transparent"
+                app:cardCornerRadius="10dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:background="@drawable/rounded_yellow_background"
+                    android:orientation="vertical"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="8dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Premium"                        android:alpha="0.8"
+
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:text="Unlock all our features to be in
+complete control of your experience "
+                        android:alpha="0.8"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="12dp" />
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:elevation="0dp"
+                        android:alpha="0.8"
+
+                        android:layout_marginTop="10dp"
+                        app:cardCornerRadius="15dp">
+
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/becomeVIP"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@color/black"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp"
+                            android:text="Upgrade from 3.99 $ "
+                            android:textColor="@color/white"
+                            android:textSize="12dp" />
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="7dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginRight="7dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="10dp"
                 app:cardCornerRadius="10dp">
 
 
@@ -461,71 +544,12 @@
 
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="7dp"
-                app:cardCornerRadius="10dp">
-
-
-                <LinearLayout
-                    android:id="@+id/becomeVIP"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="#3F2A2F"
-                    android:orientation="horizontal"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp">
-
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center_vertical"
-                        android:src="@drawable/crown2" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="15dp"
-
-                        android:text="Become VIP"
-                        android:textColor="@color/white"
-                        android:textSize="16dp" />
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="right|center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="15dp"
-
-                            android:paddingRight="20dp"
-                            android:text="Not joined yet"
-                            android:textColor="@color/white"
-                            android:textSize="12dp" />
-
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_height="260dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/userprofile_bg_layout"
                 android:orientation="vertical"
                 android:padding="10dp">

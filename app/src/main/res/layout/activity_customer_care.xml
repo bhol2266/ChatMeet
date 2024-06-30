@@ -4,8 +4,8 @@
     android:id="@+id/customerCareFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/app_bg1"
+    android:orientation="vertical"
     android:paddingTop="15dp"
     android:paddingBottom="15dp">
 
@@ -111,7 +111,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            app:cardBackgroundColor="#F3F3F3"
+            app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="25dp"
             app:cardElevation="0dp">
 
@@ -130,7 +130,7 @@
             android:layout_marginStart="7dp"
             android:layout_marginEnd="7dp"
             android:layout_weight="1"
-            app:cardBackgroundColor="#F3F3F3"
+            app:cardBackgroundColor="#531C7C"
             app:cardCornerRadius="15dp"
             app:cardElevation="0dp">
 
@@ -142,6 +142,9 @@
                 android:background="@null"
                 android:hint="Type The Messages..."
                 android:paddingStart="15dp"
+
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:textSize="16dp" />
 
         </androidx.cardview.widget.CardView>
@@ -151,7 +154,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            app:cardBackgroundColor="#F3F3F3"
+            app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="25dp"
             app:cardElevation="0dp">
 
@@ -161,7 +164,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="2dp"
                 android:background="@drawable/sendbut"
-                android:backgroundTint="@color/gmts_dark_gray" />
+                android:backgroundTint="@color/themeColor" />
 
         </androidx.cardview.widget.CardView>
 

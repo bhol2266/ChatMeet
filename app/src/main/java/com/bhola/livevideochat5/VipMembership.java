@@ -33,6 +33,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -859,14 +860,21 @@ class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull GridViewHolder holder, int position) {
         GridItem_ModelClass item = gridItemList.get(position);
-        holder.coins.setText(item.getCoins());
+        holder.coins.setText(item.getCoins()+" Gems");
         if (!discountApplied) {
             holder.price.setText(item.getMRP());
             holder.mrp.setVisibility(View.GONE);
             holder.discountCoupon.setVisibility(View.INVISIBLE);
+            holder.tagCardview.setVisibility(View.VISIBLE);
+
 
         } else {
             holder.discountCoupon.setVisibility(View.VISIBLE);
+            holder.tagCardview.setVisibility(View.INVISIBLE);
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) holder.coins.getLayoutParams();
+            params.bottomMargin = 0; // Set marginBottom to 0dp
+            holder.coins.setLayoutParams(params);
+
             holder.price.setText(item.getDISCOUNTED_PRICE());
             holder.mrp.setVisibility(View.VISIBLE);
             holder.mrp.setText(item.getMRP());
@@ -883,7 +891,47 @@ class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder> {
 
         }
 
+        setTagline(holder.tagTextview, holder.getAbsoluteAdapterPosition());
+    }
 
+    private void setTagline(TextView tagTextview, int absoluteAdapterPosition) {
+
+
+        switch (absoluteAdapterPosition) {
+            case 0:
+                tagTextview.setBackgroundColor(Color.parseColor("#FFD700")); // Red
+                tagTextview.setText("Featured Deal");
+                tagTextview.setVisibility(View.GONE);
+
+                break;
+            case 1:
+                tagTextview.setBackgroundColor(Color.parseColor("#ADFF2F")); // Green
+                tagTextview.setText("Exclusive Offer");
+                tagTextview.setVisibility(View.GONE);
+
+                break;
+            case 2:
+                tagTextview.setBackgroundColor(Color.parseColor("#87CEFA")); // Blue
+                tagTextview.setText("Top Choice");
+                tagTextview.setVisibility(View.GONE);
+
+                break;
+            case 3:
+                tagTextview.setBackgroundColor(Color.parseColor("#4682B4")); // Yellow
+                tagTextview.setText("Top Choice");
+
+                break;
+            case 4:
+                tagTextview.setBackgroundColor(Color.parseColor("#C71585")); // Magenta
+                tagTextview.setText("Most Valued");
+
+                break;
+            case 5:
+                tagTextview.setBackgroundColor(Color.parseColor("#DAA520")); // Cyan
+                tagTextview.setText("Best Offer");
+
+                break;
+        }
     }
 
     @Override
@@ -902,6 +950,8 @@ class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder> {
         TextView price;
         RelativeLayout card;
         ImageView discountCoupon;
+        CardView tagCardview;
+        TextView tagTextview;
 
         public GridViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -910,6 +960,8 @@ class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder> {
             price = itemView.findViewById(R.id.price);
             card = itemView.findViewById(R.id.card);
             discountCoupon = itemView.findViewById(R.id.discountCoupon);
+            tagCardview = itemView.findViewById(R.id.tagCardview);
+            tagTextview = itemView.findViewById(R.id.tagTextview);
 
             card.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -932,15 +984,17 @@ class GridItem_ModelClass {
     private String Coins;
     private String MRP;
     private String DISCOUNTED_PRICE;
+    private String tag;
 
 
     public GridItem_ModelClass() {
     }
 
-    public GridItem_ModelClass(String coins, String MRP, String DISCOUNTED_PRICE) {
+    public GridItem_ModelClass(String coins, String MRP, String DISCOUNTED_PRICE, String tag) {
         Coins = coins;
         this.MRP = MRP;
         this.DISCOUNTED_PRICE = DISCOUNTED_PRICE;
+        this.tag = tag;
     }
 
     public String getCoins() {
@@ -965,6 +1019,14 @@ class GridItem_ModelClass {
 
     public void setDISCOUNTED_PRICE(String DISCOUNTED_PRICE) {
         this.DISCOUNTED_PRICE = DISCOUNTED_PRICE;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }
 

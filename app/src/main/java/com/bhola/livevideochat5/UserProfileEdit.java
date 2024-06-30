@@ -91,14 +91,7 @@ public class UserProfileEdit extends AppCompatActivity {
 
         changeProfileImage();
         loadImagesFromGalley();
-        ImageView deleteIcon = findViewById(R.id.deleteIcon);
 
-        deleteIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(UserProfileEdit.this, "Long Press image to delete", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         profileDetails();
         reflectChangesBtn();
@@ -289,7 +282,7 @@ public class UserProfileEdit extends AppCompatActivity {
         profileImage = findViewById(R.id.profileImage);
         Picasso.get().load(photoUrl).into(profileImage);
 
-        LinearLayout profileImageLayout = findViewById(R.id.profileImageLayout);
+        RelativeLayout profileImageLayout = findViewById(R.id.profileImageLayout);
         profileImageLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -260,7 +260,7 @@ class LanguagePickerAdapter extends RecyclerView.Adapter<LanguagePickerAdapter.I
                 if (languageModel.isSelected()) {
 
                     holder.checkIcon.setVisibility(View.INVISIBLE);
-                    int textColor = ContextCompat.getColor(context, R.color.semiblack);
+                    int textColor = ContextCompat.getColor(context, R.color.white);
                     holder.languageName.setTextColor(textColor);
 
                     for (int i = 0; i < mlist.size(); i++) {
@@ -301,7 +301,7 @@ class LanguagePickerAdapter extends RecyclerView.Adapter<LanguagePickerAdapter.I
 
         } else {
             holder.checkIcon.setVisibility(View.INVISIBLE);
-            int textColor = ContextCompat.getColor(context, R.color.semiblack);
+            int textColor = ContextCompat.getColor(context, R.color.white);
             holder.languageName.setTextColor(textColor);
         }
     }
@@ -371,7 +371,7 @@ class LanguagePickerAdapter extends RecyclerView.Adapter<LanguagePickerAdapter.I
             }
         }
         if (!Acitivity_LanguageSeletor.saveBtnDisable) {
-            int semiblack = context.getResources().getColor(R.color.semiblack); // Replace with your color resource or a specific color value
+            int semiblack = context.getResources().getColor(R.color.white); // Replace with your color resource or a specific color value
             Acitivity_LanguageSeletor.saveBtn.setTextColor(semiblack);
         }
     }

@@ -11,13 +11,14 @@
         android:id="@+id/customImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/app_icon"
+        android:src="@drawable/add_bg"
         app:shapeAppearanceOverlay="@style/roundedImageView" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/loadImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:cardBackgroundColor="@android:color/transparent"
         android:elevation="0dp"
         app:cardElevation="0dp">
 
@@ -25,8 +26,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/border_cutting_shape"
-            android:src="@drawable/add" />
+            android:src="@drawable/add_bg" />
     </androidx.cardview.widget.CardView>
 
 

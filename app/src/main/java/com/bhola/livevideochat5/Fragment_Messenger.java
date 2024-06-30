@@ -730,7 +730,7 @@ class MessengeItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 favourite = true;
             } else {
                 String res = new DatabaseHelper(context, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile").updateLike(modelClass.getUsername(), 0);
-                userItem_viewholder.favouriteImage.setImageDrawable(context.getResources().getDrawable(R.drawable.user3));
+                userItem_viewholder.favouriteImage.setImageDrawable(context.getResources().getDrawable(R.drawable.star_outline));
                 favourite = false;
 
             }
@@ -893,7 +893,7 @@ class MessengeItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 //set imageview favourite
             } else {
                 favourite = false;
-                favouriteImage.setImageDrawable(context.getResources().getDrawable(R.drawable.user3)); // Set image drawable properly
+                favouriteImage.setImageDrawable(context.getResources().getDrawable(R.drawable.star_outline)); // Set image drawable properly
 
             }
         }

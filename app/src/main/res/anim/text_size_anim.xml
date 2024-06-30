@@ -1,9 +1,0 @@
-<!-- res/anim/text_size_anim.xml -->
-<set xmlns:android="http://schemas.android.com/apk/res/android">
-    <objectAnimator
-        android:propertyName="textSize"
-        android:valueFrom="14sp"
-        android:valueTo="18sp"
-        android:duration="500"
-        android:valueType="floatType"/>
-</set>

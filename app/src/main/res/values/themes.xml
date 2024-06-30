@@ -38,18 +38,6 @@
         <item name="android:textColor">@color/themeColor</item>
     </style>
 
-    <style name="CustomOutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <!-- Add customization as needed -->
-    </style>
-
-
-    <style name="ImageView.Corner" parent="">
-        <item name="cornerSizeTopRight">0dp</item>
-        <item name="cornerSizeTopLeft">0dp</item>
-        <item name="cornerSizeBottomLeft">40dp</item>
-        <item name="cornerSizeBottomRight">40dp</item>
-        <item name="cornerFamily">rounded</item>
-    </style>
 
     <style name="CustomShapeAppearanceBottomSheetDialog" parent="ShapeAppearance.MaterialComponents.LargeComponent">
         <item name="cornerFamily">rounded</item>

@@ -5,13 +5,12 @@ import static android.content.Context.MODE_PRIVATE;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -19,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -73,7 +73,7 @@ public class Fragment_UserProfile extends Fragment {
             }
         });
 
-        LinearLayout becomeVIP = view.findViewById(R.id.becomeVIP);
+        Button becomeVIP = view.findViewById(R.id.becomeVIP);
         becomeVIP.setOnClickListener(view -> {
             view.getContext().startActivity(new Intent(view.getContext(), PremiumMembership.class));
         });
@@ -81,6 +81,11 @@ public class Fragment_UserProfile extends Fragment {
         LinearLayout customerSupport = view.findViewById(R.id.customerSupport);
         customerSupport.setOnClickListener(v -> {
             startActivity(new Intent(context, CustomerCare.class));
+        });
+
+        CardView subscriptionButton = view.findViewById(R.id.subscriptionButton);
+        subscriptionButton.setOnClickListener(v -> {
+            context.startActivity(new Intent(context, PremiumMembership.class));
         });
 
         profileEdit();
@@ -148,6 +153,10 @@ public class Fragment_UserProfile extends Fragment {
             @Override
             public void run() {
                 location.setText(MyApplication.currentCity);
+                Fragment_Trending.userlocation_textview.setText(MyApplication.currentCity + ", " + MyApplication.currentCountry);
+                if (MyApplication.currentCity.isEmpty()) {
+                    Fragment_Trending.userlocation_textview.setText("World");
+                }
             }
         }, 2000);
 

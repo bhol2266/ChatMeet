@@ -80,7 +80,7 @@
                     android:layout_height="350dp"
                     android:background="@android:color/transparent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/female_logo" />
+                    android:src="@drawable/placeholder" />
 
 
                 <RelativeLayout
@@ -210,252 +210,238 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingBottom="20dp">
+                    android:paddingBottom="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp"
                         android:fontFamily="@font/poppins_semibold"
                         android:text="Information"
                         android:textColor="@color/white"
                         android:textSize="18dp" />
 
-                    <LinearLayout
-                        android:id="@+id/Languageslayout"
+
+                    <com.google.android.flexbox.FlexboxLayout
+                        android:id="@+id/flexboxLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        app:flexWrap="wrap"
+                        app:justifyContent="flex_start">
 
-                        <TextView
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/languagesCard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="8dp"
+                            android:alpha="0.9"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="0dp">
 
-                            android:text="Languages    :"
-                            android:textColor="@color/white"
-                            android:textSize="14dp" />
+                            <TextView
+                                android:id="@+id/languages"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#FF5722"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:paddingLeft="7dp"
+                                android:paddingTop="4dp"
+                                android:paddingRight="7dp"
+                                android:paddingBottom="2dp"
+                                android:text="Languages  :  English, French"
+                                android:textColor="@color/white"
+                                android:textSize="13dp" />
+                        </androidx.cardview.widget.CardView>
 
 
-                        <TextView
-                            android:id="@+id/Languages"
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/bodyTypeCard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="8dp"
+                            android:alpha="0.9"
+                            app:cardCornerRadius="8dp"
 
-                            android:paddingLeft="20dp"
-                            android:text=""
-                            android:textColor="@color/white"
-                            android:textSize="14dp" />
-                    </LinearLayout>
+                            app:cardElevation="0dp">
 
-                    <LinearLayout
-                        android:id="@+id/InterestedInlayout"
+                            <TextView
+                                android:id="@+id/bodyType"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#2196F3"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:paddingLeft="7dp"
+                                android:paddingTop="4dp"
+                                android:paddingRight="7dp"
+                                android:paddingBottom="2dp"
+                                android:text="BodyType  :  Athletic"
+                                android:textColor="@color/white"
+                                android:textSize="13dp" />
+                        </androidx.cardview.widget.CardView>
 
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/specificsCard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="8dp"
+                            android:alpha="0.9"
 
-                            android:text="InterestedIn  :"
-                            android:textColor="@color/white"
-                            android:textSize="14dp" />
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="0dp">
+
+                            <TextView
+                                android:id="@+id/specifics"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#9C27B0"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:paddingLeft="7dp"
+                                android:paddingTop="4dp"
+                                android:paddingRight="7dp"
+                                android:paddingBottom="2dp"
+                                android:text="Specifics  :  Tall, Blue Eyes"
+                                android:textColor="@color/white"
+                                android:textSize="13dp" />
+                        </androidx.cardview.widget.CardView>
 
 
-                        <TextView
-                            android:id="@+id/InterestedIn"
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/ethnicityCard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="8dp"
+                            android:alpha="0.9"
+                            app:cardCornerRadius="8dp"
 
-                            android:paddingLeft="20dp"
-                            android:text=""
-                            android:textColor="@color/white"
-                            android:textSize="14dp" />
-                    </LinearLayout>
+                            app:cardElevation="0dp">
 
-                    <LinearLayout
-                        android:id="@+id/BodyTypelayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/ethnicity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#FFC107"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:paddingLeft="7dp"
+                                android:paddingTop="4dp"
+                                android:paddingRight="7dp"
+                                android:paddingBottom="2dp"
+                                android:text="Ethnicity  :  Asian"
+                                android:textColor="@color/white"
+                                android:textSize="13dp" />
+                        </androidx.cardview.widget.CardView>
 
-                        <TextView
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/hairCard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="8dp"
+                            android:alpha="0.9"
 
-                            android:text="BodyType      :"
-                            android:textColor="@color/white"
-                            android:textSize="14dp" />
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="0dp">
 
+                            <TextView
+                                android:id="@+id/hair"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#757575  "
+                                android:fontFamily="@font/poppins_semibold"
+                                android:paddingLeft="7dp"
+                                android:paddingTop="4dp"
+                                android:paddingRight="7dp"
+                                android:paddingBottom="2dp"
+                                android:text="Hair  :  Black"
+                                android:textColor="@color/white"
+                                android:textSize="13dp" />
+                        </androidx.cardview.widget.CardView>
 
-                        <TextView
-                            android:id="@+id/BodyType"
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/interestedInCard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="8dp"
 
-                            android:paddingLeft="20dp"
-                            android:text=""
-                            android:textColor="@color/white"
-                            android:textSize="14dp" />
-                    </LinearLayout>
+                            android:alpha="0.9"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="0dp">
 
-                    <LinearLayout
-                        android:id="@+id/Specificslayout"
+                            <TextView
+                                android:id="@+id/interestedIn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#4CAF50"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:paddingLeft="7dp"
+                                android:paddingTop="4dp"
+                                android:paddingRight="7dp"
+                                android:paddingBottom="2dp"
+                                android:text="InterestedIn  :  Sports, Music"
+                                android:textColor="@color/white"
+                                android:textSize="13dp" />
+                        </androidx.cardview.widget.CardView>
 
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
 
-                        <TextView
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/eyeColorCard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="8dp"
+                            android:alpha="0.9"
 
-                            android:text="Specifics       :"
-                            android:textColor="@color/white"
-                            android:textSize="14dp" />
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="0dp">
 
+                            <TextView
+                                android:id="@+id/eyeColor"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#FF9800"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:paddingLeft="7dp"
+                                android:paddingTop="4dp"
+                                android:paddingRight="7dp"
+                                android:paddingBottom="2dp"
+                                android:text="EyeColor  :  Brown"
+                                android:textColor="@color/white"
+                                android:textSize="13dp" />
+                        </androidx.cardview.widget.CardView>
 
-                        <TextView
-                            android:id="@+id/Specifics"
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/subcultureCard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="8dp"
+                            android:alpha="0.9"
 
-                            android:paddingLeft="20dp"
-                            android:text=""
-                            android:textColor="@color/white"
-                            android:textSize="14dp" />
-                    </LinearLayout>
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="0dp">
 
-                    <LinearLayout
-                        android:id="@+id/Ethnicitylayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/subculture"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#795548  "
+                                android:fontFamily="@font/poppins_semibold"
+                                android:paddingLeft="7dp"
+                                android:paddingTop="4dp"
+                                android:paddingRight="7dp"
+                                android:paddingBottom="2dp"
+                                android:text="Subculture  :  Geek"
+                                android:textColor="@color/white"
+                                android:textSize="13dp" />
+                        </androidx.cardview.widget.CardView>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-
-                            android:text="Ethnicity        :"
-                            android:textColor="@color/white"
-                            android:textSize="14dp" />
-
-
-                        <TextView
-                            android:id="@+id/Ethnicity"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-
-                            android:paddingLeft="20dp"
-                            android:text=""
-                            android:textColor="@color/white"
-                            android:textSize="14dp" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/Hairlayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-
-                            android:text="Hair                :"
-                            android:textColor="@color/white"
-                            android:textSize="14dp" />
-
-
-                        <TextView
-                            android:id="@+id/Hair"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-
-                            android:paddingLeft="20dp"
-                            android:text=""
-                            android:textColor="@color/white"
-                            android:textSize="14dp" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/EyeColorlayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-
-                            android:text="EyeColor       :"
-                            android:textColor="@color/white"
-                            android:textSize="14dp" />
-
-
-                        <TextView
-                            android:id="@+id/EyeColor"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-
-                            android:paddingLeft="20dp"
-                            android:text=""
-                            android:textColor="@color/white"
-                            android:textSize="14dp" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/Subculturelayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-
-                            android:text="Subculture    :"
-                            android:textColor="@color/white"
-                            android:textSize="14dp" />
-
-
-                        <TextView
-                            android:id="@+id/Subculture"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-
-                            android:paddingLeft="20dp"
-                            android:text=""
-                            android:textColor="@color/white"
-                            android:textSize="14dp" />
-
-
-                    </LinearLayout>
-
+                    </com.google.android.flexbox.FlexboxLayout>
                 </LinearLayout>
 
 
@@ -475,15 +461,13 @@
                     android:layout_height="wrap_content" />
 
 
-
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_gifts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="80dp"
                     android:layout_marginTop="40dp"
-                    android:orientation="horizontal" />
+                    android:orientation="horizontal"
+                    android:paddingBottom="80dp" />
 
 
             </LinearLayout>

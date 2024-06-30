@@ -191,17 +191,17 @@ public class PremiumMembership extends AppCompatActivity {
         Drawable mm_slide_4 = ContextCompat.getDrawable(this, R.drawable.mm_slide_4);
         Drawable mm_slide_5 = ContextCompat.getDrawable(this, R.drawable.mm_slide_5);
 
-        SliderImageModel slide1 = new SliderImageModel(mm_slide_1, "Unlimited messages", "Send messages to anyone you want");
-        SliderImageModel slide2 = new SliderImageModel(mm_slide_2, "VIP Greetings", "All your greeting will be given preference in the chatlist");
+        SliderImageModel slide1 = new SliderImageModel(mm_slide_1, "Unlimited message", "Send messages to anyone you want");
+        SliderImageModel slide2 = new SliderImageModel(mm_slide_2, "Room Authority", "All your greeting will be given preference in the chatlist");
         SliderImageModel slide3 = new SliderImageModel(mm_slide_3, "VIP Badge", "Become a VIP will be more attractive to the girl you want");
         SliderImageModel slide4 = new SliderImageModel(mm_slide_4, "Fresh Girl", "Becoming a VIP will give you priority to recommend  new girls");
         SliderImageModel slide5 = new SliderImageModel(mm_slide_5, "Monthly Gems", "Becoming a VIP will get extra coins");
 
-        slideImages.add(slide1);
-        slideImages.add(slide2);
         slideImages.add(slide3);
-        slideImages.add(slide4);
         slideImages.add(slide5);
+        slideImages.add(slide2);
+        slideImages.add(slide4);
+        slideImages.add(slide1);
 
 
         SlideImageAdapter slideImageAdapter = new SlideImageAdapter(this, slideImages);
@@ -318,6 +318,8 @@ public class PremiumMembership extends AppCompatActivity {
             public void onProductDetailsResponse(BillingResult billingResult, List<ProductDetails> productDetailsList) {
                 // Handle the product details response for multiple products
 
+                Log.d("Sdafsdafsadf", "run: "+productDetailsList);
+
                 ((Activity) PremiumMembership.this).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -420,7 +422,7 @@ public class PremiumMembership extends AppCompatActivity {
                         ImageView image5 = view5.findViewById(R.id.image);
                         image5.setImageResource(R.drawable.mm_chat_on);
                         TextView text5 = view5.findViewById(R.id.text);
-                        text5.setText("Unlimited\nmessages");
+                        text5.setText("Unlimited\nmessage");
                         tab.setCustomView(view5);
 
                         int color = ContextCompat.getColor(PremiumMembership.this, R.color.yellow_dim);
@@ -430,7 +432,7 @@ public class PremiumMembership extends AppCompatActivity {
 
                         View view1 = getLayoutInflater().inflate(R.layout.item_flip, null);
                         ImageView image1 = view1.findViewById(R.id.image);
-                        image1.setImageResource(R.drawable.mm_hello_off);
+                        image1.setImageResource(R.drawable.mm_room_ff);
                         TextView text1 = view1.findViewById(R.id.text);
                         text1.setText("VIP\nGreetings");
                         tab.setCustomView(view1);
@@ -490,7 +492,7 @@ public class PremiumMembership extends AppCompatActivity {
                             image.setImageResource(R.drawable.mm_chat_on);
                             break;
                         case 1:
-                            image.setImageResource(R.drawable.mm_hello_on);
+                            image.setImageResource(R.drawable.mm_room_on);
                             break;
                         case 2:
                             image.setImageResource(R.drawable.mm_crown_on);
@@ -527,7 +529,7 @@ public class PremiumMembership extends AppCompatActivity {
                             image.setImageResource(R.drawable.mm_chat_off);
                             break;
                         case 1:
-                            image.setImageResource(R.drawable.mm_hello_off);
+                            image.setImageResource(R.drawable.mm_room_ff);
                             break;
                         case 2:
                             image.setImageResource(R.drawable.mm_crown_off);
@@ -679,8 +681,6 @@ class SlideImageAdapter extends RecyclerView.Adapter<SlideImageAdapter.ViewHolde
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         SliderImageModel sliderImageModel = items.get(position);
         holder.imageView.setImageDrawable(sliderImageModel.getImageDrawable());
-        holder.title.setText(sliderImageModel.getTitle());
-        holder.subTitle.setText(sliderImageModel.getSubTitle());
     }
 
     @Override
@@ -690,12 +690,9 @@ class SlideImageAdapter extends RecyclerView.Adapter<SlideImageAdapter.ViewHolde
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView title, subTitle;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.title);
-            subTitle = itemView.findViewById(R.id.subTitle);
             imageView = itemView.findViewById(R.id.imageView);
         }
     }

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fontFamily="inter"
+    android:textColor="@color/white"
     android:textAppearance="?android:attr/textAppearanceListItem"
     android:gravity="center"
     android:padding="14dp" />

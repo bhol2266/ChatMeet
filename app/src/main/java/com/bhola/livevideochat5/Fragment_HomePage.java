@@ -145,14 +145,10 @@ public class Fragment_HomePage extends Fragment {
         girl5.setVisibility(View.INVISIBLE);
         girl6.setVisibility(View.INVISIBLE);
 
-        // Start the repeated loading process
-        startLoadingGirls();
-    }
-
-    private void startLoadingGirls() {
         loadDatabase_randomGirls();
 
     }
+
 
     private void loadDatabase_randomGirls() {
         new Thread(new Runnable() {
@@ -439,6 +435,7 @@ public class Fragment_HomePage extends Fragment {
         handler.removeCallbacks(loadGirlsRunnable);
 
     }
+
 
 
 }

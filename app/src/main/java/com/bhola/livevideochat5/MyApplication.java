@@ -57,6 +57,7 @@ public class MyApplication extends Application {
     //Google login
     public static boolean userLoggedIn = false;
     public static int coins = 0;
+    public static boolean notificationEnabled = false;
     public static String userLoggedIAs = "not set";
     public static String authProviderName = "";
     public static FirebaseUser firebaseUser;
