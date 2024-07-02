@@ -16,11 +16,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -45,9 +43,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -69,7 +64,7 @@ public class Fragment_HomePage extends Fragment {
     List<String> imageList_MomingIMages = new ArrayList<>();
     View view;
     Context context;
-    ArrayList<Model_Profile> randomGirlsList;
+    public static ArrayList<Model_Profile> randomGirlsList;
     CircleImageView girl1, girl2, girl3, girl4, girl5, girl6;
     private Handler handler = new Handler();
     private Runnable loadGirlsRunnable;
@@ -145,8 +140,79 @@ public class Fragment_HomePage extends Fragment {
         girl5.setVisibility(View.INVISIBLE);
         girl6.setVisibility(View.INVISIBLE);
 
-        loadDatabase_randomGirls();
 
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (!MyApplication.currentCountry.isEmpty()) {
+                    loadDatabase_randomGirls_nearBy("India");
+                } else {
+                    loadDatabase_randomGirls();
+                }
+            }
+        }, 2000);
+
+
+    }
+
+    private void loadDatabase_randomGirls_nearBy(String selectedCountry) {
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Cursor cursor = new DatabaseHelper(context, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile").readGirls_Country(selectedCountry);
+                if (cursor.moveToFirst()) {
+                    do {
+                        randomGirlsList.add(Utils.readCursor(cursor));
+
+                    } while (cursor.moveToNext());
+
+                }
+                cursor.close();
+
+                if (randomGirlsList.isEmpty()) {
+                    // this is becauce , suppose when country is nepal, but there is not girls for nepal in database, so for the selecting random girls
+                    Cursor cursor2 = new DatabaseHelper(context, MyApplication.DB_NAME, MyApplication.DB_VERSION, "GirlsProfile").readRandomGirls();
+                    if (cursor2.moveToFirst()) {
+                        do {
+                            randomGirlsList.add(Utils.readCursor(cursor2));
+                        } while (cursor2.moveToNext());
+
+                    }
+                    cursor2.close();
+                }
+                ((Activity) context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Make all image views invisible initially
+                                girl1.setVisibility(View.INVISIBLE);
+                                girl2.setVisibility(View.INVISIBLE);
+                                girl3.setVisibility(View.INVISIBLE);
+                                girl4.setVisibility(View.INVISIBLE);
+                                girl5.setVisibility(View.INVISIBLE);
+                                girl6.setVisibility(View.INVISIBLE);
+
+                                // Load images into image views
+                                Picasso.get().load(randomGirlsList.get(0).getProfilePhoto()).fit().into(girl1);
+                                Picasso.get().load(randomGirlsList.get(1).getProfilePhoto()).fit().into(girl2);
+                                Picasso.get().load(randomGirlsList.get(2).getProfilePhoto()).fit().into(girl3);
+                                Picasso.get().load(randomGirlsList.get(3).getProfilePhoto()).fit().into(girl4);
+                                Picasso.get().load(randomGirlsList.get(4).getProfilePhoto()).fit().into(girl5);
+                                Picasso.get().load(randomGirlsList.get(5).getProfilePhoto()).fit().into(girl6);
+
+                                // Show images one by one with animation
+                                showImagesWithAnimation();
+                            }
+                        }, 200);
+
+                    }
+                });
+            }
+        }).start();
     }
 
 
@@ -405,7 +471,7 @@ public class Fragment_HomePage extends Fragment {
 
     private void startAnimation(Context context) {
         // Assuming you have a view object, e.g., myView
-        CardView buttonCardView=view.findViewById(R.id.buttonCardView);
+        CardView buttonCardView = view.findViewById(R.id.buttonCardView);
         Animation animationUp = AnimationUtils.loadAnimation(context, R.anim.bottom_scaleup);
         buttonCardView.startAnimation(animationUp);
 
@@ -435,7 +501,6 @@ public class Fragment_HomePage extends Fragment {
         handler.removeCallbacks(loadGirlsRunnable);
 
     }
-
 
 
 }

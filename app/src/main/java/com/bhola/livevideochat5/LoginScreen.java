@@ -399,11 +399,11 @@ public class LoginScreen extends AppCompatActivity {
         intent.putExtra("email", email);
         intent.putExtra("photoUrl", photoUrl);
         startActivity(intent);
-        if (loggedAs.equals("Google") && progressDialog.isShowing()) {
+        if (loggedAs.equals("Google") && progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
-    }
 
+    }
 
 }
 
