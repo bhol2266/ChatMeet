@@ -708,8 +708,51 @@ class GiftSliderAdapter extends RecyclerView.Adapter<GiftSliderAdapter.ViewHolde
             holder.eclipse.setImageResource(R.drawable.red_eclipse);
 
         }
+        holder.giftImage.setOnClickListener(v->{
+            rechargeDialog(v.getContext());
+
+        });
 
     }
+    public  void rechargeDialog(Context context) {
+
+        AlertDialog recharge_dialog = null;
+
+        final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View promptView = inflater.inflate(R.layout.dialog_recharge, null);
+        builder.setView(promptView);
+        builder.setCancelable(true);
+
+        TextView recharge = promptView.findViewById(R.id.recharge);
+        TextView cancel = promptView.findViewById(R.id.cancel);
+
+
+        recharge_dialog = builder.create();
+        recharge_dialog.show();
+
+
+        recharge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, VipMembership.class));
+            }
+        });
+
+        AlertDialog finalRecharge_dialog = recharge_dialog;
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finalRecharge_dialog.dismiss();
+            }
+        });
+
+        ColorDrawable back = new ColorDrawable(Color.TRANSPARENT);
+        InsetDrawable inset = new InsetDrawable(back, 20);
+        recharge_dialog.getWindow().setBackgroundDrawable(inset);
+
+    }
+
 
     @Override
     public int getItemCount() {
