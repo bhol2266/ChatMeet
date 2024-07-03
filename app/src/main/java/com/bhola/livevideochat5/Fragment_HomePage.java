@@ -12,6 +12,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.InsetDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,8 +33,17 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.bhola.livevideochat5.Models.CountryInfo_Model;
 import com.bhola.livevideochat5.Models.Model_Profile;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -102,14 +112,8 @@ public class Fragment_HomePage extends Fragment {
 
         setButtonAnimation(view, context);
         update_onlineCount(view, context);
-        handler1 = new Handler();
-        handler1.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                setGirlImages();
-                rotateImageview();
-            }
-        }, 1000);
+        setGirlImages();
+        rotateImageview();
 
 
         PERMISSIONS = new String[]{
@@ -141,16 +145,7 @@ public class Fragment_HomePage extends Fragment {
         girl6.setVisibility(View.INVISIBLE);
 
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (!MyApplication.currentCountry.isEmpty()) {
-                    loadDatabase_randomGirls_nearBy("India");
-                } else {
-                    loadDatabase_randomGirls();
-                }
-            }
-        }, 2000);
+        getCountryNameByIP();
 
 
     }
@@ -292,7 +287,7 @@ public class Fragment_HomePage extends Fragment {
                     girl.setAlpha(0f);
                     girl.animate().alpha(1f).setDuration(500); // 1-second fade-in animation
                 }
-            }, i * 1000); // 1.5 seconds interval
+            }, i * 100); // 1.5 seconds interval
         }
     }
 
@@ -487,6 +482,58 @@ public class Fragment_HomePage extends Fragment {
 
 
     }
+
+
+    private void getCountryNameByIP() {
+        if (MyApplication.App_updating.equals("active")) {
+            loadDatabase_randomGirls();
+            return;
+        }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String url = "https://ipinfo.io/json";
+
+                RequestQueue queue = Volley.newRequestQueue(context);
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject json = new JSONObject(response);
+                                    String countryCode = json.getString("country");
+                                    String countryName = "";
+                                    for (int i = 0; i < MyApplication.countryList.size(); i++) {
+                                        CountryInfo_Model countryInfoModel = MyApplication.countryList.get(i);
+
+                                        if (countryInfoModel.getCountryCode().equals(countryCode)) {
+                                            countryName = countryInfoModel.getCountry();
+                                            loadDatabase_randomGirls_nearBy(countryName);
+                                        }
+                                    }
+                                    if (countryName.isEmpty()) {
+                                        loadDatabase_randomGirls();
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    Log.d("sadfsdaf", "country: " + e.getMessage());
+
+                                    loadDatabase_randomGirls();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("sadfsdaf", "country: " + error.getMessage());
+                    }
+                });
+
+                queue.add(stringRequest);
+            }
+        }).start();
+    }
+
 
     @Override
     public void onResume() {
